@@ -47,6 +47,7 @@ public class Camera extends Subsystem
 	}
 
 	public void initDefaultCommand()
+	
 	{
 		setDefaultCommand(new ReadCommand());
 	}

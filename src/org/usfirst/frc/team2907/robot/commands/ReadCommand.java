@@ -18,7 +18,7 @@ public class ReadCommand extends Command{
 	
 	protected void execute()
 	{
-		Robot.camera.read();
+		//Robot.camera.read();
 //		ArrayList<PixyBlock> blocks = Robot.camera.read();
 //		PixyBlock[] blocks = Robot.camera.read();
 //		if (blocks != null && blocks.size() > 0)

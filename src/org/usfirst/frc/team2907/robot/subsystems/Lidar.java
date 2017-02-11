@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Lidar extends Subsystem
 {
+	public static final double CENTIMETERS_TO_FEET = 30.48;
 	private static final int LIDAR_ADDRESS = 0x62;
 	private static final int DATA_SIZE = 2;
 	private I2C wire;
@@ -24,6 +25,7 @@ public class Lidar extends Subsystem
 		wire.write(0x00, 0x04);
 		Timer.delay(0.04);
 		wire.read(0x8f, DATA_SIZE, buffer);
+		//System.out.println("b[0] " + buffer[0] + " b[1] " + buffer[1]);
 		return (int)Integer.toUnsignedLong(buffer[0] << 8) + Byte.toUnsignedInt(buffer[1]);
 	}
 	
