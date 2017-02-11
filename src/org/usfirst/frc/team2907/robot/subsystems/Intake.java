@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2907.robot.subsystems;
 
 import org.usfirst.frc.team2907.robot.RobotMap;
+import org.usfirst.frc.team2907.robot.commands.MoveIntakeCommand;
 
 import com.ctre.CANTalon;
 
@@ -20,6 +21,7 @@ public class Intake extends Subsystem
 	@Override
 	protected void initDefaultCommand()
 	{
+		setDefaultCommand(new MoveIntakeCommand());
 	}
 
 }

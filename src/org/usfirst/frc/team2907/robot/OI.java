@@ -17,7 +17,7 @@ public class OI {
 	public Joystick manipulatorStick = new Joystick(1);
 	
 	public JoystickButton spinUpButton = new JoystickButton(manipulatorStick, 2); // spinup on button
-	public JoystickButton climbButton = new JoystickButton(driveStick, 14); // climb on touchpad
+	public JoystickButton climbButton = new JoystickButton(manipulatorStick, 14); // climb on touchpad
 	public JoystickButton shiftButton = new JoystickButton(driveStick, 6); // shift on bumper
 	public OI()
 	{

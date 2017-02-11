@@ -14,6 +14,7 @@ public class Climber extends Subsystem
 	public void climb(double speed)
 	{
 		talon1.set(speed);
+		talon2.set(speed);
 	}
 	
 	@Override
