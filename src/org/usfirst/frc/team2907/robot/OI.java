@@ -4,7 +4,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import org.usfirst.frc.team2907.robot.commands.ClimbCommand;
 import org.usfirst.frc.team2907.robot.commands.ShiftCommand;
+import org.usfirst.frc.team2907.robot.commands.SpinUpShooterCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -12,11 +14,16 @@ import org.usfirst.frc.team2907.robot.commands.ShiftCommand;
  */
 public class OI {
 	public Joystick driveStick = new Joystick(0);
-//	public Joystick menipulatorStick = new Joystick(1);
-	public JoystickButton shiftButton = new JoystickButton(driveStick, 1);
+	public Joystick manipulatorStick = new Joystick(1);
+	
+	public JoystickButton spinUpButton = new JoystickButton(manipulatorStick, 2); // spinup on button
+	public JoystickButton climbButton = new JoystickButton(driveStick, 14); // climb on touchpad
+	public JoystickButton shiftButton = new JoystickButton(driveStick, 6); // shift on bumper
 	public OI()
 	{
 		shiftButton.whenPressed(new ShiftCommand());
+		spinUpButton.whenPressed(new SpinUpShooterCommand(!Robot.shooter.isSpinning()));
+		climbButton.whenPressed(new ClimbCommand());
 	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

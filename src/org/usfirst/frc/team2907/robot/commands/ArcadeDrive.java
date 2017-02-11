@@ -2,6 +2,7 @@ package org.usfirst.frc.team2907.robot.commands;
 
 import org.usfirst.frc.team2907.robot.Robot;
 
+import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -17,7 +18,7 @@ public class ArcadeDrive extends Command {
     }
 
     protected void execute() {
-    	Robot.driveTrain.arcadeDrive(-Robot.oi.driveStick.getY(), Robot.oi.driveStick.getZ());
+    	Robot.driveTrain.arcadeDrive(-Robot.oi.driveStick.getAxis(AxisType.kY), Robot.oi.driveStick.getRawAxis(4));
     }
 
     protected boolean isFinished() {
