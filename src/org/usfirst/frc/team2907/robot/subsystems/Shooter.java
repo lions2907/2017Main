@@ -15,7 +15,6 @@ public class Shooter extends Subsystem
 	@Override
 	protected void initDefaultCommand()
 	{
-		
 	}
 	
 	public void shoot(double power)

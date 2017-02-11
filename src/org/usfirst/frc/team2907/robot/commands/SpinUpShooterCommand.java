@@ -40,6 +40,10 @@ public class SpinUpShooterCommand extends Command
 			}
 		});
 	}
+	
+	public void end()
+	{
+	}
 
 	protected void interrupted()
 	{
