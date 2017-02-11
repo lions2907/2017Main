@@ -39,7 +39,7 @@ public class Camera extends Subsystem
 	{
 		try
 		{
-			port = new I2C(I2C.Port.kMXP, PIXY_ADDRESS);
+			port = new I2C(I2C.Port.kOnboard, PIXY_ADDRESS);
 		} catch (Exception e)
 		{
 			System.out.println("e : " + e.getLocalizedMessage());
