@@ -43,6 +43,7 @@ public class PixyPIDCommand extends Command
 	
 	protected void execute()
 	{
+		Robot.camera.read();
 	}
 	
 	protected boolean isFinished()
