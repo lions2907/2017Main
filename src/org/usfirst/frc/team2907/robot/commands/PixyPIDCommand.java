@@ -47,7 +47,7 @@ public class PixyPIDCommand extends Command
 	
 	protected boolean isFinished()
 	{
-		return false;
+		return pidController.onTarget();
 	}
 	
 	protected void end()
