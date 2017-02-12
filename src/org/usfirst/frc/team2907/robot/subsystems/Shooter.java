@@ -31,6 +31,18 @@ public class Shooter extends Subsystem
 			talon1.set(0);
 	}
 	
+	public void rumble(boolean on, double delay)
+	{
+		Scheduler.getInstance().add(new DelayedCallback(delay)
+		{
+			public void onCallback()
+			{
+				Robot.oi.manipulatorStick.setRumble(RumbleType.kLeftRumble, (on) ? 1 : 0);
+						Robot.oi.manipulatorStick.setRumble(RumbleType.kRightRumble, (on) ? 1 : 0);
+			}
+		});
+	}
+	
 	public boolean isSpinning()
 	{
 		return spinning;
