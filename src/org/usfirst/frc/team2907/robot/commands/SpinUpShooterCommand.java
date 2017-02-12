@@ -20,25 +20,8 @@ public class SpinUpShooterCommand extends Command
 
 	protected void initialize()
 	{
-		Scheduler.getInstance().add(new DelayedCallback(Shooter.SPINUP_TIME)
-		{
-			public void onCallback()
-			{
-				Robot.oi.manipulatorStick.setRumble(RumbleType.kRightRumble, 1);
-				Robot.oi.manipulatorStick.setRumble(RumbleType.kRightRumble, 2);
-
-				Scheduler.getInstance().add(new DelayedCallback(0.1)
-				{
-					public void onCallback()
-					{
-						Robot.oi.manipulatorStick.setRumble(
-								RumbleType.kRightRumble, 0);
-						Robot.oi.manipulatorStick.setRumble(
-								RumbleType.kRightRumble, 0);
-					}
-				});
-			}
-		});
+		Robot.shooter.rumble(true, 2);
+		Robot.shooter.rumble(false, 2.2);
 	}
 	
 	public void end()
