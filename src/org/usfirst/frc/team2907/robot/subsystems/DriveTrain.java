@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DriveTrain extends Subsystem {
+	public static double DISTANCE_PER_FEET = 4.0/Math.PI; // Distance in inches, 4 inch wheels. 
 	/* CANTALONS */
 	private CANTalon left1 = new CANTalon(RobotMap.TALON_LEFT_1);
 	private CANTalon left2 = new CANTalon(RobotMap.TALON_LEFT_2);
@@ -41,7 +42,7 @@ public class DriveTrain extends Subsystem {
 
 	public DriveTrain() {
 		// setup encoder
-		driveEncoder.setDistancePerPulse((1.0 / 256.0) / 2.0);
+		driveEncoder.setDistancePerPulse((1.0 / 256.0) / 2.0); // 256 pulses per revolution and 2:1 gear ratio
 		// setup talons
 		right1.setInverted(true);
 		right2.setInverted(true);
