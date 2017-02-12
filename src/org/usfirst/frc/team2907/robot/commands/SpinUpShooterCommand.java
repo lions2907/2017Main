@@ -20,7 +20,7 @@ public class SpinUpShooterCommand extends Command
 
 	protected void initialize()
 	{
-		Robot.shooter.rumble(true, 2);
+		Robot.shooter.rumble(true, 0.2);
 		Robot.shooter.rumble(false, 2.2);
 	}
 	
