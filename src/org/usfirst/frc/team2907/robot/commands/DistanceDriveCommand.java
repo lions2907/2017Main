@@ -54,7 +54,7 @@ public class DistanceDriveCommand extends Command {
 	}
 
 	protected boolean isFinished() {
-		return Robot.driveTrain.getDistance() < distance;
+		return Robot.driveTrain.getDistance() < distance / DriveTrain.DISTANCE_PER_FEET;
 	}
 
 	protected void end() {
