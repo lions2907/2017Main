@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DistanceDriveCommand extends Command {
 	private double distance;
 	private double speed;
+	private double lastOffset;
 
 	private static final double kP = 0.03;
 	private static final double kI = 0.00;
@@ -49,6 +50,7 @@ public class DistanceDriveCommand extends Command {
 	}
 
 	protected void execute(){
+		Robot.driveTrain.arcadeDrive(speed, lastOffset);
 		System.out.println("encoder : " + Robot.driveTrain.getDistance() + " end condition " +  distance / DriveTrain.DISTANCE_PER_FEET);
 // 		Robot.driveTrain.arcadeDrive(speed, 0);
 	}
@@ -69,7 +71,7 @@ public class DistanceDriveCommand extends Command {
 	class PIDOutput implements edu.wpi.first.wpilibj.PIDOutput {
 
 		public void pidWrite(double output) {
-			Robot.driveTrain.arcadeDrive(speed, output);
+			lastOffset = output;
 		}
 
 	}
