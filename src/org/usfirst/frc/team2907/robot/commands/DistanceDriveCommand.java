@@ -33,7 +33,7 @@ public class DistanceDriveCommand extends Command {
 			pidController = new PIDController(kP, kI, kD,
 					Robot.driveTrain.getSensorBoard(), output);
 			pidController.setInputRange(-180, 180);
-			pidController.setOutputRange(-speed, speed);
+			pidController.setOutputRange(-0.2, .2);
 			pidController.setAbsoluteTolerance(kToleranceDegrees);
 			pidController.setContinuous(true);
 
