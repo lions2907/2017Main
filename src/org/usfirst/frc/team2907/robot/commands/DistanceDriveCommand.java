@@ -28,33 +28,29 @@ public class DistanceDriveCommand extends Command {
 		this.distance = distance;
 		this.speed = speed;
 
-//		if (Robot.driveTrain.isNavigationAvaliable()) {
-//			output = new PIDOutput();
-//			pidController = new PIDController(kP, kI, kD,
-//					Robot.driveTrain.getSensorBoard(), output);
-//			pidController.setInputRange(-180, 180);
-//			pidController.setOutputRange(-.5, .5);
-//			pidController.setAbsoluteTolerance(kToleranceDegrees);
-//			pidController.setContinuous(true);
-//
-//		}
+		if (Robot.driveTrain.isNavigationAvaliable()) {
+			output = new PIDOutput();
+			pidController = new PIDController(kP, kI, kD,
+					Robot.driveTrain.getSensorBoard(), output);
+			pidController.setInputRange(-180, 180);
+			pidController.setOutputRange(-speed, speed);
+			pidController.setAbsoluteTolerance(kToleranceDegrees);
+			pidController.setContinuous(true);
+
+		}
 	}
 
 	protected void initialize() {
 		Robot.driveTrain.resetDistance();
-//		if (Robot.driveTrain.isNavigationAvaliable()) {
-//			pidController.setSetpoint(Robot.driveTrain.getAngle()); // don't drift
-//			pidController.enable();
-//		}
+		if (Robot.driveTrain.isNavigationAvaliable()) {
+			pidController.setSetpoint(Robot.driveTrain.getAngle()); // don't drift
+			pidController.enable();
+		}
 	}
 
 	protected void execute(){
 		System.out.println("encoder : " + Robot.driveTrain.getDistance() + " end condition " +  distance / DriveTrain.DISTANCE_PER_FEET);
-//		if (!Robot.driveTrain.isNavigationAvaliable()) {
-//			// navigation board not available, drive without according for drift
-//			Robot.driveTrain.arcadeDrive(speed, 0);
-//		}
-		Robot.driveTrain.arcadeDrive(speed, 0);
+// 		Robot.driveTrain.arcadeDrive(speed, 0);
 	}
 
 	protected boolean isFinished() {
@@ -62,8 +58,7 @@ public class DistanceDriveCommand extends Command {
 	}
 
 	protected void end() {
-//		if (Robot.driveTrain.isNavigationAvaliable())
-//			pidController.disable();
+		pidController.disable();
 		Robot.driveTrain.arcadeDrive(0, 0);
 	}
 
