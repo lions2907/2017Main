@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2907.robot.commands;
 
 import org.usfirst.frc.team2907.robot.Robot;
+import org.usfirst.frc.team2907.robot.subsystems.DriveTrain;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
@@ -22,44 +23,47 @@ public class DistanceDriveCommand extends Command {
 
 	public DistanceDriveCommand(double distance, double speed) {
 		super("DistanceDrive");
+		System.out.println("Starting");
 		requires(Robot.driveTrain);
 		this.distance = distance;
 		this.speed = speed;
 
-		if (Robot.driveTrain.isNavigationAvaliable()) {
-			output = new PIDOutput();
-			pidController = new PIDController(kP, kI, kD,
-					Robot.driveTrain.getSensorBoard(), output);
-			pidController.setInputRange(-180, 180);
-			pidController.setOutputRange(-.5, .5);
-			pidController.setAbsoluteTolerance(kToleranceDegrees);
-			pidController.setContinuous(true);
-
-		}
+//		if (Robot.driveTrain.isNavigationAvaliable()) {
+//			output = new PIDOutput();
+//			pidController = new PIDController(kP, kI, kD,
+//					Robot.driveTrain.getSensorBoard(), output);
+//			pidController.setInputRange(-180, 180);
+//			pidController.setOutputRange(-.5, .5);
+//			pidController.setAbsoluteTolerance(kToleranceDegrees);
+//			pidController.setContinuous(true);
+//
+//		}
 	}
 
 	protected void initialize() {
 		Robot.driveTrain.resetDistance();
-		if (Robot.driveTrain.isNavigationAvaliable()) {
-			pidController.setSetpoint(Robot.driveTrain.getAngle()); // don't drift
-			pidController.enable();
-		}
+//		if (Robot.driveTrain.isNavigationAvaliable()) {
+//			pidController.setSetpoint(Robot.driveTrain.getAngle()); // don't drift
+//			pidController.enable();
+//		}
 	}
 
-	protected void execute() {
-		if (!Robot.driveTrain.isNavigationAvaliable()) {
-			// navigation board not available, drive without according for drift
-			Robot.driveTrain.arcadeDrive(speed, 0);
-		}
+	protected void execute(){
+		System.out.println("encoder : " + Robot.driveTrain.getDistance() + " end condition " +  distance / DriveTrain.DISTANCE_PER_FEET);
+//		if (!Robot.driveTrain.isNavigationAvaliable()) {
+//			// navigation board not available, drive without according for drift
+//			Robot.driveTrain.arcadeDrive(speed, 0);
+//		}
+		Robot.driveTrain.arcadeDrive(speed, 0);
 	}
 
 	protected boolean isFinished() {
-		return Robot.driveTrain.getDistance() < distance / DriveTrain.DISTANCE_PER_FEET;
+		return Robot.driveTrain.getDistance() > distance / DriveTrain.DISTANCE_PER_FEET;
 	}
 
 	protected void end() {
-		if (Robot.driveTrain.isNavigationAvaliable())
-			pidController.disable();
+//		if (Robot.driveTrain.isNavigationAvaliable())
+//			pidController.disable();
 		Robot.driveTrain.arcadeDrive(0, 0);
 	}
 

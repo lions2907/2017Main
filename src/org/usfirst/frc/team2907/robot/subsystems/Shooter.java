@@ -1,9 +1,13 @@
 package org.usfirst.frc.team2907.robot.subsystems;
 
+import org.usfirst.frc.team2907.robot.Robot;
 import org.usfirst.frc.team2907.robot.RobotMap;
+import org.usfirst.frc.team2907.robot.commands.DelayedCallback;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem
@@ -31,7 +35,7 @@ public class Shooter extends Subsystem
 			talon1.set(0);
 	}
 	
-	public void rumble(boolean on, double delay)
+	public void rumble(final boolean on, double delay)
 	{
 		Scheduler.getInstance().add(new DelayedCallback(delay)
 		{

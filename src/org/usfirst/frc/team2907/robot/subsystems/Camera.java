@@ -7,6 +7,8 @@ import org.usfirst.frc.team2907.robot.RobotMap;
 import org.usfirst.frc.team2907.robot.commands.ReadCommand;
 
 import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.SerialPort.Port;
@@ -16,7 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class Camera extends Subsystem
+public class Camera extends Subsystem implements PIDSource
 {
 	private static final int[] distances = { 0, 113, 81, 62, 49, 41, 35, 30,
 			28, 25, 22, 21 };
@@ -206,7 +208,7 @@ public class Camera extends Subsystem
 				System.out.println("Center X : " + difference);
 				setLastOffset(difference);
 				double total = (rightBlock.centerX) - (leftBlock.centerX);
-				getDistance(total, difference);
+				//getDistance(total, difference);
 			} else
 			{
 				setLastOffset(pixyBlocks.get(0).centerX);
@@ -289,5 +291,25 @@ public class Camera extends Subsystem
 		public int centerY;
 		public int width;
 		public int height;
+	}
+
+	@Override
+	public void setPIDSourceType(PIDSourceType pidSource)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public PIDSourceType getPIDSourceType()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public double pidGet()
+	{
+		return offset;
 	}
 }

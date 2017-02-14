@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team2907.robot;
 
+import org.usfirst.frc.team2907.robot.commands.GearTestAuto;
+import org.usfirst.frc.team2907.robot.commands.tempAutomous;
 import org.usfirst.frc.team2907.robot.subsystems.Camera;
 import org.usfirst.frc.team2907.robot.subsystems.Climber;
 import org.usfirst.frc.team2907.robot.subsystems.DriveTrain;
@@ -44,6 +46,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		chooser.addObject("Test", new GearTestAuto());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
