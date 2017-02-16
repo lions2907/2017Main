@@ -6,7 +6,7 @@ public class GearTestAuto extends CommandGroup
 {
 	public GearTestAuto()
 	{
-		addSequential(new DistanceDriveCommand(12, -.35));
+		addSequential(new DistanceDriveCommand(12 * 2, -.35));
 //		addSequential(new RotateToAngle(30));
 //		addSequential(new PixyPIDCommand());
 	}

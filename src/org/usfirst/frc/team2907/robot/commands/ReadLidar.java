@@ -15,7 +15,7 @@ public class ReadLidar extends Command
 	
 	protected void execute()
 	{
-		//System.out.println("Lidar distance : " + Robot.lidar.read() / Lidar.CENTIMETERS_TO_FEET);
+		System.out.println("Lidar distance : " + Robot.lidar.read() / Lidar.CENTIMETERS_TO_FEET);
 	}
 	
 	@Override
