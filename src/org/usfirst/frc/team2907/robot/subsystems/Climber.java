@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2907.robot.subsystems;
 
 import org.usfirst.frc.team2907.robot.RobotMap;
+import org.usfirst.frc.team2907.robot.commands.ClimbCommand;
 
 import com.ctre.CANTalon;
 
@@ -20,8 +21,7 @@ public class Climber extends Subsystem
 	@Override
 	protected void initDefaultCommand()
 	{
-		// TODO Auto-generated method stub
-		
+		setDefaultCommand(new ClimbCommand());
 	}
 
 }

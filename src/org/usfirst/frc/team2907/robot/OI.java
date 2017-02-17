@@ -22,8 +22,8 @@ public class OI {
 	public OI()
 	{
 		shiftButton.whenPressed(new ShiftCommand());
-		spinUpButton.whenPressed(new SpinUpShooterCommand(!Robot.shooter.isSpinning()));
-		climbButton.whileHeld(new ClimbCommand());
+		spinUpButton.whileHeld(new SpinUpShooterCommand());
+		//climbButton.whileHeld(new ClimbCommand());
 	}
 	//// CREATING BUTTONS
 	// One type of button is a joystick button which is any button on a

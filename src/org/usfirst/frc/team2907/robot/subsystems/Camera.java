@@ -20,8 +20,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Camera extends Subsystem implements PIDSource
 {
-	private static final int[] distances = { 0, 113, 81, 62, 49, 41, 35, 30,
-			28, 25, 22, 21 };
 	public static final double PIXY_FOV = 75; // 42 prev
 	public static final double IMAGE_WIDTH = 320.0;
 	public static final double GEAR_WIDTH_FT = 1.166;
@@ -74,16 +72,6 @@ public class Camera extends Subsystem implements PIDSource
 	{
 		int index = 0;
 		int smallest = 1000;
-		for (int i = 0; i < distances.length; i++)
-		{
-			if (Math.abs(width - distances[i]) < smallest)
-			{
-				index = i;
-				smallest = Math.abs((int) (width - distances[i]));
-			}
-		}
-		double distance = index;
-		System.out.println("Width : " + width + " distance : " + index);
 		// double angleToTarget = (IMAGE_WIDTH / 2 - targetCenter) *
 		// DEGREES_PER_PIXEL;
 		// double sideDistance = distance * Math.sin(angleToTarget);

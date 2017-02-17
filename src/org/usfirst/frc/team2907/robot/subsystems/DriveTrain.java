@@ -31,7 +31,8 @@ public class DriveTrain extends Subsystem {
 	private CANTalon right2 = new CANTalon(RobotMap.TALON_RIGHT_2);
 	private CANTalon right3 = new CANTalon(RobotMap.TALON_RIGHT_3);
 	/* DRIVE ENCODERS */
-	private Encoder driveEncoder = new Encoder(0, 1);
+	private Encoder driveEncoderLeft = new Encoder(0, 1);
+	private Encoder driveEncoderRight = new Encoder(2, 3);
 	/* SOLONOIDS FOR SHIFTER */
 	private Solenoid leftSolenoid = new Solenoid(0);
 	private Solenoid rightSolenoid = new Solenoid(1);
@@ -42,7 +43,8 @@ public class DriveTrain extends Subsystem {
 
 	public DriveTrain() {
 		// setup encoder
-		driveEncoder.setDistancePerPulse((1.0 / 256.0) / 2.0); // 256 pulses per revolution and 2:1 gear ratio
+		driveEncoderLeft.setDistancePerPulse((1.0 / 100.0) / 2.0); // 100 pulses per revolution and 2:1 gear ratio
+		driveEncoderRight.setDistancePerPulse((1.0 / 100.0) / 2.0); // 100 pulses per revolution and 2:1 gear ratio
 		// setup talons
 		right1.setInverted(true);
 		right2.setInverted(true);
@@ -111,17 +113,13 @@ public class DriveTrain extends Subsystem {
 	
 	public double getDistance()
 	{
-		return -driveEncoder.getDistance();
-	}
-	
-	public PIDSource getDistancePID()
-	{
-		return driveEncoder;
+		return -(driveEncoderLeft.getDistance() + driveEncoderRight.getDistance()) / 2.0;
 	}
 	
 	public void resetDistance()
 	{
-		driveEncoder.reset();
+		driveEncoderLeft.reset();
+		driveEncoderRight.reset();
 	}
 	
 	public double getAngle()

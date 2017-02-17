@@ -15,9 +15,12 @@ public class ClimbCommand extends Command
 	
 	protected void execute()
 	{
-		if (Robot.oi.manipulatorStick.getY()> 0)
+		if (Robot.oi.manipulatorStick.getY() > 0)
 		{
 			Robot.climber.climb(Robot.oi.manipulatorStick.getY());
+		} else 
+		{
+			Robot.climber.climb(0);
 		}
 	}
 
