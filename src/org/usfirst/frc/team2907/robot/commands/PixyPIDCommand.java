@@ -2,6 +2,7 @@ package org.usfirst.frc.team2907.robot.commands;
 
 import org.usfirst.frc.team2907.robot.Robot;
 import org.usfirst.frc.team2907.robot.subsystems.Camera;
+import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
@@ -23,12 +24,12 @@ public class PixyPIDCommand extends Command
 	public PixyPIDCommand()
 	{
 		super("PixyPIDCommand");
-		requires(Robot.camera);
+		requires(Robot.cameraManager);
 		requires(Robot.driveTrain);
 		
 		output = new PIDOutput();
-		pidController = new PIDController(kP, kI, kD, Robot.camera, output);
-		pidController.setInputRange(0, Camera.IMAGE_WIDTH);
+		pidController = new PIDController(kP, kI, kD, Robot.cameraManager.gearCameraPID, output);
+		pidController.setInputRange(0, CameraManager.IMAGE_WIDTH);
 		pidController.setOutputRange(-.5, .5);
 		pidController.setAbsoluteTolerance(kToleranceDegrees);
 		pidController.setContinuous(true);
@@ -37,13 +38,13 @@ public class PixyPIDCommand extends Command
 	
 	protected void initialize()
 	{
-		pidController.setSetpoint(Camera.IMAGE_WIDTH / 2);
+		pidController.setSetpoint(CameraManager.IMAGE_WIDTH / 2);
 		pidController.enable();
 	}
 	
 	protected void execute()
 	{
-		Robot.camera.read();
+		Robot.cameraManager.readCameras();
 	}
 	
 	protected boolean isFinished()

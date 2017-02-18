@@ -15,7 +15,7 @@ public class MoveIntakeCommand extends Command
 	
 	public void execute()
 	{
-		Robot.intake.move(Robot.oi.manipulatorStick.getZ());
+		Robot.intake.move(-Robot.oi.manipulatorStick.getRawAxis(5));
 	}
 	
 	public void end()

@@ -24,6 +24,7 @@ public class Shooter extends Subsystem
 	private Timer timer;
 	private boolean status;
 	private boolean enabled = false;;
+	private double power = 0.85;
 
 	public Shooter()
 	{
@@ -129,6 +130,16 @@ public class Shooter extends Subsystem
 	private void setEnabled(boolean enabled)
 	{
 		this.enabled = enabled;
+	}
+
+	public double getPower()
+	{
+		return power;
+	}
+
+	public void setPower(double power)
+	{
+		this.power = power;
 	}
 
 }

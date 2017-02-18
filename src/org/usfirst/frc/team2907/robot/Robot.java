@@ -4,6 +4,7 @@ package org.usfirst.frc.team2907.robot;
 import org.usfirst.frc.team2907.robot.commands.GearTestAuto;
 import org.usfirst.frc.team2907.robot.commands.tempAutomous;
 import org.usfirst.frc.team2907.robot.subsystems.Camera;
+import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
 import org.usfirst.frc.team2907.robot.subsystems.Climber;
 import org.usfirst.frc.team2907.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2907.robot.subsystems.Intake;
@@ -11,6 +12,7 @@ import org.usfirst.frc.team2907.robot.subsystems.Lidar;
 import org.usfirst.frc.team2907.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -28,12 +30,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static final DriveTrain driveTrain = new DriveTrain();
-	public static final Camera camera = new Camera();
+	public static final CameraManager cameraManager = new CameraManager();
 	public static final Lidar lidar = new Lidar();
 	public static final Shooter shooter = new Shooter();
 	public static final Climber climber = new Climber();
 	public static final Intake intake = new Intake();
-	//public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 
 	Command autonomousCommand;
@@ -49,6 +50,8 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Test", new GearTestAuto());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		double power = Preferences.getInstance().getDouble("ShooterPower", .85);
+		shooter.setPower(power);
 	}
 
 	/**
