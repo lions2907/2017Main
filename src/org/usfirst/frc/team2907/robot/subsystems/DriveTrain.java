@@ -43,8 +43,8 @@ public class DriveTrain extends Subsystem {
 
 	public DriveTrain() {
 		// setup encoder
-		driveEncoderLeft.setDistancePerPulse((1.0 / 100.0) / 2.0); // 100 pulses per revolution and 2:1 gear ratio
-		driveEncoderRight.setDistancePerPulse((1.0 / 100.0) / 2.0); // 100 pulses per revolution and 2:1 gear ratio
+		driveEncoderLeft.setDistancePerPulse((1.0 / 100.0)); // 100 pulses per revolution and 2:1 gear ratio
+		driveEncoderRight.setDistancePerPulse((1.0 / 100.0)); // 100 pulses per revolution and 2:1 gear ratio
 		// setup talons
 		right1.setInverted(true);
 		right2.setInverted(true);

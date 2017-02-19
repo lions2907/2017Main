@@ -78,9 +78,9 @@ public class CameraManager extends Subsystem
 		System.out.println("---------- READING GEAR CAMERA ----------");
 		gearRead();
 		System.out.println("---------- END GEAR CAMERA ---------- \n");
-		System.out.println("---------- READING TOWER CAMERA ----------");
-		towerRead();
-		System.out.println("---------- END TOWER CAMERA ---------- \n");
+		//System.out.println("---------- READING TOWER CAMERA ----------");
+		//towerRead();
+		//System.out.println("---------- END TOWER CAMERA ---------- \n");
 	}
 	
 	private void towerRead()
@@ -104,10 +104,11 @@ public class CameraManager extends Subsystem
 			gearBlocks = new ArrayList<>();
 			
 		gearBlocks.clear();
-		read(gearBlocks, gearCamera);
+		gearBlocks = read(gearBlocks, gearCamera);
 		
 		if (gearBlocks.size() > 0) // found something!
 		{
+			System.out.println();
 			if (gearBlocks.size() >= 2) // prob found the gear stand!
 			{
 				PixyBlock leftBlock;
@@ -136,7 +137,7 @@ public class CameraManager extends Subsystem
 		}
 	}
 	
-	private void read(ArrayList<PixyBlock> blocks, I2C camera)
+	private ArrayList<PixyBlock> read(ArrayList<PixyBlock> blocks, I2C camera)
 	{
 		bytes = new byte[BUFFER_SIZE];
 		camera.read(0x54, BUFFER_SIZE, bytes);
@@ -156,8 +157,9 @@ public class CameraManager extends Subsystem
 				break;
 		}
 		
+		System.out.println("index : " + index);
 		if (index == BUFFER_SIZE - 1) // no header found
-			return;
+			return blocks;
 		else if (index == 0) // header found at start index
 			index += 2;
 		
@@ -200,6 +202,7 @@ public class CameraManager extends Subsystem
 			} else
 				++byteOffset;
 		}
+		return blocks;
 	}
 	
 	public PixyBlock bytesToBlock(byte[] bytes)

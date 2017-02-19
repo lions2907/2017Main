@@ -18,7 +18,8 @@ public class ArcadeDrive extends Command {
     }
 
     protected void execute() {
-    	Robot.driveTrain.arcadeDrive(Robot.oi.driveStick.getAxis(AxisType.kY), Robot.oi.driveStick.getRawAxis(4));
+    	Robot.driveTrain.arcadeDrive(Robot.oi.driveStick.getAxis(AxisType.kY), -Robot.oi.driveStick.getRawAxis(4));
+    	//System.out.println("Encoder distance : " + Robot.driveTrain.getDistance());
     }
 
     protected boolean isFinished() {

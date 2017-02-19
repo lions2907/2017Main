@@ -11,6 +11,7 @@ import org.usfirst.frc.team2907.robot.subsystems.Intake;
 import org.usfirst.frc.team2907.robot.subsystems.Lidar;
 import org.usfirst.frc.team2907.robot.subsystems.Shooter;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -36,6 +37,7 @@ public class Robot extends IterativeRobot {
 	public static final Climber climber = new Climber();
 	public static final Intake intake = new Intake();
 	public static OI oi;
+	
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -51,7 +53,11 @@ public class Robot extends IterativeRobot {
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		double power = Preferences.getInstance().getDouble("ShooterPower", .85);
+		double spinUpTime = Preferences.getInstance().getDouble("SpinUpTime", 2);
+		shooter.setSpinUpTime(spinUpTime);
 		shooter.setPower(power);
+		
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**

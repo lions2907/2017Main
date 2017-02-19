@@ -19,7 +19,8 @@ public class SpinUpShooterCommand extends Command
 
 	protected void initialize()
 	{
-		Robot.shooter.shift(false);
+		Robot.shooter.spinUp(2, false);
+		//Robot.shooter.shift(false);
 		//Robot.shooter.startTimer();
 //		Robot.shooter.rumble(true, 0.2);
 //		Robot.shooter.rumble(false, 2.2);
@@ -28,8 +29,8 @@ public class SpinUpShooterCommand extends Command
 	public void end()
 	{
 		Robot.shooter.shift(true);
-//		Robot.shooter.shoot(false);
-		Robot.shooter.stopTimer();
+		Robot.shooter.shoot(false);
+	//	Robot.shooter.stopTimer();
 	}
 
 	protected void interrupted()

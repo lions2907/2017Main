@@ -25,6 +25,7 @@ public class Shooter extends Subsystem
 	private boolean status;
 	private boolean enabled = false;;
 	private double power = 0.85;
+	private double spinUpTime = 2;
 
 	public Shooter()
 	{
@@ -88,6 +89,17 @@ public class Shooter extends Subsystem
 			}
 		});
 	}
+	
+	public void spinUp(double delay, final boolean in)
+	{
+		Scheduler.getInstance().add(new DelayedCallback(delay)
+		{
+			public void onCallback()
+			{
+				shift(in);
+			}
+		});
+	}
 
 	public void shoot(double power)
 	{
@@ -140,6 +152,16 @@ public class Shooter extends Subsystem
 	public void setPower(double power)
 	{
 		this.power = power;
+	}
+
+	public double getSpinUpTime()
+	{
+		return spinUpTime;
+	}
+
+	public void setSpinUpTime(double spinUpTime)
+	{
+		this.spinUpTime = spinUpTime;
 	}
 
 }
