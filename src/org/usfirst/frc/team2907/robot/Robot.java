@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2907.robot;
 
 import org.usfirst.frc.team2907.robot.commands.GearTestAuto;
+import org.usfirst.frc.team2907.robot.commands.ShootAuto;
 import org.usfirst.frc.team2907.robot.commands.tempAutomous;
 import org.usfirst.frc.team2907.robot.subsystems.Camera;
 import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
@@ -52,6 +53,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		chooser.addObject("Test", new GearTestAuto());
+		chooser.addObject("Shoot Test", new ShootAuto());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		double power = Preferences.getInstance().getDouble("ShooterPower", .85);

@@ -12,6 +12,7 @@ public class DriveDistance extends Command
 	double conversionFactor = -33.1375 / 100.5; // ticks per inch
 	private double encoderTicks;
 	private double startingTicks;
+	private double power;
 	
 	static double kP = 0.08;
 	static double kI = 0.00;
@@ -23,11 +24,12 @@ public class DriveDistance extends Command
 	
 	private double lastOutput;
 	
-	public DriveDistance(double inches)
+	public DriveDistance(double inches, double power)
 	{
 		super();
 		requires(Robot.driveTrain);
 		encoderTicks = inches * conversionFactor;
+		this.power = power;
 	}
 	
 	@Override
@@ -78,7 +80,7 @@ public class DriveDistance extends Command
 		public void pidWrite(double output) {
 			lastOutput = -output;
 			System.out.println("angle : " + Robot.driveTrain.getAngle() + ", output : " + output);
-			Robot.driveTrain.arcadeDrive(0.5, lastOutput);
+			Robot.driveTrain.arcadeDrive(power, lastOutput);
 //			Robot.driveTrain.arcadeDrive(0, -output);
 		}
 		
