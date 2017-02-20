@@ -111,6 +111,16 @@ public class DriveTrain extends Subsystem {
 		return sensorBoard;
 	}
 	
+	public double getLeftDistance()
+	{
+		return driveEncoderLeft.getDistance();
+	}
+	
+	public double getRightDistance()
+	{
+		return driveEncoderRight.getDistance();
+	}
+	
 	public double getDistance()
 	{
 		return -(driveEncoderLeft.getDistance() + driveEncoderRight.getDistance()) / 2.0;

@@ -75,9 +75,9 @@ public class CameraManager extends Subsystem
 	
 	public void readCameras()
 	{
-		System.out.println("---------- READING GEAR CAMERA ----------");
-		gearRead();
-		System.out.println("---------- END GEAR CAMERA ---------- \n");
+		//System.out.println("---------- READING GEAR CAMERA ----------");
+		//gearRead();
+		//System.out.println("---------- END GEAR CAMERA ---------- \n");
 		//System.out.println("---------- READING TOWER CAMERA ----------");
 		//towerRead();
 		//System.out.println("---------- END TOWER CAMERA ---------- \n");
@@ -157,7 +157,6 @@ public class CameraManager extends Subsystem
 				break;
 		}
 		
-		System.out.println("index : " + index);
 		if (index == BUFFER_SIZE - 1) // no header found
 			return blocks;
 		else if (index == 0) // header found at start index

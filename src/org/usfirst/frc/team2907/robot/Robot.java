@@ -12,6 +12,7 @@ import org.usfirst.frc.team2907.robot.subsystems.Lidar;
 import org.usfirst.frc.team2907.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
@@ -30,6 +31,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
+	private Compressor compressor = new Compressor();
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final CameraManager cameraManager = new CameraManager();
 	public static final Lidar lidar = new Lidar();
@@ -58,6 +60,8 @@ public class Robot extends IterativeRobot {
 		shooter.setPower(power);
 		
 		CameraServer.getInstance().startAutomaticCapture();
+		
+		compressor.start();
 	}
 
 	/**
@@ -67,6 +71,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		compressor.stop();
 
 	}
 
