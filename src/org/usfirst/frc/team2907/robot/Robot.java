@@ -3,7 +3,6 @@ package org.usfirst.frc.team2907.robot;
 
 import org.usfirst.frc.team2907.robot.commands.GearTestAuto;
 import org.usfirst.frc.team2907.robot.commands.ShootAuto;
-import org.usfirst.frc.team2907.robot.commands.tempAutomous;
 import org.usfirst.frc.team2907.robot.subsystems.Camera;
 import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
 import org.usfirst.frc.team2907.robot.subsystems.Climber;

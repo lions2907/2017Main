@@ -14,8 +14,8 @@ public class Intake extends Subsystem
 
 	public void move(double speed)
 	{
-		talon1.set(speed);
-		talon2.set(speed);
+		talon1.set((speed < 1) ? Math.max(speed, -.75) : Math.min(speed, .75));
+		talon2.set((speed < 1) ? Math.max(speed, -.75) : Math.min(speed, .75));
 	}
 
 	@Override
