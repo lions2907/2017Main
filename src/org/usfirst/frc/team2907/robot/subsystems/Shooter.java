@@ -18,9 +18,10 @@ public class Shooter extends Subsystem
 {
 	public static double SPINUP_TIME = 2;
 	private CANTalon talon1 = new CANTalon(RobotMap.TALON_SHOOTER);
+	private CANTalon intakeTalon = new CANTalon(RobotMap.TALON_INTAKE_SHOOT);
 	private boolean spinning = false;
-	private Solenoid solenoid = new Solenoid(RobotMap.SOLENOID_SHOOTER_1);
-	private Solenoid solenoid1 = new Solenoid(RobotMap.SOLENOID_SHOOTER_2);
+//	private Solenoid solenoid = new Solenoid(RobotMap.SOLENOID_SHOOTER_1);
+//	private Solenoid solenoid1 = new Solenoid(RobotMap.SOLENOID_SHOOTER_2);
 	private Timer timer;
 	private boolean status;
 	private boolean enabled = false;;
@@ -38,11 +39,12 @@ public class Shooter extends Subsystem
 
 	public void startTimer()
 	{
+		status = true;
 		setEnabled(true);
 		if (timer == null)
 		{
 			timer = new Timer();
-			timer.scheduleAtFixedRate(shooterTask, 0, 1000);
+			timer.scheduleAtFixedRate(shooterTask, 0, 2000);
 		}
 	}
 
@@ -59,46 +61,60 @@ public class Shooter extends Subsystem
 		public void run()
 		{
 			if (isEnabled())
-				shift(!status);
+			{
+				System.out.println("Timer : " + status);
+				if (status)
+					intake(.5);
+				else 
+					intake(0);
+				
+				status = !status;
+			}
 		}
 	};
 
-	public void shift(boolean on)
-	{
-		status = on;
-		if (status)
-			solenoid.set(true);
-		else
-			solenoid1.set(true);
-		// if (highGear) {
-		// leftSolenoid.set(!highGear);
-		// rightSolenoid.set(highGear);
-		// isHighGear = true;
-		// } else {
-		// leftSolenoid.set(!highGear);
-		// rightSolenoid.set(highGear);
-		// isHighGear = false;
-		// }
-		Scheduler.getInstance().add(new DelayedCallback(0.25)
-		{
-			public void onCallback()
-			{
-				solenoid.set(false);
-				solenoid1.set(false);
-				// shifter.set(DoubleSolenoid.Value.kOff);
-			}
-		});
-	}
-	
-	public void spinUp(double delay, final boolean in)
+//	public void shift(boolean on)
+//	{
+//		status = on;
+//		if (status)
+//			solenoid.set(true);
+//		else
+//			solenoid1.set(true);
+//		// if (highGear) {
+//		// leftSolenoid.set(!highGear);
+//		// rightSolenoid.set(highGear);
+//		// isHighGear = true;
+//		// } else {
+//		// leftSolenoid.set(!highGear);
+//		// rightSolenoid.set(highGear);
+//		// isHighGear = false;
+//		// }
+//		Scheduler.getInstance().add(new DelayedCallback(0.25)
+//		{
+//			public void onCallback()
+//			{
+//				solenoid.set(false);
+//				solenoid1.set(false);
+//				// shifter.set(DoubleSolenoid.Value.kOff);
+//			}
+//		});
+//	}
+//	
+	public void spinUp(double delay)
 	{
 		Scheduler.getInstance().add(new DelayedCallback(delay)
 		{
 			public void onCallback()
 			{
-				shift(in);
+//				startTimer();
+				intake(-.5);
 			}
 		});
+	}
+	
+	public void intake(double power)
+	{
+		intakeTalon.set(power);
 	}
 
 	public void shoot(double power)

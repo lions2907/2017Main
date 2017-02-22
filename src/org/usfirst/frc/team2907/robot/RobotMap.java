@@ -21,6 +21,7 @@ public class RobotMap
 	public static final int TALON_CLIMB_2 = 6;
 	
 	public static final int TALON_SHOOTER = 8;
+	public static final int TALON_INTAKE_SHOOT = 55;
 	
 	public static final int TALON_INTAKE_1 = 11;
 	public static final int TALON_INTAKE_2 = 22;

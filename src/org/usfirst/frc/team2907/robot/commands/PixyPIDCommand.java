@@ -1,10 +1,12 @@
 package org.usfirst.frc.team2907.robot.commands;
 
 import org.usfirst.frc.team2907.robot.Robot;
+import org.usfirst.frc.team2907.robot.commands.RotateToAngle.PIDOutput;
 import org.usfirst.frc.team2907.robot.subsystems.Camera;
 import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
 
 import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -12,11 +14,10 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class PixyPIDCommand extends Command
 {
-	static final double kP = 0.03;
-	static final double kI = 0.00;
-	static final double kD = 0.00;
-	static final double kF = 0.00;
-	static final double kToleranceDegrees = 2.0f;
+	static double kP = 0.08;
+	static double kI = 0.00;
+	static double kD = 0.00;
+	static final double kToleranceDegrees = 1.0f;
 	
 	private PIDController pidController;
 	private PIDOutput output;
@@ -26,6 +27,15 @@ public class PixyPIDCommand extends Command
 		super("PixyPIDCommand");
 		requires(Robot.cameraManager);
 		requires(Robot.driveTrain);
+	}
+	
+	protected void initialize()
+	{
+		Robot.driveTrain.getSensorBoard().reset();
+		
+		kP = Preferences.getInstance().getDouble("kP", .08);
+		kI = Preferences.getInstance().getDouble("kI", 0);
+		kD = Preferences.getInstance().getDouble("kD", 0);
 		
 		output = new PIDOutput();
 		pidController = new PIDController(kP, kI, kD, Robot.cameraManager.gearCameraPID, output);
@@ -34,10 +44,6 @@ public class PixyPIDCommand extends Command
 		pidController.setAbsoluteTolerance(kToleranceDegrees);
 		pidController.setContinuous(true);
 		
-	}
-	
-	protected void initialize()
-	{
 		pidController.setSetpoint(CameraManager.IMAGE_WIDTH / 2);
 		pidController.enable();
 	}
@@ -67,8 +73,8 @@ public class PixyPIDCommand extends Command
 		
 		public void pidWrite(double output)
 		{
-			Robot.driveTrain.arcadeDrive(0, output);
-			//Robot.driveTrain.mechDrive(Robot.oi.leftStick.getX(), Robot.oi.leftStick.getY(), output, Robot.driveTrain.sensorBoard.getAngle());
+			System.out.println("output : " + -output + " gear pos : " + Robot.cameraManager.getGearOffset());
+			Robot.driveTrain.arcadeDrive(0, -output);
 		}
 		
 	}

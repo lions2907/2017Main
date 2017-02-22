@@ -14,12 +14,12 @@ public class ClearIntakeCommand extends Command
 
 	protected void initialize()
 	{
-		Robot.shooter.shift(false);
+//		Robot.shooter.shift(false);
 	}
 	
 	public void end()
 	{
-		Robot.shooter.shift(true);
+//		Robot.shooter.shift(true);
 		Robot.shooter.shoot(0);
 	//	Robot.shooter.stopTimer();
 	}

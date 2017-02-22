@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+import org.usfirst.frc.team2907.robot.commands.BackUpGearCommand;
 import org.usfirst.frc.team2907.robot.commands.ClearIntakeCommand;
 import org.usfirst.frc.team2907.robot.commands.ClimbCommand;
 import org.usfirst.frc.team2907.robot.commands.ShiftCommand;
@@ -19,13 +20,15 @@ public class OI {
 	
 	public JoystickButton spinUpButton = new JoystickButton(manipulatorStick, 2); // spinup on button
 	public JoystickButton clearIntakeButton = new JoystickButton(manipulatorStick, 3);
+	public JoystickButton backUpButton = new JoystickButton(driveStick, 2);
 //	public JoystickButton climbButton = new JoystickButton(manipulatorStick, 3);//14); // climb on touchpad
 	public JoystickButton shiftButton = new JoystickButton(driveStick, 6); // shift on bumper
 	public OI()
 	{
 		shiftButton.whenPressed(new ShiftCommand());
 		spinUpButton.whileHeld(new SpinUpShooterCommand());
-		clearIntakeButton.whileHeld(new ClearIntakeCommand());
+		backUpButton.whenPressed(new BackUpGearCommand());
+		//clearIntakeButton.whileHeld(new ClearIntakeCommand());
 		//climbButton.whileHeld(new ClimbCommand());
 	}
 	//// CREATING BUTTONS

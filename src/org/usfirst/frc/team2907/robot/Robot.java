@@ -2,7 +2,11 @@
 package org.usfirst.frc.team2907.robot;
 
 import org.usfirst.frc.team2907.robot.commands.GearTestAuto;
+import org.usfirst.frc.team2907.robot.commands.PixyAutoTest;
+import org.usfirst.frc.team2907.robot.commands.RedLeftGearAuto;
+import org.usfirst.frc.team2907.robot.commands.RedRightGearAuto;
 import org.usfirst.frc.team2907.robot.commands.ShootAuto;
+import org.usfirst.frc.team2907.robot.commands.StraightGearAuto;
 import org.usfirst.frc.team2907.robot.subsystems.Camera;
 import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
 import org.usfirst.frc.team2907.robot.subsystems.Climber;
@@ -51,8 +55,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addObject("Test", new GearTestAuto());
-		chooser.addObject("Shoot Test", new ShootAuto());
+		chooser.addObject("Straight Gear Auto", new StraightGearAuto());
+		chooser.addObject("RedRightGearAuto", new RedRightGearAuto());
+		chooser.addObject("RedLeftGearAuto", new RedLeftGearAuto());
+		chooser.addObject("PixyTest", new PixyAutoTest());
+//		chooser.addObject("Test", new GearTestAuto());
+//		chooser.addObject("Shoot Test", new ShootAuto());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		double power = Preferences.getInstance().getDouble("ShooterPower", .85);

@@ -21,14 +21,16 @@ public class SpinUpShooterCommand extends Command
 	protected void initialize()
 	{
 		power = Preferences.getInstance().getDouble("ShooterPower", .85);
-		Robot.shooter.spinUp(2, true);
+//		Robot.shooter.intake(-.5);
+		Robot.shooter.spinUp(2);
 	}
 	
 	public void end()
 	{
-		Robot.shooter.shift(false);
+//		Robot.shooter.shift(false);
+		Robot.shooter.intake(0);
 		Robot.shooter.shoot(0);
-	//	Robot.shooter.stopTimer();
+//		Robot.shooter.stopTimer();
 	}
 
 	protected void interrupted()

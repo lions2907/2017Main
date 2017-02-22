@@ -14,12 +14,12 @@ public class ShootTimeCommand extends Command
 
 	protected void initialize()
 	{
-		Robot.shooter.spinUp(2, true);
+//		Robot.shooter.spinUp(2,/ true);
 	}
 	
 	public void end()
 	{
-		Robot.shooter.shift(false);
+//		Robot.shooter.shift(false);
 		Robot.shooter.shoot(false);
 	}
 

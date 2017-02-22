@@ -76,7 +76,7 @@ public class CameraManager extends Subsystem
 	public void readCameras()
 	{
 		//System.out.println("---------- READING GEAR CAMERA ----------");
-		//gearRead();
+		gearRead();
 		//System.out.println("---------- END GEAR CAMERA ---------- \n");
 		//System.out.println("---------- READING TOWER CAMERA ----------");
 		//towerRead();
@@ -191,10 +191,10 @@ public class CameraManager extends Subsystem
 				if (block != null)
 				{
 					blocks.add(block);
-					System.out.println("Block width : " + block.width + ", block height : " + block.height);
-					System.out.println("Block x : " + block.centerX + ", block y : " + block.centerY);
-					System.out.println("Sig : " + block.signature);
-					System.out.println("checksum : " + block.checksum);
+//					System.out.println("Block width : " + block.width + ", block height : " + block.height);
+//					System.out.println("Block x : " + block.centerX + ", block y : " + block.centerY);
+//					System.out.println("Sig : " + block.signature);
+//					System.out.println("checksum : " + block.checksum);
 					byteOffset += BLOCK_SIZE - 1;
 				} else
 					++byteOffset;
