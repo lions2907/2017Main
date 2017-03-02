@@ -44,7 +44,7 @@ public class Shooter extends Subsystem
 		if (timer == null)
 		{
 			timer = new Timer();
-			timer.scheduleAtFixedRate(shooterTask, 0, 2000);
+			timer.scheduleAtFixedRate(shooterTask, 0, 500);
 		}
 	}
 
@@ -64,7 +64,7 @@ public class Shooter extends Subsystem
 			{
 				System.out.println("Timer : " + status);
 				if (status)
-					intake(.5);
+					intake(-1);
 				else 
 					intake(0);
 				
@@ -107,7 +107,7 @@ public class Shooter extends Subsystem
 			public void onCallback()
 			{
 //				startTimer();
-				intake(-.5);
+				intake(-1);
 			}
 		});
 	}

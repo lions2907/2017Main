@@ -8,6 +8,7 @@ import org.usfirst.frc.team2907.robot.commands.DelayedCallback;
 import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -34,12 +35,13 @@ public class DriveTrain extends Subsystem {
 	private Encoder driveEncoderLeft = new Encoder(0, 1);
 	private Encoder driveEncoderRight = new Encoder(2, 3);
 	/* SOLONOIDS FOR SHIFTER */
-	private Solenoid leftSolenoid = new Solenoid(0);
-	private Solenoid rightSolenoid = new Solenoid(1);
+	private Solenoid leftSolenoid = new Solenoid(2);
+	private Solenoid rightSolenoid = new Solenoid(3);
 	private boolean isHighGear;
 	/* NAVIGATION BOARD */
 	private AHRS sensorBoard;
 	private boolean navigationAvaliable;
+	private AnalogInput gearAnalog = new AnalogInput(0);
 
 	public DriveTrain() {
 		// setup encoder
