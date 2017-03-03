@@ -41,7 +41,6 @@ public class DriveTrain extends Subsystem {
 	/* NAVIGATION BOARD */
 	private AHRS sensorBoard;
 	private boolean navigationAvaliable;
-	private AnalogInput gearAnalog = new AnalogInput(0);
 
 	public DriveTrain() {
 		// setup encoder
@@ -138,4 +137,8 @@ public class DriveTrain extends Subsystem {
 	{
 		return sensorBoard.getAngle();
 	}
+	
+//	public boolean hasGear()
+//	{
+//	}
 }

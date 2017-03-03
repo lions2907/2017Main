@@ -38,6 +38,9 @@ public class CameraManager extends Subsystem
 	/* TOWER CAMERA FIELDS */
 	private I2C towerCamera;
 	private ArrayList<PixyBlock> towerBlocks;
+	private double towerXOffset;
+	private double towerYOffset;
+	private boolean towerInRange;
 	
 	public CameraManager()
 	{
@@ -78,9 +81,9 @@ public class CameraManager extends Subsystem
 		//System.out.println("---------- READING GEAR CAMERA ----------");
 		gearRead();
 		//System.out.println("---------- END GEAR CAMERA ---------- \n");
-		//System.out.println("---------- READING TOWER CAMERA ----------");
-		//towerRead();
-		//System.out.println("---------- END TOWER CAMERA ---------- \n");
+		System.out.println("---------- READING TOWER CAMERA ----------");
+		towerRead();
+		System.out.println("---------- END TOWER CAMERA ---------- \n");
 	}
 	
 	private void towerRead()
@@ -93,9 +96,25 @@ public class CameraManager extends Subsystem
 		
 		if (towerBlocks.size() > 0)
 		{
-			System.out.println("Tower camera object detected!");
-			// TODO MEASURE REFLECTIVE TOWER TAPE, FIND OBJECT WITH LARGEST AREA AND CALC DISTANCE
-		}
+			PixyBlock largerBlock;
+			if (towerBlocks.size() == 1)
+			{
+				largerBlock = towerBlocks.get(0);
+			} else if ((towerBlocks.get(0).width * towerBlocks.get(0).height) > (towerBlocks.get(1).width * towerBlocks.get(1).height))
+			{
+				largerBlock = towerBlocks.get(0);
+			} else 
+			{
+				largerBlock = towerBlocks.get(1);
+			}
+			
+			towerXOffset = largerBlock.centerX;
+			towerYOffset = largerBlock.centerY;
+			System.out.println("tower x " + towerXOffset);
+			System.out.println("tower y " + towerYOffset);
+			towerInRange = true;
+		} else 
+			towerInRange = false;
 	}
 	
 	private void gearRead()
@@ -278,6 +297,21 @@ public class CameraManager extends Subsystem
 	public double getGearOffset()
 	{
 		return gearOffset;
+	}
+	
+	public double getTowerXOffset()
+	{
+		return towerXOffset;
+	}
+	
+	public double getTowerYOffset()
+	{
+		return towerYOffset;
+	}
+	
+	public boolean isTowerInRange()
+	{
+		return towerInRange;
 	}
 	
 	public PIDSource gearCameraPID = new PIDSource()

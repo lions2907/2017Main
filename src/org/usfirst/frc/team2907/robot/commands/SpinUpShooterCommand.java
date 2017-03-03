@@ -27,6 +27,7 @@ public class SpinUpShooterCommand extends Command
 	
 	public void end()
 	{
+		Robot.shooter.setEnabled(false);
 //		Robot.shooter.shift(false);
 		Robot.shooter.intake(0);
 		Robot.shooter.shoot(0);

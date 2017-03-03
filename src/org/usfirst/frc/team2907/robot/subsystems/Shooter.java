@@ -9,7 +9,9 @@ import org.usfirst.frc.team2907.robot.commands.DelayedCallback;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -19,12 +21,13 @@ public class Shooter extends Subsystem
 	public static double SPINUP_TIME = 2;
 	private CANTalon talon1 = new CANTalon(RobotMap.TALON_SHOOTER);
 	private CANTalon intakeTalon = new CANTalon(RobotMap.TALON_INTAKE_SHOOT);
+//	private Relay relay = new Relay();
 	private boolean spinning = false;
 //	private Solenoid solenoid = new Solenoid(RobotMap.SOLENOID_SHOOTER_1);
 //	private Solenoid solenoid1 = new Solenoid(RobotMap.SOLENOID_SHOOTER_2);
 	private Timer timer;
 	private boolean status;
-	private boolean enabled = false;;
+	private boolean enabled = false;
 	private double power = 0.85;
 	private double spinUpTime = 2;
 
@@ -43,8 +46,8 @@ public class Shooter extends Subsystem
 		setEnabled(true);
 		if (timer == null)
 		{
-			timer = new Timer();
-			timer.scheduleAtFixedRate(shooterTask, 0, 500);
+//			timer = new Timer();
+//			timer.scheduleAtFixedRate(shooterTask, 0, 500);
 		}
 	}
 
@@ -55,23 +58,23 @@ public class Shooter extends Subsystem
 		// timer = null;
 	}
 
-	private TimerTask shooterTask = new TimerTask()
-	{
-		@Override
-		public void run()
-		{
-			if (isEnabled())
-			{
-				System.out.println("Timer : " + status);
-				if (status)
-					intake(-1);
-				else 
-					intake(0);
-				
-				status = !status;
-			}
-		}
-	};
+//	private TimerTask shooterTask = new TimerTask()
+//	{
+//		@Override
+//		public void run()
+//		{
+//			if (isEnabled())
+//			{
+//				System.out.println("Timer : " + status);
+//				if (status)
+//					intake(-1);
+//				else 
+//					intake(0);
+//				
+//				status = !status;
+//			}
+//		}
+//	};
 
 //	public void shift(boolean on)
 //	{
@@ -102,12 +105,13 @@ public class Shooter extends Subsystem
 //	
 	public void spinUp(double delay)
 	{
+		enabled = true;
 		Scheduler.getInstance().add(new DelayedCallback(delay)
 		{
 			public void onCallback()
 			{
-//				startTimer();
-				intake(-1);
+				if (enabled)
+					intake(-1);
 			}
 		});
 	}
@@ -155,7 +159,7 @@ public class Shooter extends Subsystem
 		return enabled;
 	}
 
-	private void setEnabled(boolean enabled)
+	public void setEnabled(boolean enabled)
 	{
 		this.enabled = enabled;
 	}
