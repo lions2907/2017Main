@@ -1,6 +1,8 @@
 
 package org.usfirst.frc.team2907.robot;
 
+import org.usfirst.frc.team2907.robot.commands.BlueLeftGearAuto;
+import org.usfirst.frc.team2907.robot.commands.BlueRightGearAuto;
 import org.usfirst.frc.team2907.robot.commands.GearTestAuto;
 import org.usfirst.frc.team2907.robot.commands.PixyAutoTest;
 import org.usfirst.frc.team2907.robot.commands.RedLeftGearAuto;
@@ -35,7 +37,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends IterativeRobot {
 
-	private Compressor compressor = new Compressor();
+//	private Compressor compressor = new Compressor(0);
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final CameraManager cameraManager = new CameraManager();
 	public static final Lidar lidar = new Lidar();
@@ -44,7 +46,6 @@ public class Robot extends IterativeRobot {
 	public static final Intake intake = new Intake();
 	public static OI oi;
 	
-
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -55,10 +56,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		chooser.addObject("Blue Right Gear Auto", new BlueRightGearAuto());
+		chooser.addObject("Blue Left Gear Auto", new BlueLeftGearAuto());
 		chooser.addObject("Straight Gear Auto", new StraightGearAuto());
-		chooser.addObject("RedRightGearAuto", new RedRightGearAuto());
-		chooser.addObject("RedLeftGearAuto", new RedLeftGearAuto());
-		chooser.addObject("PixyTest", new PixyAutoTest());
+		chooser.addObject("Red Right Gear Auto", new RedRightGearAuto());
+		chooser.addObject("Red Left Gear Auto", new RedLeftGearAuto());
+//		chooser.addObject("PixyTest", new PixyAutoTest());
 //		chooser.addObject("Test", new GearTestAuto());
 //		chooser.addObject("Shoot Test", new ShootAuto());
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -70,7 +73,8 @@ public class Robot extends IterativeRobot {
 		
 		CameraServer.getInstance().startAutomaticCapture();
 		
-		compressor.start();
+//		compressor.setClosedLoopControl(true);
+//		compressor.start();
 	}
 
 	/**
@@ -80,7 +84,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-		compressor.stop();
+//		compressor.stop();
 
 	}
 

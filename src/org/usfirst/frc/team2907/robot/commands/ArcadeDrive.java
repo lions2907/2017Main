@@ -22,7 +22,8 @@ public class ArcadeDrive extends Command {
     }
 
     protected void execute() {
-    	Robot.driveTrain.arcadeDrive(Robot.oi.driveStick.getAxis(AxisType.kY), -Robot.oi.driveStick.getRawAxis(4));
+    	Robot.driveTrain.arcadeDrive(Robot.oi.driveStick.getAxis(AxisType.kY), -Robot.oi.driveStick.getRawAxis(2));//ps4
+//    	Robot.driveTrain.arcadeDrive(Robot.oi.driveStick.getAxis(AxisType.kY), -Robot.oi.driveStick.getRawAxis(4)); xbox
 		accelX = Math.abs(Robot.driveTrain.getSensorBoard().getWorldLinearAccelX());
 		accelY = Math.abs(Robot.driveTrain.getSensorBoard().getWorldLinearAccelY());
     	//System.out.println("Encoder distance : " + Robot.driveTrain.getDistance());\

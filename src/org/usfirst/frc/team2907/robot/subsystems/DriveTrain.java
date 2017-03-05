@@ -9,6 +9,7 @@ import com.ctre.CANTalon;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -41,8 +42,12 @@ public class DriveTrain extends Subsystem {
 	/* NAVIGATION BOARD */
 	private AHRS sensorBoard;
 	private boolean navigationAvaliable;
+//	private Compressor compressor = new Compressor(0);
 
 	public DriveTrain() {
+//		compressor.setClosedLoopControl(true);
+//		compressor.start();
+//		System.out.println("switch status : " + compressor.getPressureSwitchValue() + ", psi : " + compressor.getCompressorCurrent());
 		// setup encoder
 		driveEncoderLeft.setDistancePerPulse((1.0 / 100.0)); // 100 pulses per revolution and 2:1 gear ratio
 		driveEncoderRight.setDistancePerPulse((1.0 / 100.0)); // 100 pulses per revolution and 2:1 gear ratio

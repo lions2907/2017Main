@@ -81,9 +81,9 @@ public class CameraManager extends Subsystem
 		//System.out.println("---------- READING GEAR CAMERA ----------");
 		gearRead();
 		//System.out.println("---------- END GEAR CAMERA ---------- \n");
-		System.out.println("---------- READING TOWER CAMERA ----------");
+//		System.out.println("---------- READING TOWER CAMERA ----------");
 		towerRead();
-		System.out.println("---------- END TOWER CAMERA ---------- \n");
+//		System.out.println("---------- END TOWER CAMERA ---------- \n");
 	}
 	
 	private void towerRead()

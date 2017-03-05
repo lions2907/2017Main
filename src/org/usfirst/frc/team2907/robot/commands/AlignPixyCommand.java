@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AlignPixyCommand extends Command
 {
 	private double OFFSET = 210;
-	private static final double power = .5;
+	private static final double power = .25;
 	public AlignPixyCommand()
 	{
 		super("AlignPixy");
@@ -41,7 +41,7 @@ public class AlignPixyCommand extends Command
 	protected boolean isFinished()
 	{
 		double offset = Robot.cameraManager.getGearOffset();
-		//System.out.println("offset : " + offset);
+		System.out.println("offset : " + offset);
 		// TODO Auto-generated method stub
 		return Math.abs(offset - OFFSET) < 10;
 	}

@@ -130,7 +130,7 @@ public class Shooter extends Subsystem
 	{
 		spinning = on;
 		if (spinning)
-			talon1.set(-.85);
+			talon1.set(-power);
 		else
 			talon1.set(0);
 	}

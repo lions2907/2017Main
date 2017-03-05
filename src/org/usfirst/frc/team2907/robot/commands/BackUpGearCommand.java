@@ -14,6 +14,7 @@ public class BackUpGearCommand extends Command
 	{
 		super("BackUpGearCommand");
 		requires(Robot.driveTrain);
+		System.out.println("testout");
 	}
 	
 	public void initialize()
