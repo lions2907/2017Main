@@ -17,7 +17,7 @@ public class StartShooterIntakeCommand extends Command
 
 	protected void initialize()
 	{
-//		Robot.shooter.intake(on ? );
+		Robot.shooter.intake(on ? -1 : 0);
 	}
 
 	@Override

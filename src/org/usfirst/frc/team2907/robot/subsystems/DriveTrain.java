@@ -26,12 +26,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveTrain extends Subsystem {
 	public static double DISTANCE_PER_FEET = 4.0*Math.PI; // Distance in inches, 4 inch wheels. 
 	/* CANTALONS */
-	private CANTalon left1 = new CANTalon(RobotMap.TALON_LEFT_1);
+	private CANTalon left1 = new CANTalon(RobotMap.TALON_LEFT_1); // mini cim
 	private CANTalon left2 = new CANTalon(RobotMap.TALON_LEFT_2);
 	private CANTalon left3 = new CANTalon(RobotMap.TALON_LEFT_3);
 	private CANTalon right1 = new CANTalon(RobotMap.TALON_RIGHT_1);
 	private CANTalon right2 = new CANTalon(RobotMap.TALON_RIGHT_2);
-	private CANTalon right3 = new CANTalon(RobotMap.TALON_RIGHT_3);
+	private CANTalon right3 = new CANTalon(RobotMap.TALON_RIGHT_3); // mini cim
 	/* DRIVE ENCODERS */
 	private Encoder driveEncoderLeft = new Encoder(0, 1);
 	private Encoder driveEncoderRight = new Encoder(2, 3);
@@ -90,6 +90,18 @@ public class DriveTrain extends Subsystem {
 		});
 	}
 
+//	public void arcadeTurbo(double move, double rotate)
+//	{
+//		double leftSpeed = move + rotate;
+//		double rightSpeed = move - rotate;
+//		left1.set(leftSpeed);
+//		left2.set(leftSpeed);
+//		left3.set(leftSpeed);
+//		right1.set(rightSpeed);
+//		right2.set(rightSpeed);
+//		right3.set(rightSpeed);
+//	}
+	
 	public void arcadeDrive(double move, double rotate) {
 		double leftSpeed = move + rotate;
 		double rightSpeed = move - rotate;

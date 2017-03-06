@@ -10,12 +10,12 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
  */
 public class RobotMap
 {
-	public static final int TALON_LEFT_1 = 4;
-	public static final int TALON_LEFT_2 = 9;
-	public static final int TALON_LEFT_3 = 5;
-	public static final int TALON_RIGHT_1 = 3;
-	public static final int TALON_RIGHT_2 = 10;
-	public static final int TALON_RIGHT_3 = 7;
+	public static final int TALON_LEFT_1 = 4; // mini cim
+	public static final int TALON_LEFT_2 = 9; // cim
+	public static final int TALON_LEFT_3 = 5; // cim
+	public static final int TALON_RIGHT_1 = 3; // cim
+	public static final int TALON_RIGHT_2 = 10; // cim 
+	public static final int TALON_RIGHT_3 = 7; // mini cim
 	
 	public static final int TALON_CLIMB_1 = 44;
 	public static final int TALON_CLIMB_2 = 6;

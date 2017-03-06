@@ -17,7 +17,7 @@ public class ClimbCommand extends Command
 	{
 		if (Robot.oi.manipulatorStick.getY() < 0)
 		{
-			Robot.climber.climb(-Robot.oi.manipulatorStick.getY());
+			Robot.climber.climb(-(Math.min(Robot.oi.manipulatorStick.getY(), .75)));
 		} else 
 		{
 			Robot.climber.climb(0);

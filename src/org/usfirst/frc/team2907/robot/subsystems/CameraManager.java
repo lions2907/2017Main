@@ -16,6 +16,7 @@ public class CameraManager extends Subsystem
 {
 	/* GLOBAL CONSTANTS */
 	public static final double IMAGE_WIDTH = 320.0;
+	public static final double IMAGE_HEIGHT = 200.0;
 	public static final int BLOCK_SIZE = 14;
 	public static final int BUFFER_SIZE = 64;
 	/* RESUSED FIELDS */
@@ -30,6 +31,7 @@ public class CameraManager extends Subsystem
 	private boolean gearInRange;
 	private double gearOffset;
 	private ArrayList<PixyBlock> gearBlocks;
+	private double gearArea;
 	/* TOWER CAMERA CONSTANTS */
 	public static final double PIXY_POV_TOWER = 42;
 	public static int PIXY_ADDRESS_TOWER = 0x55;
@@ -142,16 +144,20 @@ public class CameraManager extends Subsystem
 					rightBlock = gearBlocks.get(1);
 				}
 				double difference = (rightBlock.centerX + leftBlock.centerX) / 2;
-				System.out.println("Center X : " + difference);
+				gearArea = (rightBlock.centerX - leftBlock.centerX) * ((leftBlock.height + rightBlock.height) / 2);
+				System.out.println("Center X : " + difference + ", targets : " + gearBlocks.size() + ", area : " + gearArea);
 				setGearOffset(difference);
 				double total = (rightBlock.centerX) - (leftBlock.centerX);
+				
 				//getDistance(total, difference);
 			} else
 			{
+				gearArea = gearBlocks.get(0).width * gearBlocks.get(0).height;
 				setGearOffset(gearBlocks.get(0).centerX);
 			}
 		} else
 		{
+			gearArea = 0;
 			gearInRange = false;
 		}
 	}
@@ -312,6 +318,11 @@ public class CameraManager extends Subsystem
 	public boolean isTowerInRange()
 	{
 		return towerInRange;
+	}
+	
+	public double getGearArea()
+	{
+		return gearArea;
 	}
 	
 	public PIDSource gearCameraPID = new PIDSource()

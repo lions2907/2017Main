@@ -22,7 +22,8 @@ public class OI {
 	public JoystickButton clearIntakeButton = new JoystickButton(manipulatorStick, 3);
 	public JoystickButton backUpButton = new JoystickButton(driveStick, 1);
 //	public JoystickButton climbButton = new JoystickButton(manipulatorStick, 3);//14); // climb on touchpad
-	public JoystickButton shiftButton = new JoystickButton(driveStick, 6); // shift on bumper
+	public JoystickButton shiftButton = new JoystickButton(driveStick, 6); // shift on right bumper
+	public JoystickButton maxButton = new JoystickButton(driveStick, 5); // no limits on left bumper
 	public OI()
 	{
 		shiftButton.whenPressed(new ShiftCommand());

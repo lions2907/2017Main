@@ -2,6 +2,8 @@ package org.usfirst.frc.team2907.robot.commands;
 
 import org.usfirst.frc.team2907.robot.Robot;
 
+import sun.dc.pr.PRError;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,37 +11,65 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ArcadeDrive extends Command {
+public class ArcadeDrive extends Command
+{
 
 	private double accelX;
 	private double accelY;
-	
-    public ArcadeDrive() {
-    	requires(Robot.driveTrain);
-    }
+	private double scaleFactor;
 
-    protected void initialize() {
-    }
+	public ArcadeDrive()
+	{
+		requires(Robot.driveTrain);
+	}
 
-    protected void execute() {
-    	Robot.driveTrain.arcadeDrive(Robot.oi.driveStick.getAxis(AxisType.kY), -Robot.oi.driveStick.getRawAxis(2));//ps4
-//    	Robot.driveTrain.arcadeDrive(Robot.oi.driveStick.getAxis(AxisType.kY), -Robot.oi.driveStick.getRawAxis(4)); xbox
-		accelX = Math.abs(Robot.driveTrain.getSensorBoard().getWorldLinearAccelX());
-		accelY = Math.abs(Robot.driveTrain.getSensorBoard().getWorldLinearAccelY());
-    	//System.out.println("Encoder distance : " + Robot.driveTrain.getDistance());\
-		Robot.oi.driveStick.setRumble(RumbleType.kLeftRumble, (accelY > .6) ? 1 : 0);
-		Robot.oi.driveStick.setRumble(RumbleType.kRightRumble, (accelX > .6) ? 1 : 0);
-    }
+	protected void initialize()
+	{
+		scaleFactor = Preferences.getInstance().getDouble("Drive Scale", 1);
+	}
 
-    protected boolean isFinished() {
-        return false;
-    }
+	protected void execute()
+	{
 
-    protected void end() {
-    	Robot.driveTrain.arcadeDrive(0,0);
-    }
-    
-    protected void interrupted() {
-    	end();
-    }
+		if (Robot.oi.maxButton.get())
+		{
+			System.out.println("MAX POWER");
+			Robot.driveTrain.arcadeDrive(
+					Robot.oi.driveStick.getAxis(AxisType.kY),
+					-Robot.oi.driveStick.getRawAxis(2));// ps4
+		} else
+		{
+			System.out.println("LIMITED POWER");
+			Robot.driveTrain.arcadeDrive(
+					Robot.oi.driveStick.getAxis(AxisType.kY) * scaleFactor,
+					-Robot.oi.driveStick.getRawAxis(2));// ps4
+		}
+		// Robot.driveTrain.arcadeDrive(Robot.oi.driveStick.getAxis(AxisType.kY),
+		// -Robot.oi.driveStick.getRawAxis(4)); xbox
+		accelX = Math.abs(Robot.driveTrain.getSensorBoard()
+				.getWorldLinearAccelX());
+		accelY = Math.abs(Robot.driveTrain.getSensorBoard()
+				.getWorldLinearAccelY());
+		// System.out.println("Encoder distance : " +
+		// Robot.driveTrain.getDistance());\
+		Robot.oi.driveStick.setRumble(RumbleType.kLeftRumble, (accelY > .6) ? 1
+				: 0);
+		Robot.oi.driveStick.setRumble(RumbleType.kRightRumble,
+				(accelX > .6) ? 1 : 0);
+	}
+
+	protected boolean isFinished()
+	{
+		return false;
+	}
+
+	protected void end()
+	{
+		Robot.driveTrain.arcadeDrive(0, 0);
+	}
+
+	protected void interrupted()
+	{
+		end();
+	}
 }
