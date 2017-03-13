@@ -4,6 +4,7 @@ import org.usfirst.frc.team2907.robot.commands.ReadLidar;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Lidar extends Subsystem

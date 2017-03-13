@@ -52,7 +52,7 @@ public class DriveDistance extends Command
 		pidController.enable();
 		
 		Robot.driveTrain.resetDistance();
-		startingTicks = Robot.driveTrain.getLeftDistance();
+		startingTicks = Robot.driveTrain.getRightDistance();
 		System.out.println("Starting ticks : " + startingTicks);
 	}
 	
@@ -65,13 +65,13 @@ public class DriveDistance extends Command
 	public void execute()
 	{
 		//Robot.driveTrain.arcadeDrive(0.5, lastOutput);
-		System.out.println("distance : " + Robot.driveTrain.getLeftDistance() + " goal ticks : " + (encoderTicks + startingTicks));
+		System.out.println("distance : " + Robot.driveTrain.getRightDistance() + " goal ticks : " + (encoderTicks + startingTicks));
 	}
 
 	@Override
 	protected boolean isFinished()
 	{
-		return Robot.driveTrain.getLeftDistance() <= encoderTicks + startingTicks;
+		return -Robot.driveTrain.getRightDistance() <= encoderTicks + startingTicks;
 	}
 	
 	class PIDOutput implements edu.wpi.first.wpilibj.PIDOutput

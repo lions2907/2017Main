@@ -33,13 +33,11 @@ public class ArcadeDrive extends Command
 
 		if (Robot.oi.maxButton.get())
 		{
-			System.out.println("MAX POWER");
 			Robot.driveTrain.arcadeDrive(
 					Robot.oi.driveStick.getAxis(AxisType.kY),
 					-Robot.oi.driveStick.getRawAxis(2));// ps4
 		} else
 		{
-			System.out.println("LIMITED POWER");
 			Robot.driveTrain.arcadeDrive(
 					Robot.oi.driveStick.getAxis(AxisType.kY) * scaleFactor,
 					-Robot.oi.driveStick.getRawAxis(2));// ps4
@@ -50,8 +48,8 @@ public class ArcadeDrive extends Command
 				.getWorldLinearAccelX());
 		accelY = Math.abs(Robot.driveTrain.getSensorBoard()
 				.getWorldLinearAccelY());
-		// System.out.println("Encoder distance : " +
-		// Robot.driveTrain.getDistance());\
+		 System.out.println("Encoder distance : " +
+		 Robot.driveTrain.getRightDistance());
 		Robot.oi.driveStick.setRumble(RumbleType.kLeftRumble, (accelY > .6) ? 1
 				: 0);
 		Robot.oi.driveStick.setRumble(RumbleType.kRightRumble,

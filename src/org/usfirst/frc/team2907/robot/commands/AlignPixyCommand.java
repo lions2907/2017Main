@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AlignPixyCommand extends Command
 {
 	private double OFFSET = 210;
-	private static final double power = .25;
+	private static final double power = .4;
 	public AlignPixyCommand()
 	{
 		super("AlignPixy");
