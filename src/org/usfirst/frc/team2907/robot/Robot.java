@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2907.robot;
 
 import org.usfirst.frc.team2907.robot.commands.BlueLeftGearAuto;
+import org.usfirst.frc.team2907.robot.commands.BlueLeftWallAuto;
 import org.usfirst.frc.team2907.robot.commands.BlueRightGearAuto;
 import org.usfirst.frc.team2907.robot.commands.CenterRedAuto;
 import org.usfirst.frc.team2907.robot.commands.DrivePixyAuto;
@@ -63,8 +64,9 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Straight Gear Auto", new StraightGearAuto());
 		chooser.addObject("Red Right Gear Auto", new RedRightGearAuto());
 		chooser.addObject("Red Left Gear Auto", new RedLeftGearAuto());
+		chooser.addObject("Blue left wall gear auto", new BlueLeftWallAuto());
 //		chooser.addObject("PixyTest", new PixyAutoTest());
-		chooser.addObject("Red Center Auto", new CenterRedAuto());
+//		chooser.addObject("Red Center Auto", new CenterRedAuto());
 //		chooser.addObject("Test", new GearTestAuto());
 //		chooser.addObject("Shoot Test", new ShootAuto());
 		// chooser.addObject("My Auto", new MyAutoCommand());
