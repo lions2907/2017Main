@@ -9,6 +9,7 @@ import org.usfirst.frc.team2907.robot.commands.ClearIntakeCommand;
 import org.usfirst.frc.team2907.robot.commands.ClimbCommand;
 import org.usfirst.frc.team2907.robot.commands.ShiftCommand;
 import org.usfirst.frc.team2907.robot.commands.SpinUpShooterCommand;
+import org.usfirst.frc.team2907.robot.commands.WaitForGearCommand;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -29,6 +30,7 @@ public class OI {
 		shiftButton.whenPressed(new ShiftCommand());
 		spinUpButton.whileHeld(new SpinUpShooterCommand());
 		backUpButton.whenPressed(new BackUpGearCommand());
+//		backUpButton.whenPressed(new WaitForGearCommand());
 		//clearIntakeButton.whileHeld(new ClearIntakeCommand());
 		//climbButton.whileHeld(new ClimbCommand());
 	}

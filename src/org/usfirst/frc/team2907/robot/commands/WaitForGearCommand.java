@@ -21,7 +21,13 @@ public class WaitForGearCommand extends Command
 	@Override
 	protected boolean isFinished()
 	{
-		return !(Robot.intake.getDistance() < 5);
+		System.out.println("ultrasonic distance : " + Robot.intake.getDistance());
+		if (Robot.intake.getDistance() > 1.5)
+		{
+			Timer.delay(1.5);
+		}
+		System.out.println("Finished");
+		return Robot.intake.getDistance() > 1.5;
 	}
 
 }

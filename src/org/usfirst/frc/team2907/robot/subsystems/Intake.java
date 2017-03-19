@@ -13,7 +13,7 @@ public class Intake extends Subsystem
 	private CANTalon talon1 = new CANTalon(RobotMap.TALON_INTAKE_1);
 	private CANTalon talon2 = new CANTalon(RobotMap.TALON_INTAKE_2);
 	
-	private Ultrasonic ultrasonic = new Ultrasonic(9, 8);
+	private Ultrasonic ultrasonic = new Ultrasonic(8, 9);
 	
 	public Intake()
 	{

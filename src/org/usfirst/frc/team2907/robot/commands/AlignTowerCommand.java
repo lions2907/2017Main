@@ -39,11 +39,11 @@ public class AlignTowerCommand extends Command
 	{
 		alignedHorizontal = false;
 		alignedHorizontal = false;
-		if (!Robot.cameraManager.isTowerInRange())
-		{
-			cancel();
-			return;
-		}
+//		if (!Robot.cameraManager.isTowerInRange())
+//		{
+//			cancel();
+//			return;
+//		}
 
 		double horizontalOffset = Robot.cameraManager.getTowerXOffset();
 		if (horizontalOffset - HORIZONTAL_OFFSET > HORIZONTAL_ERROR)

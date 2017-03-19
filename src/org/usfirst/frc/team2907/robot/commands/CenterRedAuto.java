@@ -10,8 +10,9 @@ public class CenterRedAuto extends CommandGroup
 		addSequential(new AlignPixyCommand());
 		addSequential(new DriveDistance(16, .25));
 		addSequential(new WaitForGearCommand());
-		addSequential(new DriveDistance(16, -.4));
-		addSequential(new RotateToAngle(90));
-		addSequential(new AlignTowerCommand(.25));
+		addSequential(new DriveDistanceBack(12, -.4));
+		addSequential(new RotateToAngle(-30));
+		addSequential(new AlignTowerCommand(.4));
+		addParallel(new SpinUpShooterCommand());
 	}
 }
