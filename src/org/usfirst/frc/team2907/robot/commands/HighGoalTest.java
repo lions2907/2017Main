@@ -6,7 +6,8 @@ public class HighGoalTest extends CommandGroup
 {
 	public HighGoalTest()
 	{
-		addSequential(new ShooterCommand(true));
-		addSequential(new AlignTowerCommand(.25));
+		addSequential(new WaitForGearCommand());
+//		addSequential(new AlignTowerCommand(.4, false));
+//		addSequential(new SpinUpShooterCommand());
 	}
 }

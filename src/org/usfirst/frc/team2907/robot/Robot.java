@@ -9,6 +9,7 @@ import org.usfirst.frc.team2907.robot.commands.CenterBlueAuto;
 import org.usfirst.frc.team2907.robot.commands.CenterRedAuto;
 import org.usfirst.frc.team2907.robot.commands.DrivePixyAuto;
 import org.usfirst.frc.team2907.robot.commands.GearTestAuto;
+import org.usfirst.frc.team2907.robot.commands.HighGoalTest;
 import org.usfirst.frc.team2907.robot.commands.MTBlueCenterAuto;
 import org.usfirst.frc.team2907.robot.commands.MTBlueLeftGear;
 import org.usfirst.frc.team2907.robot.commands.MTBlueRightGear;
@@ -70,7 +71,7 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Blue Right Gear Auto", new MTBlueRightGear());
 		chooser.addObject("Red Left Gear Auto", new MTRedLeftGear());
 		chooser.addObject("Blue Left Gear Auto", new MTBlueLeftGear());
-//		chooser.addObject("Shooting test", new CenterRedAuto());
+		chooser.addObject("Shooting test", new HighGoalTest());
 		chooser.addObject("Red Center Gear+Shoot Auto", new CenterRedAuto());
 		chooser.addObject("Blue Center Gear+Shoot Auto", new CenterBlueAuto());
 		chooser.addObject("Old Blue auto", new BlueLeftWallAuto());

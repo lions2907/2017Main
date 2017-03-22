@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class CameraManager extends Subsystem
 {
+	public boolean aligned = false;
 	/* GLOBAL CONSTANTS */
 	public static final double IMAGE_WIDTH = 320.0;
 	public static final double IMAGE_HEIGHT = 200.0;

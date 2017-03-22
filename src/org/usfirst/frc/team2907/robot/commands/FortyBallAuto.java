@@ -11,7 +11,7 @@ public class FortyBallAuto extends CommandGroup
 		addSequential(new DriveDistanceCollision(60, .7));
 		addSequential(new DriveDistance(12, -.25));
 		addSequential(new RotateToAngle(90));
-		addSequential(new AlignTowerCommand(.25));
+//		addSequential(new AlignTowerCommand(.25));
 		addParallel(new SpinUpShooterCommand());
 	}
 }

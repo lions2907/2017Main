@@ -12,10 +12,14 @@ public class MTBlueLeftGear extends CommandGroup
 	// - drive 12 inches
 	public MTBlueLeftGear()
 	{
-		addSequential(new DriveDistance(46, .5));
+		addSequential(new DriveDistance(66, .5));
 		addSequential(new RotateToAngle(45));
-		addSequential(new DriveDistance(80, .5));
+		addSequential(new DriveDistance(32, .5));
+		addSequential(new DriveDistance(12, .25));
 		addSequential(new AlignPixyCommand());
 		addSequential(new DriveDistance(12, .25));
+		addSequential(new WaitForGearCommand());
+		addSequential(new AlignTowerCommand(.40, true));
+		addSequential(new SpinUpShooterCommand());
 	}
 }

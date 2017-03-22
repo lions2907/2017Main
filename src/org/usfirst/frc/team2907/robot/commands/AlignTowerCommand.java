@@ -26,13 +26,15 @@ public class AlignTowerCommand extends Command
 	private boolean alignedVertical;
 
 	private double power;
+	private boolean isBlue;
 
-	public AlignTowerCommand(double power)
+	public AlignTowerCommand(double power, boolean blue)
 	{
 		super("AlignTowerCommand");
 		requires(Robot.driveTrain);
 		requires(Robot.cameraManager);
 		this.power = power;
+		isBlue = blue;
 	}
 
 	protected void initialize()
@@ -90,12 +92,17 @@ public class AlignTowerCommand extends Command
 		if (alignedHorizontal && alignedVertical)
 		{
 			System.out.println("We did it!");
+			Robot.cameraManager.aligned = true;
 		}
 		return alignedHorizontal && alignedVertical;
 	}
 
 	protected void end()
 	{
+		if (isBlue && Math.abs(Robot.driveTrain.getAngle()) > 70)
+		{
+			Robot.cameraManager.aligned = false;
+		}
 	}
 
 	protected void interrupted()
