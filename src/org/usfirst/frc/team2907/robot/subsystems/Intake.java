@@ -13,11 +13,18 @@ public class Intake extends Subsystem
 	private CANTalon talon1 = new CANTalon(RobotMap.TALON_INTAKE_1);
 	private CANTalon talon2 = new CANTalon(RobotMap.TALON_INTAKE_2);
 	
+	private CANTalon gearTalon = new CANTalon(RobotMap.TALON_GEAR_INTAKE);
+	
 	private Ultrasonic ultrasonic = new Ultrasonic(8, 9);
 	
 	public Intake()
 	{
 		ultrasonic.setAutomaticMode(true);
+	}
+	
+	public void moveGear(double speed)
+	{
+		gearTalon.set(speed);
 	}
 
 	public void move(double speed)

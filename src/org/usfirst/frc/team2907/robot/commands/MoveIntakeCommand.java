@@ -15,7 +15,22 @@ public class MoveIntakeCommand extends Command
 	
 	public void execute()
 	{
-		Robot.intake.move(-Robot.oi.manipulatorStick.getRawAxis(5));
+		if (Robot.oi.manipulatorStick.getRawButton(7))
+		{
+			Robot.intake.move(.5);
+		} else if (Robot.oi.manipulatorStick.getRawButton(8))
+		{
+			Robot.intake.move(-.5);
+		} else 
+		{
+			Robot.intake.move(0);
+		}
+		
+		if (Robot.oi.manipulatorStick.getRawButton(3))
+		{
+			Robot.intake.moveGear(1);
+		}
+		//Robot.intake.move(-Robot.oi.manipulatorStick.getRawAxis(5));
 	}
 	
 	public void end()

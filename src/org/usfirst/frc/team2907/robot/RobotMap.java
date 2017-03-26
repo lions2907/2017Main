@@ -26,6 +26,8 @@ public class RobotMap
 	public static final int TALON_INTAKE_1 = 7;
 	public static final int TALON_INTAKE_2 = 22;
 	
+	public static final int TALON_GEAR_INTAKE = 55;
+	
 	public static final int SOLENOID_1 = 0;
 	public static final int SOLENOID_2 = 1;
 	public static final int SOLENOID_SHOOTER_1 = 2;
