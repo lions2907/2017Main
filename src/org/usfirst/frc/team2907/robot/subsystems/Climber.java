@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Climber extends Subsystem
 {
+	// CLIMBING TALONS
 	private CANTalon talon1 = new CANTalon(RobotMap.TALON_CLIMB_1);
 	private CANTalon talon2 = new CANTalon(RobotMap.TALON_CLIMB_2);
 	

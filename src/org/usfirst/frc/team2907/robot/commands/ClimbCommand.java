@@ -6,7 +6,10 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ClimbCommand extends Command
 {
-
+	/* THIS COMMAND CONTROLS THE CLIMBER VIA ANALOG JOYSTICK */
+	public static final int JOYSTICK_AXIS = 1; // LEFT AXIS UP-DOWN
+	public static final double POWER_MAX = .75; // BEST TORQUE AT 75% POWER?
+	
 	public ClimbCommand()
 	{
 		super("ClimbCommand");
@@ -15,9 +18,9 @@ public class ClimbCommand extends Command
 	
 	protected void execute()
 	{
-		if (Robot.oi.manipulatorStick.getY() < 0)
+		if (Robot.oi.manipulatorStick.getY() < 0) // ONLY DRIVE ONE WAY CAUSE LOCKING MECHANISM
 		{
-			Robot.climber.climb(-(Math.min(Robot.oi.manipulatorStick.getZ(), .75)));
+			Robot.climber.climb(-(Math.min(Robot.oi.manipulatorStick.getRawAxis(JOYSTICK_AXIS), POWER_MAX)));
 		} else 
 		{
 			Robot.climber.climb(0);
@@ -37,7 +40,6 @@ public class ClimbCommand extends Command
 	@Override
 	protected boolean isFinished()
 	{
-		// TODO Auto-generated method stub
 		return false;
 	}
 

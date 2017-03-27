@@ -12,7 +12,7 @@ import org.usfirst.frc.team2907.robot.commands.StraightGearAuto;
 import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
 import org.usfirst.frc.team2907.robot.subsystems.Climber;
 import org.usfirst.frc.team2907.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team2907.robot.subsystems.Intake;
+import org.usfirst.frc.team2907.robot.subsystems.IntakeManger;
 import org.usfirst.frc.team2907.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -26,25 +26,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot
 {
-	
+	/* SUBSYSTEMS WHICH ARE A VIRTUAL MAP OF THE ROBOT */
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final CameraManager cameraManager = new CameraManager();
 	public static final Shooter shooter = new Shooter();
 	public static final Climber climber = new Climber();
-	public static final Intake intake = new Intake();
+	public static final IntakeManger intake = new IntakeManger();
+	/* OI OPERATOR INPUT CONTROLS JOYSTICKS */
 	public static OI oi;
-
+	/* AUTONOMOUS MODE SELECTORS */
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
-	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
 	@Override
 	public void robotInit()
 	{
+		/* INIT JOYSTICKS */
 		oi = new OI();
+		/* ADD AUTO MODES TO DASHBOARD FOR EASY SELECTING */
 		chooser.addObject("Red Right Gear Auto", new MTRedRightGear());
 		chooser.addObject("Blue Right Gear Auto", new MTBlueRightGear());
 		chooser.addObject("Red Left Gear Auto", new MTRedLeftGear());
@@ -55,20 +54,16 @@ public class Robot extends IterativeRobot
 		chooser.addObject("Old Blue auto", new BlueLeftWallAuto());
 		chooser.addObject("Straight Gear Auto", new StraightGearAuto());
 		SmartDashboard.putData("Auto mode", chooser);
+		/* DYNAMICALLY CHANGE SHOOTER POWER VIA DASHBOARD VARIABLES */
 		double power = Preferences.getInstance().getDouble("ShooterPower", .85);
 		double spinUpTime = Preferences.getInstance()
 				.getDouble("SpinUpTime", 2);
 		shooter.setSpinUpTime(spinUpTime);
 		shooter.setPower(power);
-
+		/* OPENS WEBCAM */
 		CameraServer.getInstance().startAutomaticCapture();
 	}
 
-	/**
-	 * This function is called once each time the robot enters Disabled mode.
-	 * You can use it to reset any subsystem information you want to clear when
-	 * the robot is disabled.
-	 */
 	@Override
 	public void disabledInit()
 	{
@@ -80,28 +75,10 @@ public class Robot extends IterativeRobot
 		Scheduler.getInstance().run();
 	}
 
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 * 
-	 * You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
-	 */
 	@Override
 	public void autonomousInit()
 	{
 		autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)

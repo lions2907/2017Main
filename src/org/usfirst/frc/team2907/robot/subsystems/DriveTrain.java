@@ -43,12 +43,8 @@ public class DriveTrain extends Subsystem {
 	/* NAVIGATION BOARD */
 	private AHRS sensorBoard;
 	private boolean navigationAvaliable;
-//	private Compressor compressor = new Compressor(0);
 
 	public DriveTrain() {
-//		compressor.setClosedLoopControl(true);
-//		compressor.start();
-//		System.out.println("switch status : " + compressor.getPressureSwitchValue() + ", psi : " + compressor.getCompressorCurrent());
 		// setup encoder
 		driveEncoderLeft.setDistancePerPulse((1.0 / 100.0)); // 100 pulses per revolution and 2:1 gear ratio
 		driveEncoderRight.setDistancePerPulse((1.0 / 100.0)); // 100 pulses per revolution and 2:1 gear ratio

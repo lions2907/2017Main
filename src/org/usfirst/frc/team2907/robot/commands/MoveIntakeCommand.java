@@ -6,7 +6,8 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveIntakeCommand extends Command
 {
-	
+	// THIS COMMAND CONTROLS THE FRONT FUEL INTAKE VIA JOYSTICK INPUT
+	public static final int JOYSTICK_AXIS = 5; // RIGHT UP-DOWN ON JOYSTICK AXIS
 	public MoveIntakeCommand()
 	{
 		super("MoveIntake");
@@ -15,22 +16,7 @@ public class MoveIntakeCommand extends Command
 	
 	public void execute()
 	{
-		if (Robot.oi.manipulatorStick.getRawButton(7))
-		{
-			Robot.intake.move(.5);
-		} else if (Robot.oi.manipulatorStick.getRawButton(8))
-		{
-			Robot.intake.move(-.5);
-		} else 
-		{
-			Robot.intake.move(0);
-		}
-		
-		if (Robot.oi.manipulatorStick.getRawButton(3))
-		{
-			Robot.intake.moveGear(1);
-		}
-		//Robot.intake.move(-Robot.oi.manipulatorStick.getRawAxis(5));
+		Robot.intake.move(-Robot.oi.manipulatorStick.getRawAxis(JOYSTICK_AXIS));
 	}
 	
 	public void end()
@@ -46,7 +32,6 @@ public class MoveIntakeCommand extends Command
 	@Override
 	protected boolean isFinished()
 	{
-		// TODO Auto-generated method stub
 		return false;
 	}
 
