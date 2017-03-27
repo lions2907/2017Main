@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RotateToAngle extends Command {
 
+	// THIS COMMAND ROTATES TO A GIVEN ANGLE -360-360 VIA PID
 	static double kP = 0.08;
 	static double kI = 0.00;
 	static double kD = 0.00;

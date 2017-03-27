@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class StraightGearAuto extends CommandGroup
 {
+	// THE CONSISTANT STRAIGHT GEAR AUTO MODE, DISTANCES ARE IN INCHES
 	public StraightGearAuto()
 	{
 		addSequential(new DriveDistance(56, .75));
