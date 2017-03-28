@@ -1,4 +1,4 @@
-package AutonomousCommands;
+package org.usfirst.frc.team2907.robot.AutonomousCommands;
 
 import org.usfirst.frc.team2907.robot.commands.AlignPixyCommand;
 import org.usfirst.frc.team2907.robot.commands.DriveDistance;
@@ -6,18 +6,18 @@ import org.usfirst.frc.team2907.robot.commands.RotateToAngle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-public class MTBlueRightGear extends CommandGroup
+public class MTRedLeftGear extends CommandGroup
 {
-	// ----------Blue right gear-----------
-	// - Drive 50 inches
-	// - turn -60 degrees
+	// ----------Red left gear-------------
+	// - Drive 47 inches
+	// - turn 60 degrees
 	// - drive 70 inches
 	// - align camera
 	// - drive 12 inches
-	public MTBlueRightGear()
+	public MTRedLeftGear()
 	{
-		addSequential(new DriveDistance(50, .5));
-		addSequential(new RotateToAngle(-45));
+		addSequential(new DriveDistance(47, .5));
+		addSequential(new RotateToAngle(45));
 		addSequential(new DriveDistance(70, .5));
 		addSequential(new AlignPixyCommand());
 		addSequential(new DriveDistance(12, .25));

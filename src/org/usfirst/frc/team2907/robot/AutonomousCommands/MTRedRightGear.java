@@ -1,4 +1,4 @@
-package AutonomousCommands;
+package org.usfirst.frc.team2907.robot.AutonomousCommands;
 
 import org.usfirst.frc.team2907.robot.commands.AlignPixyCommand;
 import org.usfirst.frc.team2907.robot.commands.AlignTowerCommand;

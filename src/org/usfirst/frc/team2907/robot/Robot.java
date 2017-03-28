@@ -1,18 +1,18 @@
 package org.usfirst.frc.team2907.robot;
 
+import org.usfirst.frc.team2907.robot.AutonomousCommands.CenterBlueAuto;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.CenterGearAuto;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.CenterRedAuto;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.MTBlueLeftGear;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.MTBlueRightGear;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.MTRedLeftGear;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.MTRedRightGear;
 import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
 import org.usfirst.frc.team2907.robot.subsystems.Climber;
 import org.usfirst.frc.team2907.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2907.robot.subsystems.IntakeManger;
 import org.usfirst.frc.team2907.robot.subsystems.Shooter;
 
-import AutonomousCommands.CenterBlueAuto;
-import AutonomousCommands.CenterGearAuto;
-import AutonomousCommands.CenterRedAuto;
-import AutonomousCommands.MTBlueLeftGear;
-import AutonomousCommands.MTBlueRightGear;
-import AutonomousCommands.MTRedLeftGear;
-import AutonomousCommands.MTRedRightGear;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
