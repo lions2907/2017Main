@@ -145,10 +145,11 @@ public class CameraManager extends Subsystem
 					rightBlock = gearBlocks.get(1);
 				}
 				double difference = (rightBlock.centerX + leftBlock.centerX) / 2;
-				gearArea = (rightBlock.centerX - leftBlock.centerX) * ((leftBlock.height + rightBlock.height) / 2);
+				gearArea = ((rightBlock.width + leftBlock.width) / 2) * ((rightBlock.height + leftBlock.height) / 2);
+//				gearArea = (rightBlock.centerX - leftBlock.centerX) * ((leftBlock.height + rightBlock.height) / 2);
 				System.out.println("Center X : " + difference + ", targets : " + gearBlocks.size() + ", area : " + gearArea);
 				setGearOffset(difference);
-				double total = (rightBlock.centerX) - (leftBlock.centerX);
+//				double total = (rightBlock.centerX) - (leftBlock.centerX);
 				
 				//getDistance(total, difference);
 			} else
