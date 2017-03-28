@@ -1,20 +1,18 @@
 package org.usfirst.frc.team2907.robot;
 
-import org.usfirst.frc.team2907.robot.commands.BlueLeftWallAuto;
-import org.usfirst.frc.team2907.robot.commands.CenterBlueAuto;
-import org.usfirst.frc.team2907.robot.commands.CenterRedAuto;
-import org.usfirst.frc.team2907.robot.commands.HighGoalTest;
-import org.usfirst.frc.team2907.robot.commands.MTBlueLeftGear;
-import org.usfirst.frc.team2907.robot.commands.MTBlueRightGear;
-import org.usfirst.frc.team2907.robot.commands.MTRedLeftGear;
-import org.usfirst.frc.team2907.robot.commands.MTRedRightGear;
-import org.usfirst.frc.team2907.robot.commands.StraightGearAuto;
 import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
 import org.usfirst.frc.team2907.robot.subsystems.Climber;
 import org.usfirst.frc.team2907.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2907.robot.subsystems.IntakeManger;
 import org.usfirst.frc.team2907.robot.subsystems.Shooter;
 
+import AutonomousCommands.CenterBlueAuto;
+import AutonomousCommands.CenterGearAuto;
+import AutonomousCommands.CenterRedAuto;
+import AutonomousCommands.MTBlueLeftGear;
+import AutonomousCommands.MTBlueRightGear;
+import AutonomousCommands.MTRedLeftGear;
+import AutonomousCommands.MTRedRightGear;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
@@ -45,14 +43,20 @@ public class Robot extends IterativeRobot
 		oi = new OI();
 		/* ADD AUTO MODES TO DASHBOARD FOR EASY SELECTING */
 		chooser.addObject("Red Right Gear Auto", new MTRedRightGear());
-		chooser.addObject("Blue Right Gear Auto", new MTBlueRightGear());
+		chooser.addObject("Red Right Gear & Shoot Auto", new MTRedRightGear(true, false));
+		
 		chooser.addObject("Red Left Gear Auto", new MTRedLeftGear());
+		
 		chooser.addObject("Blue Left Gear Auto", new MTBlueLeftGear());
-		chooser.addObject("Shooting test", new HighGoalTest());
-		chooser.addObject("Red Center Gear+Shoot Auto", new CenterRedAuto());
-		chooser.addObject("Blue Center Gear+Shoot Auto", new CenterBlueAuto());
-		chooser.addObject("Old Blue auto", new BlueLeftWallAuto());
-		chooser.addObject("Straight Gear Auto", new StraightGearAuto());
+		chooser.addObject("Blue Left Gear & Shoot Auto", new MTBlueLeftGear(true, false));
+		
+		chooser.addObject("Blue Right Gear Auto", new MTBlueRightGear());
+		
+		chooser.addObject("Center Gear Auto", new CenterGearAuto());
+		chooser.addObject("Red Center Gear & Shoot Auto", new CenterRedAuto(false));
+		chooser.addObject("Blue Center Gear & Shoot Auto", new CenterBlueAuto(false));
+		
+//		chooser.addObject("Shooting test", new HighGoalTest());
 		SmartDashboard.putData("Auto mode", chooser);
 		/* DYNAMICALLY CHANGE SHOOTER POWER VIA DASHBOARD VARIABLES */
 		double power = Preferences.getInstance().getDouble("ShooterPower", .85);
