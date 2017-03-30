@@ -20,7 +20,7 @@ public class IntakeManger extends Subsystem
 	// TALON CONTROLLING GEAR MECHANISM
 //	private CANTalon gearTalon = new CANTalon(RobotMap.TALON_GEAR_INTAKE);
 	// ULTRASONIC FOR DIGITAL READING OF GEAR (TEMP?)
-	private Ultrasonic ultrasonic = new Ultrasonic(8, 9);
+	private Ultrasonic ultrasonic = new Ultrasonic(RobotMap.ULTRASONIC_G_READ, RobotMap.ULTRASONIC_G_WRITE);
 	private Solenoid leftSolenoid = new Solenoid(RobotMap.SOLENOID_INTAKE_1);
 	private Solenoid rightSolenoid = new Solenoid(RobotMap.SOLENOID_INTAKE_2);
 	private boolean isOut;

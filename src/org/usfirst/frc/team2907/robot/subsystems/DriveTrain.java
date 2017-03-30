@@ -6,6 +6,7 @@ import org.usfirst.frc.team2907.robot.commands.ArcadeDrive;
 import org.usfirst.frc.team2907.robot.commands.DelayedCallback;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -25,7 +26,9 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class DriveTrain extends Subsystem {
-	public static double DISTANCE_PER_FEET = 4.0*Math.PI; // Distance in inches, 4 inch wheels. 
+	public static final int MAX_AMPS = 80;
+	public static final double ENCODER_PULSES_PR = 100.0;
+	public static final double DISTANCE_PER_FEET = 4.0*Math.PI; // Distance in inches, 4 inch wheels. 
 	/* CANTALONS */
 	private CANTalon left1 = new CANTalon(RobotMap.TALON_LEFT_1);
 	private CANTalon left2 = new CANTalon(RobotMap.TALON_LEFT_2);
@@ -34,23 +37,35 @@ public class DriveTrain extends Subsystem {
 	private CANTalon right2 = new CANTalon(RobotMap.TALON_RIGHT_2);
 //	private CANTalon right3 = new CANTalon(RobotMap.TALON_RIGHT_3);
 	/* DRIVE ENCODERS */
-	private Encoder driveEncoderLeft = new Encoder(0, 1);
-	private Encoder driveEncoderRight = new Encoder(2, 3);
+	private Encoder driveEncoderLeft = new Encoder(RobotMap.DRIVE_ENCODER_LCH1, RobotMap.DRIVE_ENCODER_LCH2);
+	private Encoder driveEncoderRight = new Encoder(RobotMap.DRIVE_ENCODER_RCH1, RobotMap.DRIVE_ENCODER_RCH2);
 	/* SOLONOIDS FOR SHIFTER */
-	private Solenoid leftSolenoid = new Solenoid(2);
-	private Solenoid rightSolenoid = new Solenoid(3);
+	private Solenoid leftSolenoid = new Solenoid(RobotMap.SOLENOID_DRIVE_1);
+	private Solenoid rightSolenoid = new Solenoid(RobotMap.SOLENOID_DRIVE_2);
 	private boolean isHighGear;
 	/* NAVIGATION BOARD */
 	private AHRS sensorBoard;
 	private boolean navigationAvaliable;
 
-	public DriveTrain() {
+	public DriveTrain()
+	{
 		// setup encoder
-		driveEncoderLeft.setDistancePerPulse((1.0 / 100.0)); // 100 pulses per revolution and 2:1 gear ratio
-		driveEncoderRight.setDistancePerPulse((1.0 / 100.0)); // 100 pulses per revolution and 2:1 gear ratio
+		driveEncoderLeft.setDistancePerPulse((1.0 / ENCODER_PULSES_PR)); // 100 pulses per revolution and 2:1 gear ratio
+		driveEncoderRight.setDistancePerPulse((1.0 / ENCODER_PULSES_PR)); // 100 pulses per revolution and 2:1 gear ratio
 		// setup talons
+		left1.setCurrentLimit(MAX_AMPS);
+		left1.EnableCurrentLimit(true);
+
+		left2.changeControlMode(TalonControlMode.Follower);
+		left2.set(RobotMap.TALON_LEFT_1);
+		
 		right1.setInverted(true);
-		right2.setInverted(true);
+		right1.setCurrentLimit(MAX_AMPS);
+		right1.EnableCurrentLimit(true);
+		
+		right2.changeControlMode(TalonControlMode.Follower);
+		right2.set(RobotMap.TALON_RIGHT_1);
+//		right2.setInverted(true);
 //		right3.setInverted(true);
 		try {
 			// init sensor board
@@ -103,10 +118,10 @@ public class DriveTrain extends Subsystem {
 		double leftSpeed = move + rotate;
 		double rightSpeed = move - rotate;
 		left1.set(leftSpeed);
-		left2.set(leftSpeed);
+//		left2.set(leftSpeed);
 //		left3.set(leftSpeed);
 		right1.set(rightSpeed);
-		right2.set(rightSpeed);
+//		right2.set(rightSpeed);
 //		right3.set(rightSpeed);
 	}
 
