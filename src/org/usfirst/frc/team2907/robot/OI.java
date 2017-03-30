@@ -21,6 +21,8 @@ public class OI
 	public Joystick manipulatorStick = new Joystick(1);
 	
 	public JoystickButton spinUpButton = new JoystickButton(manipulatorStick, 2); // spinup on 'x' button
+	public JoystickButton openGearButton = new JoystickButton(manipulatorStick, 3);
+	
 	public JoystickButton backUpButton = new JoystickButton(driveStick, 1);	// backs up set distance
 	public JoystickButton shiftButton = new JoystickButton(driveStick, 6); // shift on right bumper
 	public JoystickButton maxButton = new JoystickButton(driveStick, 5); // no limits on left bumper aka TURBO POWER

@@ -30,8 +30,8 @@ public class RobotMap
 	
 	public static final int SOLENOID_1 = 0;
 	public static final int SOLENOID_2 = 1;
-	public static final int SOLENOID_SHOOTER_1 = 2;
-	public static final int SOLENOID_SHOOTER_2 = 3;
+	public static final int SOLENOID_INTAKE_1 = 2;
+	public static final int SOLENOID_INTAKE_2 = 3;
 	
 	public static final int DRIVE_ENCODER_RCH1 = 0;
 	public static final int DRIVE_ENCODER_RCH2 = 1;
