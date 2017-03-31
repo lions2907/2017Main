@@ -18,13 +18,19 @@ public class ClimbCommand extends Command
 	
 	protected void execute()
 	{
-		if (Robot.oi.manipulatorStick.getY() < 0) // ONLY DRIVE ONE WAY CAUSE LOCKING MECHANISM
+		if (!Robot.oi.isGuitarMode())
 		{
-			Robot.climber.climb(-Robot.oi.manipulatorStick.getRawAxis(JOYSTICK_AXIS));
-			//Robot.climber.climb(-(Math.min(Robot.oi.manipulatorStick.getRawAxis(JOYSTICK_AXIS), POWER_MAX)));
+			if (Robot.oi.manipulatorStick.getY() < 0) // ONLY DRIVE ONE WAY CAUSE LOCKING MECHANISM
+			{
+				Robot.climber.climb(-Robot.oi.manipulatorStick.getRawAxis(JOYSTICK_AXIS));
+				//Robot.climber.climb(-(Math.min(Robot.oi.manipulatorStick.getRawAxis(JOYSTICK_AXIS), POWER_MAX)));
+			} else 
+			{
+				Robot.climber.climb(0);
+			}
 		} else 
 		{
-			Robot.climber.climb(0);
+			
 		}
 	}
 

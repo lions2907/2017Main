@@ -16,7 +16,13 @@ public class MoveIntakeCommand extends Command
 	
 	public void execute()
 	{
-		Robot.intake.move(-Robot.oi.manipulatorStick.getRawAxis(JOYSTICK_AXIS));
+		if (!Robot.oi.isGuitarMode())
+		{
+			Robot.intake.move(-Robot.oi.manipulatorStick.getRawAxis(JOYSTICK_AXIS));
+		} else 
+		{
+			Robot.intake.move(Robot.oi.manipulatorStick.getRawAxis(1));
+		}
 	}
 	
 	public void end()

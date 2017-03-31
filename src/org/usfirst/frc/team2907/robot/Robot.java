@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot
 {
+	public static final boolean ENABLE_GUITAR = false;
 	/* SUBSYSTEMS WHICH ARE A VIRTUAL MAP OF THE ROBOT */
 	public static final DriveTrain driveTrain = new DriveTrain();
 	public static final CameraManager cameraManager = new CameraManager();
@@ -40,7 +41,7 @@ public class Robot extends IterativeRobot
 	public void robotInit()
 	{
 		/* INIT JOYSTICKS */
-		oi = new OI();
+		oi = new OI(ENABLE_GUITAR);
 		/* ADD AUTO MODES TO DASHBOARD FOR EASY SELECTING */
 		chooser.addObject("Red Right Gear Auto", new MTRedRightGear());
 		chooser.addObject("Red Right Gear & Shoot Auto", new MTRedRightGear(true, false));
