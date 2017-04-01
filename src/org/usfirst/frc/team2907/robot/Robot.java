@@ -7,6 +7,9 @@ import org.usfirst.frc.team2907.robot.AutonomousCommands.MTBlueLeftGear;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.MTBlueRightGear;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.MTRedLeftGear;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.MTRedRightGear;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.NothingAuto;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.PixyTuneTest;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.UltraSonicTuneTest;
 import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
 import org.usfirst.frc.team2907.robot.subsystems.Climber;
 import org.usfirst.frc.team2907.robot.subsystems.DriveTrain;
@@ -36,6 +39,12 @@ public class Robot extends IterativeRobot
 	/* AUTONOMOUS MODE SELECTORS */
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
+	
+	/*
+	 * TODO ADD 'GearCameraPower' TO DASHBOARD VARIABLES
+	 * ADD 'EmptyGearDistance' TO DASHBOARD VARIABLES
+	 * ADD 'UltrasonicDriveDelay' TO DASHBOARD VARIABLES
+	 */
 
 	@Override
 	public void robotInit()
@@ -53,10 +62,15 @@ public class Robot extends IterativeRobot
 		
 		chooser.addObject("Blue Right Gear Auto", new MTBlueRightGear());
 		
-		chooser.addObject("Center Gear Auto", new CenterGearAuto());
+		chooser.addDefault("Center Gear Auto", new CenterGearAuto());
 		chooser.addObject("Red Center Gear & Shoot Auto", new CenterRedAuto(false));
 		chooser.addObject("Blue Center Gear & Shoot Auto", new CenterBlueAuto(false));
 		
+		// just in worst case?
+		chooser.addObject("Nothing Auto(WORST CASE SCENARIO)", new NothingAuto());
+		// TEMP FOR TESTING AND TUNING SENSORS
+		chooser.addObject("PIXY TUNING TEST PROGRAM", new PixyTuneTest());
+		chooser.addObject("ULTRASONIC TUNING TEST PROGRAM", new UltraSonicTuneTest());
 //		chooser.addObject("Shooting test", new HighGoalTest());
 		SmartDashboard.putData("Auto mode", chooser);
 		/* DYNAMICALLY CHANGE SHOOTER POWER VIA DASHBOARD VARIABLES */

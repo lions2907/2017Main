@@ -8,7 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AlignPixyCommand extends Command
 {
 	private double OFFSET = 210;
-	private static final double power = .4;
+	private double POWER = .4;
+	
 	public AlignPixyCommand()
 	{
 		super("AlignPixy");
@@ -18,6 +19,7 @@ public class AlignPixyCommand extends Command
 
 	protected void initialize()
 	{
+		POWER = Preferences.getInstance().getDouble("GearCameraPower", .4);
 		OFFSET = Preferences.getInstance().getDouble("GearPixelOffset", 210);
 	}
 
@@ -28,10 +30,10 @@ public class AlignPixyCommand extends Command
 		double offset = Robot.cameraManager.getGearOffset();
 		if (offset < OFFSET)
 		{
-			Robot.driveTrain.arcadeDrive(0, power);
+			Robot.driveTrain.arcadeDrive(0, POWER);
 		} else 
 		{
-			Robot.driveTrain.arcadeDrive(0, -power);
+			Robot.driveTrain.arcadeDrive(0, -POWER);
 		}
 		System.out.println("offset : " + offset);
 		

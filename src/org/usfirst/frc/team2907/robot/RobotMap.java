@@ -23,7 +23,7 @@ public class RobotMap
 	public static final int TALON_SHOOTER = 55;
 	public static final int TALON_INTAKE_SHOOT = 4;
 	
-	public static final int TALON_INTAKE_1 = 11;
+	public static final int TALON_INTAKE_1 = 22;
 	public static final int TALON_INTAKE_2 = 7;
 	
 	public static final int SOLENOID_DRIVE_1 = 2;
@@ -33,9 +33,9 @@ public class RobotMap
 	
 	public static final int DRIVE_ENCODER_RCH1 = 1;
 	public static final int DRIVE_ENCODER_RCH2 = 2;
-	public static final int DRIVE_ENCODER_LCH1 = 4;
-	public static final int DRIVE_ENCODER_LCH2 = 5;
+	public static final int DRIVE_ENCODER_LCH1 = 6;
+	public static final int DRIVE_ENCODER_LCH2 = 7;
 	
-	public static final int ULTRASONIC_G_WRITE = 9;
-	public static final int ULTRASONIC_G_READ = 8;
+	public static final int ULTRASONIC_G_WRITE = 4;
+	public static final int ULTRASONIC_G_READ = 5;
 }

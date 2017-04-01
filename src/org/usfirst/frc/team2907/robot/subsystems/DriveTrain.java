@@ -32,10 +32,10 @@ public class DriveTrain extends Subsystem {
 	/* CANTALONS */
 	private CANTalon left1 = new CANTalon(RobotMap.TALON_LEFT_1);
 	private CANTalon left2 = new CANTalon(RobotMap.TALON_LEFT_2);
-//	private CANTalon left3 = new CANTalon(RobotMap.TALON_LEFT_3);
+	private CANTalon left3 = new CANTalon(RobotMap.TALON_LEFT_3);
 	private CANTalon right1 = new CANTalon(RobotMap.TALON_RIGHT_1);
 	private CANTalon right2 = new CANTalon(RobotMap.TALON_RIGHT_2);
-//	private CANTalon right3 = new CANTalon(RobotMap.TALON_RIGHT_3);
+	private CANTalon right3 = new CANTalon(RobotMap.TALON_RIGHT_3);
 	/* DRIVE ENCODERS */
 	private Encoder driveEncoderLeft = new Encoder(RobotMap.DRIVE_ENCODER_LCH1, RobotMap.DRIVE_ENCODER_LCH2);
 	private Encoder driveEncoderRight = new Encoder(RobotMap.DRIVE_ENCODER_RCH1, RobotMap.DRIVE_ENCODER_RCH2);
@@ -59,12 +59,18 @@ public class DriveTrain extends Subsystem {
 		left2.changeControlMode(TalonControlMode.Follower);
 		left2.set(RobotMap.TALON_LEFT_1);
 		
+		left3.changeControlMode(TalonControlMode.Follower);
+		left3.set(RobotMap.TALON_LEFT_1);
+		
 		right1.setInverted(true);
 		right1.setCurrentLimit(MAX_AMPS);
 		right1.EnableCurrentLimit(true);
 		
 		right2.changeControlMode(TalonControlMode.Follower);
 		right2.set(RobotMap.TALON_RIGHT_1);
+		
+		right3.changeControlMode(TalonControlMode.Follower);
+		right3.set(RobotMap.TALON_RIGHT_1);
 //		right2.setInverted(true);
 //		right3.setInverted(true);
 		try {

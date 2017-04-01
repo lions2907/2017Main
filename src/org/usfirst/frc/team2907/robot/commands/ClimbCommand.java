@@ -22,7 +22,7 @@ public class ClimbCommand extends Command
 		{
 			if (Robot.oi.manipulatorStick.getY() < 0) // ONLY DRIVE ONE WAY CAUSE LOCKING MECHANISM
 			{
-				Robot.climber.climb(-Robot.oi.manipulatorStick.getRawAxis(JOYSTICK_AXIS));
+				Robot.climber.climb(Robot.oi.manipulatorStick.getRawAxis(JOYSTICK_AXIS));
 				//Robot.climber.climb(-(Math.min(Robot.oi.manipulatorStick.getRawAxis(JOYSTICK_AXIS), POWER_MAX)));
 			} else 
 			{

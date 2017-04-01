@@ -2,19 +2,26 @@ package org.usfirst.frc.team2907.robot.commands;
 
 import org.usfirst.frc.team2907.robot.Robot;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class WaitForGearCommand extends Command
 {
-	public static final double NO_GEAR_DISTANCE = 1.5; // HONESTLY NO IDEA WHAT THE ULTRASONIC MEASUREMENTS ARE
 	public static final double READ_DELAY = .1;
-	public static final double DRIVE_DELAY = 1.5;
+	public static double NO_GEAR_DISTANCE = 1.5; 
+	public static double DRIVE_DELAY = 1.5;
 	// WAITS FOR GEAR TO TAKEN BY BO SO WE CAN DRIVE OFF
 	public WaitForGearCommand()
 	{
 		super("WaitForGear");
 		requires(Robot.intake);
+	}
+	
+	protected void initialize()
+	{
+		NO_GEAR_DISTANCE = Preferences.getInstance().getDouble("EmptyGearDistance", 1.5);
+		DRIVE_DELAY = Preferences.getInstance().getDouble("UltrasonicDriveDelay", 1.5);
 	}
 	
 	public void execute()

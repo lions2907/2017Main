@@ -48,8 +48,8 @@ public class ArcadeDrive extends Command
 				.getWorldLinearAccelX());
 		accelY = Math.abs(Robot.driveTrain.getSensorBoard()
 				.getWorldLinearAccelY());
-		 System.out.println("Encoder distance : " +
-		 Robot.driveTrain.getRightDistance());
+		 System.out.println("Encoder right distance : " +
+		 Robot.driveTrain.getRightDistance() + ", left : " + Robot.driveTrain.getLeftDistance());
 		Robot.oi.driveStick.setRumble(RumbleType.kLeftRumble, (accelY > .6) ? 1
 				: 0);
 		Robot.oi.driveStick.setRumble(RumbleType.kRightRumble,
