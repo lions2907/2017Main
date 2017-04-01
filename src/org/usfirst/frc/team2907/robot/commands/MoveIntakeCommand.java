@@ -3,6 +3,7 @@ package org.usfirst.frc.team2907.robot.commands;
 import org.usfirst.frc.team2907.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MoveIntakeCommand extends Command
 {
@@ -23,6 +24,8 @@ public class MoveIntakeCommand extends Command
 		{
 			Robot.intake.move(Robot.oi.manipulatorStick.getRawAxis(1));
 		}
+		
+		SmartDashboard.putBoolean("Collector contains gear", Robot.intake.getDistance() > WaitForGearCommand.NO_GEAR_DISTANCE);
 	}
 	
 	public void end()

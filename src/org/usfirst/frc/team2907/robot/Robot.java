@@ -9,6 +9,7 @@ import org.usfirst.frc.team2907.robot.AutonomousCommands.MTRedLeftGear;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.MTRedRightGear;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.NothingAuto;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.PixyTuneTest;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.TowerTuneTest;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.UltraSonicTuneTest;
 import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
 import org.usfirst.frc.team2907.robot.subsystems.Climber;
@@ -71,6 +72,7 @@ public class Robot extends IterativeRobot
 		// TEMP FOR TESTING AND TUNING SENSORS
 		chooser.addObject("PIXY TUNING TEST PROGRAM", new PixyTuneTest());
 		chooser.addObject("ULTRASONIC TUNING TEST PROGRAM", new UltraSonicTuneTest());
+		chooser.addObject("TOWER TUNING TEST PROGRAM", new TowerTuneTest());
 //		chooser.addObject("Shooting test", new HighGoalTest());
 		SmartDashboard.putData("Auto mode", chooser);
 		/* DYNAMICALLY CHANGE SHOOTER POWER VIA DASHBOARD VARIABLES */

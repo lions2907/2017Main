@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -44,16 +45,14 @@ public class ArcadeDrive extends Command
 		}
 		// Robot.driveTrain.arcadeDrive(Robot.oi.driveStick.getAxis(AxisType.kY),
 		// -Robot.oi.driveStick.getRawAxis(4)); xbox
-		accelX = Math.abs(Robot.driveTrain.getSensorBoard()
-				.getWorldLinearAccelX());
-		accelY = Math.abs(Robot.driveTrain.getSensorBoard()
-				.getWorldLinearAccelY());
-		 System.out.println("Encoder right distance : " +
-		 Robot.driveTrain.getRightDistance() + ", left : " + Robot.driveTrain.getLeftDistance());
-		Robot.oi.driveStick.setRumble(RumbleType.kLeftRumble, (accelY > .6) ? 1
-				: 0);
-		Robot.oi.driveStick.setRumble(RumbleType.kRightRumble,
-				(accelX > .6) ? 1 : 0);
+		accelX = Math.abs(Robot.driveTrain.getSensorBoard().getWorldLinearAccelX());
+		accelY = Math.abs(Robot.driveTrain.getSensorBoard().getWorldLinearAccelY());
+		System.out.println("Encoder right distance : " + Robot.driveTrain.getRightDistance() + ", left : "
+				+ Robot.driveTrain.getLeftDistance());
+		Robot.oi.driveStick.setRumble(RumbleType.kLeftRumble, (accelY > .6) ? 1 : 0);
+		Robot.oi.driveStick.setRumble(RumbleType.kRightRumble, (accelX > .6) ? 1 : 0);
+		
+		SmartDashboard.putString("Drivetrain Gear", (Robot.driveTrain.isHighGear()) ? "HIGH" : "LOW"); 
 	}
 
 	protected boolean isFinished()
