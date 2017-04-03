@@ -9,6 +9,9 @@ import org.usfirst.frc.team2907.robot.AutonomousCommands.MTRedLeftGear;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.MTRedRightGear;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.NothingAuto;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.PixyTuneTest;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.RedBoilerSideAuto;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.RedRightGearAuto;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.StraightNoCamera;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.TowerTuneTest;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.UltraSonicTuneTest;
 import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
@@ -53,7 +56,7 @@ public class Robot extends IterativeRobot
 		/* INIT JOYSTICKS */
 		oi = new OI(ENABLE_GUITAR);
 		/* ADD AUTO MODES TO DASHBOARD FOR EASY SELECTING */
-		chooser.addObject("Red Right Gear Auto", new MTRedRightGear());
+		chooser.addObject("Red Right Gear Auto", new RedRightGearAuto());
 		chooser.addObject("Red Right Gear & Shoot Auto", new MTRedRightGear(true, false));
 		
 		chooser.addObject("Red Left Gear Auto", new MTRedLeftGear());
@@ -67,12 +70,15 @@ public class Robot extends IterativeRobot
 		chooser.addObject("Red Center Gear & Shoot Auto", new CenterRedAuto(false));
 		chooser.addObject("Blue Center Gear & Shoot Auto", new CenterBlueAuto(false));
 		
+		chooser.addObject("Red Boiler Side Auto", new RedBoilerSideAuto());
+		
 		// just in worst case?
 		chooser.addObject("Nothing Auto(WORST CASE SCENARIO)", new NothingAuto());
 		// TEMP FOR TESTING AND TUNING SENSORS
 		chooser.addObject("PIXY TUNING TEST PROGRAM", new PixyTuneTest());
 		chooser.addObject("ULTRASONIC TUNING TEST PROGRAM", new UltraSonicTuneTest());
 		chooser.addObject("TOWER TUNING TEST PROGRAM", new TowerTuneTest());
+		chooser.addObject("Center no camera", new StraightNoCamera());
 //		chooser.addObject("Shooting test", new HighGoalTest());
 		SmartDashboard.putData("Auto mode", chooser);
 		/* DYNAMICALLY CHANGE SHOOTER POWER VIA DASHBOARD VARIABLES */

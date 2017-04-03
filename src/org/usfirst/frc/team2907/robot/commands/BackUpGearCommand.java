@@ -43,7 +43,7 @@ public class BackUpGearCommand extends Command
 	protected boolean isFinished()
 	{
 		System.out.println("test : " + Robot.driveTrain.getLeftDistance() + " end : " + (2.0 * conversionFactor));
-		return Robot.driveTrain.getLeftDistance() >= Math.abs((distance * conversionFactor));
+		return -Robot.driveTrain.getLeftDistance() >= Math.abs((distance * conversionFactor));
 	}
 
 }

@@ -71,7 +71,7 @@ public class DriveDistance extends Command
 	@Override
 	protected boolean isFinished()
 	{
-		return -Robot.driveTrain.getRightDistance() <= encoderTicks + startingTicks;
+		return Robot.driveTrain.getRightDistance() <= encoderTicks + startingTicks;
 	}
 	
 	class PIDOutput implements edu.wpi.first.wpilibj.PIDOutput

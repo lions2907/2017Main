@@ -10,6 +10,6 @@ public class TowerTuneTest extends CommandGroup
 	public TowerTuneTest()
 	{
 		addSequential(new AlignTowerCommand(.4));
-		addSequential(new SpinUpShooterCommand());
+//		addSequential(new SpinUpShooterCommand());
 	}
 }

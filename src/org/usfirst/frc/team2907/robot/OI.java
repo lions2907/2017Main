@@ -25,6 +25,7 @@ public class OI
 
 	 public JoystickButton fastClimbButton;
 	 public JoystickButton slowClimbButton;
+	 public JoystickButton gearButton;
 
 	public JoystickButton spinUpButton;
 	public JoystickButton openGearButton;
@@ -40,16 +41,17 @@ public class OI
 			this.guitarMode = guitarMode;
 			 fastClimbButton = new JoystickButton(manipulatorStick, 2);
 			 slowClimbButton = new JoystickButton(manipulatorStick, 6);
+			 gearButton = new JoystickButton(manipulatorStick, 3);
 			 fastClimbButton.whileHeld(new ClimberPowerCommand(1));
 			 slowClimbButton.whileHeld(new ClimberPowerCommand(.25));
 		} else
 		{
 			spinUpButton = new JoystickButton(manipulatorStick, 2); // spinup on 'x' button
 			openGearButton = new JoystickButton(manipulatorStick, 3); // open gear mech on 'o' button
-			shiftButton.whenPressed(new ShiftCommand());
 			openGearButton.whenPressed(new OpenGearIntakeCommand());
+			spinUpButton.whileHeld(new SpinUpShooterCommand());
 		}
-		spinUpButton.whileHeld(new SpinUpShooterCommand());
+		shiftButton.whenPressed(new ShiftCommand());
 		backUpButton.whenPressed(new BackUpGearCommand());
 	}
 
