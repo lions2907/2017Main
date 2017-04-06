@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 import org.usfirst.frc.team2907.robot.AutonomousCommands.ClimberPowerCommand;
+import org.usfirst.frc.team2907.robot.commands.AlignTowerCommand;
 import org.usfirst.frc.team2907.robot.commands.BackUpGearCommand;
 import org.usfirst.frc.team2907.robot.commands.ClearIntakeCommand;
 import org.usfirst.frc.team2907.robot.commands.ClimbCommand;
@@ -30,6 +31,7 @@ public class OI
 	public JoystickButton spinUpButton;
 	public JoystickButton openGearButton;
 
+	public JoystickButton alignButton = new JoystickButton(driveStick, /* TODO FIGURE OUT WHICH BUTTON */3);
 	public JoystickButton backUpButton = new JoystickButton(driveStick, 1); // backs up set distance
 	public JoystickButton shiftButton = new JoystickButton(driveStick, 6); // shift on right bumper
 	public JoystickButton maxButton = new JoystickButton(driveStick, 5); // no limits on left bumper aka TURBO POWER
@@ -51,6 +53,8 @@ public class OI
 			openGearButton.whenPressed(new OpenGearIntakeCommand());
 			spinUpButton.whileHeld(new SpinUpShooterCommand());
 		}
+		
+		alignButton.whileHeld(new AlignTowerCommand(.4));
 		shiftButton.whenPressed(new ShiftCommand());
 		backUpButton.whenPressed(new BackUpGearCommand());
 	}

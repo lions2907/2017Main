@@ -10,6 +10,7 @@ import org.usfirst.frc.team2907.robot.commands.DelayedCallback;
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -21,10 +22,9 @@ public class Shooter extends Subsystem
 	public static double SPINUP_TIME = 2;
 	private CANTalon talon1 = new CANTalon(RobotMap.TALON_SHOOTER);
 	private CANTalon intakeTalon = new CANTalon(RobotMap.TALON_INTAKE_SHOOT);
+	private Encoder shooterEncoder = new Encoder(RobotMap.SHOOTER_ENCODER_1, RobotMap.SHOOTER_ENCODER_2);
 //	private Relay relay = new Relay();
 	private boolean spinning = false;
-//	private Solenoid solenoid = new Solenoid(RobotMap.SOLENOID_SHOOTER_1);
-//	private Solenoid solenoid1 = new Solenoid(RobotMap.SOLENOID_SHOOTER_2);
 	private Timer timer;
 	private boolean status;
 	private boolean enabled = false;
@@ -33,6 +33,7 @@ public class Shooter extends Subsystem
 
 	public Shooter()
 	{
+		shooterEncoder.setDistancePerPulse(1);
 	}
 
 	@Override
@@ -118,7 +119,7 @@ public class Shooter extends Subsystem
 	
 	public void intake(double power)
 	{
-		intakeTalon.set(power);
+		intakeTalon.set(-power);
 	}
 
 	public void shoot(double power)
@@ -133,6 +134,11 @@ public class Shooter extends Subsystem
 			talon1.set(-power);
 		else
 			talon1.set(0);
+	}
+	
+	public double getRPM()
+	{
+		return shooterEncoder.getRate();
 	}
 
 	public void rumble(final boolean on, double delay)

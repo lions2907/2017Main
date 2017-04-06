@@ -42,6 +42,7 @@ public class SpinUpShooterCommand extends Command
 	@Override
 	public void execute()
 	{
+		System.out.println("Shooter RPM : " + Robot.shooter.getRPM());
 		Robot.shooter.shoot(power);
 	}
 

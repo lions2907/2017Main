@@ -17,15 +17,15 @@ public class Climber extends Subsystem
 	public Climber()
 	{
 		talon1.changeControlMode(TalonControlMode.Voltage);
-		talon2.changeControlMode(TalonControlMode.Voltage);
-//		talon2.changeControlMode(TalonControlMode.Follower);
-//		talon2.set(RobotMap.TALON_CLIMB_1);
+//		talon2.changeControlMode(TalonControlMode.Voltage);
+		talon2.changeControlMode(TalonControlMode.Follower);
+		talon2.set(RobotMap.TALON_CLIMB_1);
 	}
 	
 	public void climb(double speed)
 	{
-		talon1.set(speed * 12); // in voltage mode add 12 volt scale 
-		talon2.set(speed * 12);
+		talon1.set(speed * -12); // in voltage mode add 12 volt scale 
+//		talon2.set(speed * 12);
 //		talon2.set(speed);
 	}
 	
