@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.ClimberPowerCommand;
 import org.usfirst.frc.team2907.robot.commands.AlignTowerCommand;
 import org.usfirst.frc.team2907.robot.commands.BackUpGearCommand;
-import org.usfirst.frc.team2907.robot.commands.ClearIntakeCommand;
 import org.usfirst.frc.team2907.robot.commands.ClimbCommand;
 import org.usfirst.frc.team2907.robot.commands.OpenGearIntakeCommand;
 import org.usfirst.frc.team2907.robot.commands.ShiftCommand;
@@ -52,7 +51,8 @@ public class OI
 			spinUpButton = new JoystickButton(manipulatorStick, 2); // spinup on 'x' button
 			openGearButton = new JoystickButton(manipulatorStick, 3); // open gear mech on 'o' button
 			openGearButton.whenPressed(new OpenGearIntakeCommand());
-			spinUpButton.whileHeld(new SpinUpShooterCommand());
+			spinUpButton.whileHeld(new ShooterPIDCommand(50));
+//			spinUpButton.whileHeld(new SpinUpShooterCommand());
 		}
 		
 		alignButton.whileHeld(new AlignTowerCommand(.25));

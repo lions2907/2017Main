@@ -34,7 +34,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot
 {
-	public static final boolean ENABLE_RYAN = false;
 	public static final boolean ENABLE_GUITAR = false;
 	/* SUBSYSTEMS WHICH ARE A VIRTUAL MAP OF THE ROBOT */
 	public static final DriveTrain driveTrain = new DriveTrain();
@@ -72,7 +71,7 @@ public class Robot extends IterativeRobot
 		
 //		chooser.addObject("Blue Right Gear Auto", new MTBlueRightGear());
 		
-		chooser.addDefault("Center Gear Auto", new CenterGearAuto());
+//		chooser.addDefault("Center Gear Auto", new CenterGearAuto());
 		chooser.addObject("Red Center Gear & Shoot Auto", new CenterRedAuto(true));
 		chooser.addObject("Blue Center Gear & Shoot Auto", new CenterBlueAuto(true));
 		
@@ -80,12 +79,12 @@ public class Robot extends IterativeRobot
 		chooser.addObject("Blue Boiler Side Auto", new BlueBoilerSideAuto());
 		
 		// just in worst case?
-		chooser.addObject("Nothing Auto(WORST CASE SCENARIO)", new NothingAuto());
+//		chooser.addObject("Nothing Auto(WORST CASE SCENARIO)", new NothingAuto());
 		// TEMP FOR TESTING AND TUNING SENSORS
 //		chooser.addObject("PIXY TUNING TEST PROGRAM", new PixyTuneTest());
-		chooser.addObject("ULTRASONIC TUNING TEST PROGRAM", new UltraSonicTuneTest());
+//		chooser.addObject("ULTRASONIC TUNING TEST PROGRAM", new UltraSonicTuneTest());
 //		chooser.addObject("TOWER TUNING TEST PROGRAM", new TowerTuneTest());
-		chooser.addObject("Center no camera", new StraightNoCamera());
+//		chooser.addObject("Center no camera", new StraightNoCamera());
 //		chooser.addObject("Shooting test", new HighGoalTest());
 		SmartDashboard.putData("Auto mode", chooser);
 		/* DYNAMICALLY CHANGE SHOOTER POWER VIA DASHBOARD VARIABLES */

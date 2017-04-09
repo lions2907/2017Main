@@ -20,18 +20,14 @@ public class SpinUpShooterCommand extends Command
 
 	protected void initialize()
 	{
+		Robot.shooter.disableSpeedController();
 		power = Preferences.getInstance().getDouble("ShooterPower", .85);
-//		Robot.shooter.intake(-1);
 		Robot.shooter.spinUp(3);
 	}
 	
 	public void end()
 	{
-		Robot.shooter.setEnabled(false);
-//		Robot.shooter.shift(false);
-		Robot.shooter.intake(0);
-		Robot.shooter.shoot(0);
-//		Robot.shooter.stopTimer();
+		Robot.shooter.stop();
 	}
 
 	protected void interrupted()
@@ -42,8 +38,7 @@ public class SpinUpShooterCommand extends Command
 	@Override
 	public void execute()
 	{
-		System.out.println("Shooter position " + Robot.shooter.talon1.getPosition() + " velocity : " + Robot.shooter.talon1.getEncVelocity());
-//		System.out.println("Shooter RPM : " + Robot.shooter.getRPM() + " distance : " + Robot.shooter.getDistance());
+		System.out.println("Shooter velocity : " + Robot.shooter.getRPM());
 		Robot.shooter.shoot(power);
 	}
 

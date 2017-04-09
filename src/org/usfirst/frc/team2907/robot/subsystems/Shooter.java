@@ -8,6 +8,7 @@ import org.usfirst.frc.team2907.robot.RobotMap;
 import org.usfirst.frc.team2907.robot.commands.DelayedCallback;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -22,24 +23,34 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Shooter extends Subsystem
 {
-	public static double SPINUP_TIME = 2;
-	public CANTalon talon1 = new CANTalon(RobotMap.TALON_SHOOTER);
-	private CANTalon intakeTalon = new CANTalon(RobotMap.TALON_INTAKE_SHOOT);
-	private Encoder shooterEncoder = new Encoder(RobotMap.SHOOTER_ENCODER_1,
-			RobotMap.SHOOTER_ENCODER_2);
-	//	private Relay relay = new Relay();
-	private boolean spinning = false;
-	private Timer timer;
-	private boolean status;
-	private boolean enabled = false;
+	private CANTalon talonShooter = new CANTalon(RobotMap.TALON_SHOOTER);
+	private CANTalon talonIntake = new CANTalon(RobotMap.TALON_INTAKE_SHOOT);
+	private boolean isShooting = false;
+	private boolean isSpeedControlledEnabled = false;
 	private double power = 0.85;
 	private double spinUpTime = 2;
 
 	public Shooter()
 	{
-		shooterEncoder.setDistancePerPulse(1 / 360.0);
-		shooterEncoder.reset();
-//		talon1.changeControlMode(TalonControlMode.Speed);
+		talonShooter.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		talonShooter.setF(0.04833);
+		talonShooter.setP(0.001);
+		talonShooter.setI(0);
+		talonShooter.setD(0);
+		talonShooter.configNominalOutputVoltage(0, 0);
+		talonShooter.configPeakOutputVoltage(12, -12);
+	}
+
+	public void enableSpeedController()
+	{
+		isSpeedControlledEnabled = true;
+		talonShooter.changeControlMode(TalonControlMode.Speed);
+	}
+
+	public void disableSpeedController()
+	{
+		isSpeedControlledEnabled = false;
+		talonShooter.changeControlMode(TalonControlMode.PercentVbus);
 	}
 
 	@Override
@@ -47,138 +58,44 @@ public class Shooter extends Subsystem
 	{
 	}
 
-	public void startTimer()
-	{
-		status = true;
-		setEnabled(true);
-		if (timer == null)
-		{
-			//			timer = new Timer();
-			//			timer.scheduleAtFixedRate(shooterTask, 0, 500);
-		}
-	}
-
-	public void stopTimer()
-	{
-		setEnabled(false);
-		// timer.cancel();
-		// timer = null;
-	}
-
-	//	private TimerTask shooterTask = new TimerTask()
-	//	{
-	//		@Override
-	//		public void run()
-	//		{
-	//			if (isEnabled())
-	//			{
-	//				System.out.println("Timer : " + status);
-	//				if (status)
-	//					intake(-1);
-	//				else 
-	//					intake(0);
-	//				
-	//				status = !status;
-	//			}
-	//		}
-	//	};
-
-	//	public void shift(boolean on)
-	//	{
-	//		status = on;
-	//		if (status)
-	//			solenoid.set(true);
-	//		else
-	//			solenoid1.set(true);
-	//		// if (highGear) {
-	//		// leftSolenoid.set(!highGear);
-	//		// rightSolenoid.set(highGear);
-	//		// isHighGear = true;
-	//		// } else {
-	//		// leftSolenoid.set(!highGear);
-	//		// rightSolenoid.set(highGear);
-	//		// isHighGear = false;
-	//		// }
-	//		Scheduler.getInstance().add(new DelayedCallback(0.25)
-	//		{
-	//			public void onCallback()
-	//			{
-	//				solenoid.set(false);
-	//				solenoid1.set(false);
-	//				// shifter.set(DoubleSolenoid.Value.kOff);
-	//			}
-	//		});
-	//	}
-	//	
 	public void spinUp(double delay)
 	{
-		enabled = true;
+		isShooting = true;
 		Scheduler.getInstance().add(new DelayedCallback(delay)
 		{
 			public void onCallback()
 			{
-				if (enabled)
+				if (isShooting)
 					intake(-1);
 			}
 		});
 	}
 
+	public void shoot(double rpm)
+	{
+		talonShooter.set(rpm);
+	}
+
+	public void stop()
+	{
+		isShooting = false;
+		talonIntake.set(0);
+		talonShooter.set(0);
+	}
+
 	public void intake(double power)
 	{
-		intakeTalon.set(-power);
-	}
-
-	public void shoot(double power)
-	{
-		talon1.set(power);
-	}
-
-	public void shoot(boolean on)
-	{
-		spinning = on;
-		if (spinning)
-			talon1.set(-power);
-		else
-			talon1.set(0);
-	}
-
-	public double getDistance()
-	{
-		return shooterEncoder.getDistance();
+		talonIntake.set(-power);
 	}
 
 	public double getRPM()
 	{
-		return shooterEncoder.getRate();
-	}
-
-	public void rumble(final boolean on, double delay)
-	{
-		//		Scheduler.getInstance().add(new DelayedCallback(delay)
-		//		{
-		//			public void onCallback()
-		//			{
-		//				Robot.oi.manipulatorStick.setRumble(RumbleType.kLeftRumble,
-		//						(on) ? 1 : 0);
-		//				Robot.oi.manipulatorStick.setRumble(RumbleType.kRightRumble,
-		//						(on) ? 1 : 0);
-		//			}
-		//		});
-	}
-
-	public boolean isSpinning()
-	{
-		return spinning;
+		return talonShooter.getEncVelocity();
 	}
 
 	public boolean isEnabled()
 	{
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled)
-	{
-		this.enabled = enabled;
+		return isShooting;
 	}
 
 	public double getPower()
@@ -200,27 +117,4 @@ public class Shooter extends Subsystem
 	{
 		this.spinUpTime = spinUpTime;
 	}
-
-	public PIDSource RPMPidSource = new PIDSource()
-	{
-
-		@Override
-		public void setPIDSourceType(PIDSourceType pidSource)
-		{
-		}
-
-		@Override
-		public PIDSourceType getPIDSourceType()
-		{
-			// TODO Auto-generated method stub
-			return PIDSourceType.kRate;
-		}
-
-		@Override
-		public double pidGet()
-		{
-			return getRPM();
-		}
-	};
-
 }
