@@ -47,6 +47,7 @@ public class ArcadeDrive extends Command
 		// -Robot.oi.driveStick.getRawAxis(4)); xbox
 		accelX = Math.abs(Robot.driveTrain.getSensorBoard().getWorldLinearAccelX());
 		accelY = Math.abs(Robot.driveTrain.getSensorBoard().getWorldLinearAccelY());
+//		System.out.println("Gyro : " + Robot.driveTrain.getSensorBoard().getAngle());
 //		System.out.println("Encoder right distance : " + Robot.driveTrain.getRightDistance() + ", left : "
 //				+ Robot.driveTrain.getLeftDistance());
 		Robot.oi.driveStick.setRumble(RumbleType.kLeftRumble, (accelY > .6) ? 1 : 0);

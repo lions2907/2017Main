@@ -11,6 +11,7 @@ public class CenterBlueAuto extends CenterGearAuto
 	public CenterBlueAuto(boolean enableShooter)
 	{
 		super();
+		addSequential(new DriveDistanceBack(6, .25));
 		addSequential(new WaitForGearCommand());
 		addSequential(new DriveDistanceBack(12, -.4));
 		addSequential(new RotateToAngle(50));

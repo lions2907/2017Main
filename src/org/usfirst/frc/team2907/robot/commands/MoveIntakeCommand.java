@@ -25,6 +25,7 @@ public class MoveIntakeCommand extends Command
 			Robot.intake.move(Robot.oi.manipulatorStick.getRawAxis(1));
 		}
 		
+//		System.out.println("Switch : " + Robot.intake.isSwitchFlipped());
 //		SmartDashboard.putNumber("GearDistance : ", Robot.intake.getDistance());
 		SmartDashboard.putString("Collector Status : ",(Robot.intake.isOut()) ? "OPEN" : "CLOSED");
 //		SmartDashboard.putBoolean("Collector contains gear", Robot.intake.getDistance() > WaitForGearCommand.NO_GEAR_DISTANCE);

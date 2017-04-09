@@ -14,14 +14,14 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class AlignTowerCommand extends Command
 {
-	public static int[] OFFSETS = { 0/* feet */, 0/* feet */, 0 /* feet */};
+//	public static int[] OFFSETS = { 0/* feet */, 0/* feet */, 0 /* feet */};
 	/*
 	 * -------------
 	 * ..---- tower x 163.0 tower y 193.0
 	 */
 	// constants for easy changes
-	public static final int HORIZONTAL_OFFSET = 163;
-	public static int VERTICAL_OFFSET = 193;
+	public static final int HORIZONTAL_OFFSET = 200;
+	public static int VERTICAL_OFFSET = 90;
 	public static final int HORIZONTAL_ERROR = 10;
 	public static final int VERTICAL_ERROR = 10;
 
@@ -41,7 +41,7 @@ public class AlignTowerCommand extends Command
 	protected void initialize()
 	{
 		alignedHorizontal = false;
-		alignedHorizontal = false;
+		alignedVertical = false;
 
 		double horizontalOffset = Robot.cameraManager.getTowerXOffset();
 		if (horizontalOffset - HORIZONTAL_OFFSET > HORIZONTAL_ERROR)
@@ -49,7 +49,7 @@ public class AlignTowerCommand extends Command
 			alignedHorizontal = false;
 		}
 		
-		VERTICAL_OFFSET = findClosestPostition((int)Robot.cameraManager.getTowerYOffset());
+//		VERTICAL_OFFSET = findClosestPostition((int)Robot.cameraManager.getTowerYOffset());
 	}
 
 	protected void execute()
@@ -85,18 +85,18 @@ public class AlignTowerCommand extends Command
 		}
 	}
 
-	private int findClosestPostition(int position)
-	{
-		int smallest = position - OFFSETS[0];
-		for (int dis : OFFSETS)
-		{
-			if (position - dis < smallest)
-			{
-				smallest = position - dis;
-			}
-		}
-		return smallest;
-	}
+//	private int findClosestPostition(int position)
+//	{
+//		int smallest = position - OFFSETS[0];
+//		for (int dis : OFFSETS)
+//		{
+//			if (position - dis < smallest)
+//			{
+//				smallest = position - dis;
+//			}
+//		}
+//		return smallest;
+//	}
 
 	protected boolean isFinished()
 	{

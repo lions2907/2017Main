@@ -7,6 +7,7 @@ import org.usfirst.frc.team2907.robot.commands.MoveIntakeCommand;
 
 import com.ctre.CANTalon;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -25,10 +26,16 @@ public class IntakeManger extends Subsystem
 	private Solenoid leftSolenoid = new Solenoid(RobotMap.SOLENOID_INTAKE_1);
 	private Solenoid rightSolenoid = new Solenoid(RobotMap.SOLENOID_INTAKE_2);
 	private boolean isOut;
+	private DigitalInput limitSwitch = new DigitalInput(10);
 	
 	public IntakeManger()
 	{
 		ultrasonic.setAutomaticMode(true);
+	}
+	
+	public boolean isSwitchFlipped()
+	{
+		return limitSwitch.get();
 	}
 	
 	public void open(boolean out)

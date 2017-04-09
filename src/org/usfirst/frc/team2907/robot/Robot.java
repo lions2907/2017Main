@@ -1,5 +1,7 @@
 package org.usfirst.frc.team2907.robot;
 
+import org.usfirst.frc.team2907.robot.AutonomousCommands.BlueBoilerSideAuto;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.BlueLoadingZoneAuto;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.CenterBlueAuto;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.CenterGearAuto;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.CenterRedAuto;
@@ -10,6 +12,7 @@ import org.usfirst.frc.team2907.robot.AutonomousCommands.MTRedRightGear;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.NothingAuto;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.PixyTuneTest;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.RedBoilerSideAuto;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.RedLoadingZoneAuto;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.RedRightGearAuto;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.StraightNoCamera;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.TowerTuneTest;
@@ -31,6 +34,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot
 {
+	public static final boolean ENABLE_RYAN = false;
 	public static final boolean ENABLE_GUITAR = false;
 	/* SUBSYSTEMS WHICH ARE A VIRTUAL MAP OF THE ROBOT */
 	public static final DriveTrain driveTrain = new DriveTrain();
@@ -55,29 +59,32 @@ public class Robot extends IterativeRobot
 	{
 		/* INIT JOYSTICKS */
 		oi = new OI(ENABLE_GUITAR);
+		chooser.addObject("Blue Loading Zone Auto", new BlueLoadingZoneAuto());
+		chooser.addObject("Red Loading Zone Auto", new RedLoadingZoneAuto());
 		/* ADD AUTO MODES TO DASHBOARD FOR EASY SELECTING */
-		chooser.addObject("Red Right Gear Auto", new RedRightGearAuto());
-		chooser.addObject("Red Right Gear & Shoot Auto", new MTRedRightGear(true, false));
+//		chooser.addObject("Red Right Gear Auto", new RedRightGearAuto());
+//		chooser.addObject("Red Right Gear & Shoot Auto", new MTRedRightGear(true, false));
 		
-		chooser.addObject("Red Left Gear Auto", new MTRedLeftGear());
+//		chooser.addObject("Red Left Gear Auto", new MTRedLeftGear());
 		
-		chooser.addObject("Blue Left Gear Auto", new MTBlueLeftGear());
-		chooser.addObject("Blue Left Gear & Shoot Auto", new MTBlueLeftGear(true, false));
+//		chooser.addObject("Blue Left Gear Auto", new MTBlueLeftGear());
+//		chooser.addObject("Blue Left Gear & Shoot Auto", new MTBlueLeftGear(true, false));
 		
-		chooser.addObject("Blue Right Gear Auto", new MTBlueRightGear());
+//		chooser.addObject("Blue Right Gear Auto", new MTBlueRightGear());
 		
 		chooser.addDefault("Center Gear Auto", new CenterGearAuto());
-		chooser.addObject("Red Center Gear & Shoot Auto", new CenterRedAuto(false));
-		chooser.addObject("Blue Center Gear & Shoot Auto", new CenterBlueAuto(false));
+		chooser.addObject("Red Center Gear & Shoot Auto", new CenterRedAuto(true));
+		chooser.addObject("Blue Center Gear & Shoot Auto", new CenterBlueAuto(true));
 		
 		chooser.addObject("Red Boiler Side Auto", new RedBoilerSideAuto());
+		chooser.addObject("Blue Boiler Side Auto", new BlueBoilerSideAuto());
 		
 		// just in worst case?
 		chooser.addObject("Nothing Auto(WORST CASE SCENARIO)", new NothingAuto());
 		// TEMP FOR TESTING AND TUNING SENSORS
-		chooser.addObject("PIXY TUNING TEST PROGRAM", new PixyTuneTest());
+//		chooser.addObject("PIXY TUNING TEST PROGRAM", new PixyTuneTest());
 		chooser.addObject("ULTRASONIC TUNING TEST PROGRAM", new UltraSonicTuneTest());
-		chooser.addObject("TOWER TUNING TEST PROGRAM", new TowerTuneTest());
+//		chooser.addObject("TOWER TUNING TEST PROGRAM", new TowerTuneTest());
 		chooser.addObject("Center no camera", new StraightNoCamera());
 //		chooser.addObject("Shooting test", new HighGoalTest());
 		SmartDashboard.putData("Auto mode", chooser);

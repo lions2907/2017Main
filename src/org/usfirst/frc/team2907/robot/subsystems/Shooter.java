@@ -8,10 +8,13 @@ import org.usfirst.frc.team2907.robot.RobotMap;
 import org.usfirst.frc.team2907.robot.commands.DelayedCallback;
 
 import com.ctre.CANTalon;
+import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.PIDSource;
+import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -20,10 +23,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Shooter extends Subsystem
 {
 	public static double SPINUP_TIME = 2;
-	private CANTalon talon1 = new CANTalon(RobotMap.TALON_SHOOTER);
+	public CANTalon talon1 = new CANTalon(RobotMap.TALON_SHOOTER);
 	private CANTalon intakeTalon = new CANTalon(RobotMap.TALON_INTAKE_SHOOT);
-	private Encoder shooterEncoder = new Encoder(RobotMap.SHOOTER_ENCODER_1, RobotMap.SHOOTER_ENCODER_2);
-//	private Relay relay = new Relay();
+	private Encoder shooterEncoder = new Encoder(RobotMap.SHOOTER_ENCODER_1,
+			RobotMap.SHOOTER_ENCODER_2);
+	//	private Relay relay = new Relay();
 	private boolean spinning = false;
 	private Timer timer;
 	private boolean status;
@@ -33,7 +37,9 @@ public class Shooter extends Subsystem
 
 	public Shooter()
 	{
-		shooterEncoder.setDistancePerPulse(1);
+		shooterEncoder.setDistancePerPulse(1 / 360.0);
+		shooterEncoder.reset();
+//		talon1.changeControlMode(TalonControlMode.Speed);
 	}
 
 	@Override
@@ -47,8 +53,8 @@ public class Shooter extends Subsystem
 		setEnabled(true);
 		if (timer == null)
 		{
-//			timer = new Timer();
-//			timer.scheduleAtFixedRate(shooterTask, 0, 500);
+			//			timer = new Timer();
+			//			timer.scheduleAtFixedRate(shooterTask, 0, 500);
 		}
 	}
 
@@ -59,51 +65,51 @@ public class Shooter extends Subsystem
 		// timer = null;
 	}
 
-//	private TimerTask shooterTask = new TimerTask()
-//	{
-//		@Override
-//		public void run()
-//		{
-//			if (isEnabled())
-//			{
-//				System.out.println("Timer : " + status);
-//				if (status)
-//					intake(-1);
-//				else 
-//					intake(0);
-//				
-//				status = !status;
-//			}
-//		}
-//	};
+	//	private TimerTask shooterTask = new TimerTask()
+	//	{
+	//		@Override
+	//		public void run()
+	//		{
+	//			if (isEnabled())
+	//			{
+	//				System.out.println("Timer : " + status);
+	//				if (status)
+	//					intake(-1);
+	//				else 
+	//					intake(0);
+	//				
+	//				status = !status;
+	//			}
+	//		}
+	//	};
 
-//	public void shift(boolean on)
-//	{
-//		status = on;
-//		if (status)
-//			solenoid.set(true);
-//		else
-//			solenoid1.set(true);
-//		// if (highGear) {
-//		// leftSolenoid.set(!highGear);
-//		// rightSolenoid.set(highGear);
-//		// isHighGear = true;
-//		// } else {
-//		// leftSolenoid.set(!highGear);
-//		// rightSolenoid.set(highGear);
-//		// isHighGear = false;
-//		// }
-//		Scheduler.getInstance().add(new DelayedCallback(0.25)
-//		{
-//			public void onCallback()
-//			{
-//				solenoid.set(false);
-//				solenoid1.set(false);
-//				// shifter.set(DoubleSolenoid.Value.kOff);
-//			}
-//		});
-//	}
-//	
+	//	public void shift(boolean on)
+	//	{
+	//		status = on;
+	//		if (status)
+	//			solenoid.set(true);
+	//		else
+	//			solenoid1.set(true);
+	//		// if (highGear) {
+	//		// leftSolenoid.set(!highGear);
+	//		// rightSolenoid.set(highGear);
+	//		// isHighGear = true;
+	//		// } else {
+	//		// leftSolenoid.set(!highGear);
+	//		// rightSolenoid.set(highGear);
+	//		// isHighGear = false;
+	//		// }
+	//		Scheduler.getInstance().add(new DelayedCallback(0.25)
+	//		{
+	//			public void onCallback()
+	//			{
+	//				solenoid.set(false);
+	//				solenoid1.set(false);
+	//				// shifter.set(DoubleSolenoid.Value.kOff);
+	//			}
+	//		});
+	//	}
+	//	
 	public void spinUp(double delay)
 	{
 		enabled = true;
@@ -116,7 +122,7 @@ public class Shooter extends Subsystem
 			}
 		});
 	}
-	
+
 	public void intake(double power)
 	{
 		intakeTalon.set(-power);
@@ -135,7 +141,12 @@ public class Shooter extends Subsystem
 		else
 			talon1.set(0);
 	}
-	
+
+	public double getDistance()
+	{
+		return shooterEncoder.getDistance();
+	}
+
 	public double getRPM()
 	{
 		return shooterEncoder.getRate();
@@ -143,16 +154,16 @@ public class Shooter extends Subsystem
 
 	public void rumble(final boolean on, double delay)
 	{
-//		Scheduler.getInstance().add(new DelayedCallback(delay)
-//		{
-//			public void onCallback()
-//			{
-//				Robot.oi.manipulatorStick.setRumble(RumbleType.kLeftRumble,
-//						(on) ? 1 : 0);
-//				Robot.oi.manipulatorStick.setRumble(RumbleType.kRightRumble,
-//						(on) ? 1 : 0);
-//			}
-//		});
+		//		Scheduler.getInstance().add(new DelayedCallback(delay)
+		//		{
+		//			public void onCallback()
+		//			{
+		//				Robot.oi.manipulatorStick.setRumble(RumbleType.kLeftRumble,
+		//						(on) ? 1 : 0);
+		//				Robot.oi.manipulatorStick.setRumble(RumbleType.kRightRumble,
+		//						(on) ? 1 : 0);
+		//			}
+		//		});
 	}
 
 	public boolean isSpinning()
@@ -189,5 +200,27 @@ public class Shooter extends Subsystem
 	{
 		this.spinUpTime = spinUpTime;
 	}
+
+	public PIDSource RPMPidSource = new PIDSource()
+	{
+
+		@Override
+		public void setPIDSourceType(PIDSourceType pidSource)
+		{
+		}
+
+		@Override
+		public PIDSourceType getPIDSourceType()
+		{
+			// TODO Auto-generated method stub
+			return PIDSourceType.kRate;
+		}
+
+		@Override
+		public double pidGet()
+		{
+			return getRPM();
+		}
+	};
 
 }

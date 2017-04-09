@@ -11,6 +11,7 @@ import org.usfirst.frc.team2907.robot.commands.ClearIntakeCommand;
 import org.usfirst.frc.team2907.robot.commands.ClimbCommand;
 import org.usfirst.frc.team2907.robot.commands.OpenGearIntakeCommand;
 import org.usfirst.frc.team2907.robot.commands.ShiftCommand;
+import org.usfirst.frc.team2907.robot.commands.ShooterPIDCommand;
 import org.usfirst.frc.team2907.robot.commands.SpinUpShooterCommand;
 import org.usfirst.frc.team2907.robot.commands.WaitForGearCommand;
 
@@ -31,7 +32,7 @@ public class OI
 	public JoystickButton spinUpButton;
 	public JoystickButton openGearButton;
 
-	public JoystickButton alignButton = new JoystickButton(driveStick, /* TODO FIGURE OUT WHICH BUTTON */3);
+	public JoystickButton alignButton = new JoystickButton(driveStick, /* TODO FIGURE OUT WHICH BUTTON */4);
 	public JoystickButton backUpButton = new JoystickButton(driveStick, 1); // backs up set distance
 	public JoystickButton shiftButton = new JoystickButton(driveStick, 6); // shift on right bumper
 	public JoystickButton maxButton = new JoystickButton(driveStick, 5); // no limits on left bumper aka TURBO POWER
@@ -54,7 +55,7 @@ public class OI
 			spinUpButton.whileHeld(new SpinUpShooterCommand());
 		}
 		
-		alignButton.whileHeld(new AlignTowerCommand(.4));
+		alignButton.whileHeld(new AlignTowerCommand(.25));
 		shiftButton.whenPressed(new ShiftCommand());
 		backUpButton.whenPressed(new BackUpGearCommand());
 	}

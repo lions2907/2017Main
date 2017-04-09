@@ -35,8 +35,8 @@ public class RobotMap
 	public static final int DRIVE_ENCODER_RCH2 = 2;
 	public static final int DRIVE_ENCODER_LCH1 = 6;
 	public static final int DRIVE_ENCODER_LCH2 = 7;
-	public static final int SHOOTER_ENCODER_1 = 8;
-	public static final int SHOOTER_ENCODER_2 = 9;
+	public static final int SHOOTER_ENCODER_1 = 9;
+	public static final int SHOOTER_ENCODER_2 = 8;
 	
 	public static final int ULTRASONIC_G_WRITE = 5;
 	public static final int ULTRASONIC_G_READ = 4;
