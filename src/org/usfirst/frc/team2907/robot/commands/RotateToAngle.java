@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2907.robot.commands;
 
 import org.usfirst.frc.team2907.robot.Robot;
+import org.usfirst.frc.team2907.robot.AutonomousCommands.Flag;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Preferences;
@@ -21,6 +22,8 @@ public class RotateToAngle extends Command {
 	private PIDOutput output;
 	
 	private double destDegrees;
+	
+	private Flag flag;
 
 	public RotateToAngle(double degrees) {
 		super("RotateToAngle");
@@ -30,10 +33,17 @@ public class RotateToAngle extends Command {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 	}
+	
+	public RotateToAngle(Flag flag)
+	{
+		this(flag.angle);
+		this.flag = flag;
+	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.driveTrain.getSensorBoard().reset();
+		if (flag == null)
+			Robot.driveTrain.getSensorBoard().reset();
 		
 		kP = Preferences.getInstance().getDouble("kP", .08);
 		kI = Preferences.getInstance().getDouble("kI", 0);

@@ -8,14 +8,17 @@ import org.usfirst.frc.team2907.robot.commands.WaitForGearCommand;
 
 public class CenterRedAuto extends CenterGearAuto
 {
-	public CenterRedAuto(boolean enableShooter)
+	public CenterRedAuto(boolean enableLiftCamera, boolean enableShooter)
 	{
-		super();
+		super(enableLiftCamera);
 		addSequential(new WaitForGearCommand());
 		addSequential(new DriveDistanceBack(12, -.4));
 		addSequential(new RotateToAngle(-50));
-		addSequential(new AlignTowerCommand(.4));
+		addParallel(new AlignTowerCommand(.4));
 		if (enableShooter)
 			addSequential(new SpinUpShooterCommand());
+//		addSequential(new AlignTowerCommand(.4));
+//		if (enableShooter)
+//			addSequential(new SpinUpShooterCommand());
 	}
 }
