@@ -34,6 +34,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Robot extends IterativeRobot
 {
+	public static final boolean ENABLE_DRIVE_LOGS = false;
 	public static final boolean ENABLE_GUITAR = false;
 	/* SUBSYSTEMS WHICH ARE A VIRTUAL MAP OF THE ROBOT */
 	public static final DriveTrain driveTrain = new DriveTrain();

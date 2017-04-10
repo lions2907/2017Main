@@ -32,28 +32,29 @@ public class ArcadeDrive extends Command
 	protected void execute()
 	{
 
-		if (Robot.oi.maxButton.get())
-		{
+//		if (Robot.oi.maxButton.get())
+//		{
 			Robot.driveTrain.arcadeDrive(
 					Robot.oi.driveStick.getAxis(AxisType.kY),
 					-Robot.oi.driveStick.getRawAxis(2));// ps4
-		} else
-		{
-			Robot.driveTrain.arcadeDrive(
-					Robot.oi.driveStick.getAxis(AxisType.kY) * scaleFactor,
-					-Robot.oi.driveStick.getRawAxis(2));// ps4
-		}
-		// Robot.driveTrain.arcadeDrive(Robot.oi.driveStick.getAxis(AxisType.kY),
-		// -Robot.oi.driveStick.getRawAxis(4)); xbox
+//		} else
+//		{
+//			Robot.driveTrain.arcadeDrive(
+//					Robot.oi.driveStick.getAxis(AxisType.kY) * scaleFactor,
+//					-Robot.oi.driveStick.getRawAxis(2));// ps4
+//		}
 		accelX = Math.abs(Robot.driveTrain.getSensorBoard().getWorldLinearAccelX());
 		accelY = Math.abs(Robot.driveTrain.getSensorBoard().getWorldLinearAccelY());
-//		System.out.println("Gyro : " + Robot.driveTrain.getSensorBoard().getAngle());
-//		System.out.println("Encoder right distance : " + Robot.driveTrain.getRightDistance() + ", left : "
-//				+ Robot.driveTrain.getLeftDistance());
 		Robot.oi.driveStick.setRumble(RumbleType.kLeftRumble, (accelY > .6) ? 1 : 0);
 		Robot.oi.driveStick.setRumble(RumbleType.kRightRumble, (accelX > .6) ? 1 : 0);
 		
 		SmartDashboard.putString("Drivetrain Gear", (Robot.driveTrain.isHighGear()) ? "HIGH" : "LOW"); 
+		
+		if (Robot.ENABLE_DRIVE_LOGS)
+		{
+			System.out.println("Encoder right distance : " + Robot.driveTrain.getRightDistance() + ", left : "
+			+ Robot.driveTrain.getLeftDistance());
+		}
 	}
 
 	protected boolean isFinished()

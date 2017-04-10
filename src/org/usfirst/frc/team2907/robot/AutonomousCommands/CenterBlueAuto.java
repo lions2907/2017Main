@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2907.robot.AutonomousCommands;
 
 import org.usfirst.frc.team2907.robot.commands.AlignTowerCommand;
+import org.usfirst.frc.team2907.robot.commands.DriveDistance;
 import org.usfirst.frc.team2907.robot.commands.DriveDistanceBack;
 import org.usfirst.frc.team2907.robot.commands.RotateToAngle;
 import org.usfirst.frc.team2907.robot.commands.SpinUpShooterCommand;
@@ -11,7 +12,7 @@ public class CenterBlueAuto extends CenterGearAuto
 	public CenterBlueAuto(boolean enableShooter)
 	{
 		super();
-		addSequential(new DriveDistanceBack(6, .25));
+		addSequential(new DriveDistance(6, .25));
 		addSequential(new WaitForGearCommand());
 		addSequential(new DriveDistanceBack(12, -.4));
 		addSequential(new RotateToAngle(50));

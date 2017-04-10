@@ -148,6 +148,16 @@ public class DriveTrain extends Subsystem {
 		return sensorBoard;
 	}
 	
+	public double getLinearAccelY()
+	{
+		return sensorBoard.getWorldLinearAccelX();
+	}
+	
+	public double getLinearAccelX()
+	{
+		return sensorBoard.getWorldLinearAccelY();
+	}
+	
 	public double getLeftDistance()
 	{
 		return driveEncoderLeft.getDistance();
