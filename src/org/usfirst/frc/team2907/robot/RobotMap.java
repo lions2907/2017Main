@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
-public class RobotMap
+public class RobotMap					// final code 2017
 {
 	public static final int TALON_LEFT_1 = 5;   	// drive cim
 	public static final int TALON_LEFT_2 = 9;   	// drive cim
