@@ -49,12 +49,6 @@ public class Robot extends IterativeRobot
 	/* AUTONOMOUS MODE SELECTORS */
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
-	
-	/*
-	 * TODO ADD 'GearCameraPower' TO DASHBOARD VARIABLES
-	 * ADD 'EmptyGearDistance' TO DASHBOARD VARIABLES
-	 * ADD 'UltrasonicDriveDelay' TO DASHBOARD VARIABLES
-	 */
 
 	@Override
 	public void robotInit()
