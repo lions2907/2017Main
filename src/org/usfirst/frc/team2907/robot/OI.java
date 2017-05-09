@@ -20,26 +20,29 @@ import org.usfirst.frc.team2907.robot.commands.WaitForGearCommand;
  */
 public class OI
 {
-	private boolean guitarMode;
-	public Joystick driveStick = new Joystick(0);
-	public Joystick manipulatorStick = new Joystick(1);
+	private boolean guitarMode;				// boolean flag to enable guitar hero controller as manipulator
+	
+	public Joystick driveStick = new Joystick(0);		// drivers ps4 joystick
+	public Joystick manipulatorStick = new Joystick(1);	// manipulator ps4 joystick
 
-	 public JoystickButton fastClimbButton;
-	 public JoystickButton slowClimbButton;
-	 public JoystickButton gearButton;
-
-	public JoystickButton spinUpButton;
-	public JoystickButton openGearButton;
-
-	public JoystickButton alignButton = new JoystickButton(driveStick, /* TODO FIGURE OUT WHICH BUTTON */4);
+	/* MANIPULATOR GUITAR FIELDS */
+	public JoystickButton fastClimbButton;			// fast climb button on guitar
+	public JoystickButton slowClimbButton;			// slow climb button on guitar
+	public JoystickButton gearButton;			// open gear mechanism on guitar
+	/* MANIPULATOR PS4 FIELDS */
+	public JoystickButton spinUpButton;			// spins up shooter
+	public JoystickButton openGearButton;			// opens gear mechanism
+	/* DRIVER PS4 FIELDS */
+	public JoystickButton alignButton = new JoystickButton(driveStick, 4);	// camera align on triangle
 	public JoystickButton backUpButton = new JoystickButton(driveStick, 1); // backs up set distance
-	public JoystickButton shiftButton = new JoystickButton(driveStick, 6); // shift on right bumper
-	public JoystickButton maxButton = new JoystickButton(driveStick, 5); // no limits on left bumper aka TURBO POWER
+	public JoystickButton shiftButton = new JoystickButton(driveStick, 6); 	// shift on right bumper
+	public JoystickButton maxButton = new JoystickButton(driveStick, 5); 	// no limits on left bumper (not used)
 
 	public OI(boolean guitarMode)
 	{
 		if (guitarMode)
 		{
+			/* init guitar fields if used */
 			this.guitarMode = guitarMode;
 			 fastClimbButton = new JoystickButton(manipulatorStick, 2);
 			 slowClimbButton = new JoystickButton(manipulatorStick, 6);
@@ -48,16 +51,17 @@ public class OI
 			 slowClimbButton.whileHeld(new ClimberPowerCommand(.25));
 		} else
 		{
-			spinUpButton = new JoystickButton(manipulatorStick, 2); // spinup on 'x' button
-			openGearButton = new JoystickButton(manipulatorStick, 3); // open gear mech on 'o' button
-			openGearButton.whenPressed(new OpenGearIntakeCommand());
-			spinUpButton.whileHeld(new ShooterPIDCommand(50));
-//			spinUpButton.whileHeld(new SpinUpShooterCommand());
+			/* init ps4 fields */
+			spinUpButton = new JoystickButton(manipulatorStick, 2);		// spinup on 'x' button
+			openGearButton = new JoystickButton(manipulatorStick, 3);	// open gear mech on 'o' button
+			openGearButton.whenPressed(new OpenGearIntakeCommand());	// register open gear mech command 
+			// spinUpButton.whileHeld(new ShooterPIDCommand(50));		// used when testing velocity control on shooter
+			spinUpButton.whileHeld(new SpinUpShooterCommand());		// register shooter command
 		}
 		
-		alignButton.whileHeld(new AlignTowerCommand(.25));
-		shiftButton.whenPressed(new ShiftCommand());
-		backUpButton.whenPressed(new BackUpGearCommand());
+		alignButton.whileHeld(new AlignTowerCommand(.25));			// register align tower command
+		shiftButton.whenPressed(new ShiftCommand());				// register shift drivetrain command
+		backUpButton.whenPressed(new BackUpGearCommand());			// register loading lane back up command
 	}
 
 	public boolean isGuitarMode()
