@@ -16,17 +16,16 @@ public class Climber extends Subsystem
 	
 	public Climber()
 	{
+		// use voltage mode as default, PercentVBus will scale with battery level
 		talon1.changeControlMode(TalonControlMode.Voltage);
-//		talon2.changeControlMode(TalonControlMode.Voltage);
+		// use follower mode to ensure exact same voltage is applied to both talons
 		talon2.changeControlMode(TalonControlMode.Follower);
 		talon2.set(RobotMap.TALON_CLIMB_1);
 	}
 	
 	public void climb(double speed)
 	{
-		talon1.set(speed * -12); // in voltage mode add 12 volt scale 
-//		talon2.set(speed * 12);
-//		talon2.set(speed);
+		talon1.set(speed * -12); // using voltage mode, apply 12 volt scale 
 	}
 	
 	@Override
