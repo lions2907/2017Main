@@ -27,12 +27,16 @@ public class Shooter extends Subsystem
 	private CANTalon talonIntake = new CANTalon(RobotMap.TALON_INTAKE_SHOOT);
 	private boolean isShooting = false;
 	private boolean isSpeedControlledEnabled = false;
+	/* default power for shooter when not in velocity mode */
 	private double power = 0.85;
+	/* spinup time in seconds */
 	private double spinUpTime = 2;
 
 	public Shooter()
 	{
+		/* register shooter encoder */
 		talonShooter.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+		/* velocity control PIDF fields */
 		talonShooter.setF(0.04833);
 		talonShooter.setP(0.001);
 		talonShooter.setI(0);
@@ -60,6 +64,7 @@ public class Shooter extends Subsystem
 
 	public void spinUp(double delay)
 	{
+		/* starts shooter and waits until spun up to spin intake */
 		isShooting = true;
 		Scheduler.getInstance().add(new DelayedCallback(delay)
 		{
