@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class OpenGearIntakeCommand extends Command
 {
+	/* This command just flips the gear collector to its opposite state */
 	public OpenGearIntakeCommand()
 	{
 		super();

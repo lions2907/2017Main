@@ -1,7 +1,6 @@
 package org.usfirst.frc.team2907.robot.commands;
 
 import org.usfirst.frc.team2907.robot.Robot;
-import org.usfirst.frc.team2907.robot.AutonomousCommands.Flag;
 
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;

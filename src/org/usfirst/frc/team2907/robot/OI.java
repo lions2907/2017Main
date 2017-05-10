@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-import org.usfirst.frc.team2907.robot.AutonomousCommands.ClimberPowerCommand;
 import org.usfirst.frc.team2907.robot.commands.AlignTowerCommand;
 import org.usfirst.frc.team2907.robot.commands.BackUpGearCommand;
 import org.usfirst.frc.team2907.robot.commands.ClimbCommand;
+import org.usfirst.frc.team2907.robot.commands.ClimberPowerCommand;
 import org.usfirst.frc.team2907.robot.commands.OpenGearIntakeCommand;
 import org.usfirst.frc.team2907.robot.commands.ShiftCommand;
 import org.usfirst.frc.team2907.robot.commands.ShooterPIDCommand;

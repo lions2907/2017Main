@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class BlueLeftWallAuto extends CommandGroup
 {
+	/* Original side auto created during build season, never used */
 	public BlueLeftWallAuto()
 	{
 		addSequential(new DriveDistance(72, .5));

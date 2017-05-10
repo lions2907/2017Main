@@ -9,6 +9,7 @@ import org.usfirst.frc.team2907.robot.commands.WaitForGearCommand;
 
 public class CenterBlueAuto extends CenterGearAuto
 {
+	/* Created at district champs, used at worlds */
 	public CenterBlueAuto(boolean enableLiftCamera, boolean enableShooter)
 	{
 		super(enableLiftCamera);
@@ -19,9 +20,9 @@ public class CenterBlueAuto extends CenterGearAuto
 		addParallel(new AlignTowerCommand(.4));
 		if (enableShooter)
 			addSequential(new SpinUpShooterCommand());
-//		addSequential(new AlignTowerCommand(.4));
-//		if (enableShooter)
-//			addSequential(new SpinUpShooterCommand());
+		addSequential(new AlignTowerCommand(.4));
+		if (enableShooter)
+			addSequential(new SpinUpShooterCommand());
 	}
 	
 	

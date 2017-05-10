@@ -4,5 +4,5 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class NothingAuto extends CommandGroup
 {
-
+	/* Worst case scenario? */
 }

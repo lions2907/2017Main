@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ShooterPIDCommand extends Command
 {
+	/* controls shooter with velocity control */
 	private double rpm;
 
 	public ShooterPIDCommand(double rpm)

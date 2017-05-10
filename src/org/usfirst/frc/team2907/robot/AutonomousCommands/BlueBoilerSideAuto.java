@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class BlueBoilerSideAuto extends CommandGroup
 {
+	/* Blue boiler side auto created at district champs and used at worlds */
 	public BlueBoilerSideAuto(boolean enableLiftCamera, boolean enableShooter)
 	{
 		addSequential(new DriveDistance(8, .5));

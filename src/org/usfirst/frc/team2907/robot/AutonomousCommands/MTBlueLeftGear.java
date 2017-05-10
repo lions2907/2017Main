@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class MTBlueLeftGear extends CommandGroup
 {
+	/* Created and used at MTVernon */
 	// -----------Blue left gear(boiler side)-------
 	// - drive 46 inches
 	// - turn 60 degrees
@@ -19,13 +20,6 @@ public class MTBlueLeftGear extends CommandGroup
 	// - drive 12 inches
 	public MTBlueLeftGear()
 	{
-		/*
-		 * PRACTICE FIELD CODE addSequential(new DriveDistance(66, .5));
-		 * addSequential(new RotateToAngle(45)); addSequential(new
-		 * DriveDistance(32, .5)); addSequential(new DriveDistance(12, .25));
-		 * addSequential(new AlignPixyCommand()); addSequential(new
-		 * DriveDistance(12, .25));
-		 */
 		addSequential(new DriveDistance(46, .5));
 		addSequential(new RotateToAngle(45));
 		addSequential(new DriveDistance(80, .5));

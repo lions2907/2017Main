@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class RedLeftGearAuto extends CommandGroup
 {
+	/* The original auto created during build season, on our 'practice field' */
 	public RedLeftGearAuto()
 	{
 		addSequential(new DriveDistance(36, .75));

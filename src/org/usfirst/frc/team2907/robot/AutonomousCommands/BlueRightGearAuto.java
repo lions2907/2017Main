@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class BlueRightGearAuto extends CommandGroup
 {
+	/* Original side auto created during build season and never used */
 	public BlueRightGearAuto()
 	{
 		addSequential(new DriveDistance(36, .75));

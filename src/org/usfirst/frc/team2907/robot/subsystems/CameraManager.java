@@ -141,7 +141,7 @@ public class CameraManager extends Subsystem
 				System.out.println("Center X : " + difference + ", targets : " + gearBlocks.size() + ", area : " + gearArea);
 				setGearOffset(difference);
 			} else
-			{ /
+			{ 
 				// only one target, likely at an angle
 				gearArea = gearBlocks.get(0).width * gearBlocks.get(0).height;
 				setGearOffset(gearBlocks.get(0).centerX);

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class RedLoadingZoneAuto extends CommandGroup
 {
+	/* Loading zone auto created with measurements at district champs, never tested */
 	public RedLoadingZoneAuto()
 	{
 		addSequential(new DriveDistance(8, .5));
@@ -14,7 +15,6 @@ public class RedLoadingZoneAuto extends CommandGroup
 		addSequential(new DriveDistance(46, .5));
 		addSequential(new DriveDistance(20, .25));
 		addSequential(new RotateToAngle(42));
-//		addSequential(new AlignPixyCommand());
 		addSequential(new DriveDistance(64, .25));
 	}
 }

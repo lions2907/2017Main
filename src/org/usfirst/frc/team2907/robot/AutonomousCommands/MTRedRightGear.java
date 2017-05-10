@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class MTRedRightGear extends CommandGroup
 {
+	/* Created and used at MTVernon */
 	// -----------Red right gear(boiler side)-------------
 	// - Drive 43 inches
 	// - turn -60 degrees

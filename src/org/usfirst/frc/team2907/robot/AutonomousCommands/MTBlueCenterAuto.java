@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class MTBlueCenterAuto extends CommandGroup
 {
+	/* Created and used at MTVernon */
 	public MTBlueCenterAuto()
 	{
 		addSequential(new DriveDistance(56, .75));
@@ -17,6 +18,5 @@ public class MTBlueCenterAuto extends CommandGroup
 		addSequential(new WaitForGearCommand());
 		addSequential(new DriveDistance(16, -.4));
 		addSequential(new RotateToAngle(-90));
-//		addSequential(new AlignTowerCommand(.4));
 	}
 }

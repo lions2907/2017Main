@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2907.robot;
 
-import org.usfirst.frc.team2907.robot.AutonomousCommands.AccelerometerTuneTest;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.BlueBoilerSideAuto;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.BlueLoadingZoneAuto;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.CenterBlueAuto;
@@ -17,7 +16,6 @@ import org.usfirst.frc.team2907.robot.AutonomousCommands.RedLoadingZoneAuto;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.RedRightGearAuto;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.StraightNoCamera;
 import org.usfirst.frc.team2907.robot.AutonomousCommands.TowerTuneTest;
-import org.usfirst.frc.team2907.robot.AutonomousCommands.UltraSonicTuneTest;
 import org.usfirst.frc.team2907.robot.subsystems.CameraManager;
 import org.usfirst.frc.team2907.robot.subsystems.Climber;
 import org.usfirst.frc.team2907.robot.subsystems.DriveTrain;
@@ -73,18 +71,11 @@ public class Robot extends IterativeRobot
 		{
 			// TEMP FOR TESTING AND TUNING SENSORS
 			chooser.addObject("PIXY TUNING TEST PROGRAM", new PixyTuneTest());
-			chooser.addObject("ULTRASONIC TUNING TEST PROGRAM", new UltraSonicTuneTest());
 			chooser.addObject("TOWER TUNING TEST PROGRAM", new TowerTuneTest());
-			chooser.addObject("ACCELEROMETER TEST PROGRAM", new AccelerometerTuneTest());
 		}
 		
 		SmartDashboard.putData("Auto mode", chooser);
-		/* DYNAMICALLY CHANGE SHOOTER POWER VIA DASHBOARD VARIABLES */
-		double power = Preferences.getInstance().getDouble("ShooterPower", .85);
-		double spinUpTime = Preferences.getInstance()
-				.getDouble("SpinUpTime", 2);
-		shooter.setSpinUpTime(spinUpTime);
-		shooter.setPower(power);
+
 		/* OPENS WEBCAM */
 		CameraServer.getInstance().startAutomaticCapture();
 	}

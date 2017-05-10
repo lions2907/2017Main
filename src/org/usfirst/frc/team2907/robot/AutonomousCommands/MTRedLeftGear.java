@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class MTRedLeftGear extends CommandGroup
 {
+	/* Created and used at MTVernon */
 	// ----------Red left gear-------------
 	// - Drive 47 inches
 	// - turn 60 degrees

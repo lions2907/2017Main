@@ -1,16 +1,13 @@
 package org.usfirst.frc.team2907.robot.commands;
-import java.util.Timer;
 
 import org.usfirst.frc.team2907.robot.Robot;
-import org.usfirst.frc.team2907.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.Preferences;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
 
 public class SpinUpShooterCommand extends Command
 {
+	/* This class controls the shooter in default mode (PercentVBus) */
 	private double power;
 	public SpinUpShooterCommand()
 	{
@@ -20,9 +17,12 @@ public class SpinUpShooterCommand extends Command
 
 	protected void initialize()
 	{
+		/* get variables from dashboard */
+		double spinUpTime = Preferences.getInstance().getDouble("SpinUpTime", 2);
+		Robot.shooter.setSpinUpTime(spinUpTime);
 		Robot.shooter.disableSpeedController();
 		power = Preferences.getInstance().getDouble("ShooterPower", .85);
-		Robot.shooter.spinUp(3);
+		Robot.shooter.spinUp(spinUpTime);
 	}
 	
 	public void end()
@@ -38,6 +38,7 @@ public class SpinUpShooterCommand extends Command
 	@Override
 	public void execute()
 	{
+		/* log shooter velocity */
 		System.out.println("Shooter velocity : " + Robot.shooter.getRPM());
 		Robot.shooter.shoot(power);
 	}

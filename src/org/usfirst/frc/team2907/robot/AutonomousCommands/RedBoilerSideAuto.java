@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2907.robot.AutonomousCommands;
 
-import org.usfirst.frc.team2907.robot.Robot;
 import org.usfirst.frc.team2907.robot.commands.AlignPixyCommand;
 import org.usfirst.frc.team2907.robot.commands.AlignTowerCommand;
 import org.usfirst.frc.team2907.robot.commands.DriveDistance;
@@ -12,6 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class RedBoilerSideAuto extends CommandGroup
 {
+	/* Red boiler side auto with shooter and lift camera, created at district champs and used at worlds */
 	public RedBoilerSideAuto(boolean enableLiftCamera, boolean enableShooter)
 	{
 		addSequential(new DriveDistance(8, .5));

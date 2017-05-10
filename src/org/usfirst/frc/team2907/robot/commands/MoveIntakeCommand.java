@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class MoveIntakeCommand extends Command
 {
-	// THIS COMMAND CONTROLS THE FRONT FUEL INTAKE VIA JOYSTICK INPUT
 	public static final int JOYSTICK_AXIS = 5; // RIGHT UP-DOWN ON JOYSTICK AXIS
 	public MoveIntakeCommand()
 	{
@@ -24,11 +23,8 @@ public class MoveIntakeCommand extends Command
 		{
 			Robot.intake.move(Robot.oi.manipulatorStick.getRawAxis(1));
 		}
-		
-//		System.out.println("Switch : " + Robot.intake.isSwitchFlipped());
-//		SmartDashboard.putNumber("GearDistance : ", Robot.intake.getDistance());
+		/* write collector status to dashboard for drivers */
 		SmartDashboard.putString("Collector Status : ",(Robot.intake.isOut()) ? "OPEN" : "CLOSED");
-//		SmartDashboard.putBoolean("Collector contains gear", Robot.intake.getDistance() > WaitForGearCommand.NO_GEAR_DISTANCE);
 	}
 	
 	public void end()

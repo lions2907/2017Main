@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class ShiftCommand extends Command
 {
-	// SHIFTS TO OPPOSITE GEAR WHEN THE DRIVE FEELS LIKE IT
+	/*This command just shifts the drivetrain to its opposite state */
 	public ShiftCommand()
 	{
 		super("ShiftCommand");
