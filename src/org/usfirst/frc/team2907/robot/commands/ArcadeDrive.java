@@ -14,42 +14,32 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ArcadeDrive extends Command
 {
-
 	private double accelX;
 	private double accelY;
-	private double scaleFactor;
 
 	public ArcadeDrive()
 	{
+		super("ArcadeDrive");
 		requires(Robot.driveTrain);
 	}
 
 	protected void initialize()
 	{
-		scaleFactor = Preferences.getInstance().getDouble("Drive Scale", 1);
 	}
 
 	protected void execute()
 	{
-
-//		if (Robot.oi.maxButton.get())
-//		{
-			Robot.driveTrain.arcadeDrive(
-					Robot.oi.driveStick.getAxis(AxisType.kY),
-					-Robot.oi.driveStick.getRawAxis(2));// ps4
-//		} else
-//		{
-//			Robot.driveTrain.arcadeDrive(
-//					Robot.oi.driveStick.getAxis(AxisType.kY) * scaleFactor,
-//					-Robot.oi.driveStick.getRawAxis(2));// ps4
-//		}
+		/* drive robot with driver ps4 joystick */
+		Robot.driveTrain.arcadeDrive(Robot.oi.driveStick.getAxis(AxisType.kY), -Robot.oi.driveStick.getRawAxis(2));
+		/* get accelX and accelY from navX */
 		accelX = Math.abs(Robot.driveTrain.getSensorBoard().getWorldLinearAccelX());
 		accelY = Math.abs(Robot.driveTrain.getSensorBoard().getWorldLinearAccelY());
+		/* if collision rumble joystick */
 		Robot.oi.driveStick.setRumble(RumbleType.kLeftRumble, (accelY > .6) ? 1 : 0);
 		Robot.oi.driveStick.setRumble(RumbleType.kRightRumble, (accelX > .6) ? 1 : 0);
-		
+		/* log drivetrain shifter status to dashboard for drivers */
 		SmartDashboard.putString("Drivetrain Gear", (Robot.driveTrain.isHighGear()) ? "HIGH" : "LOW"); 
-		
+		/* if logs are enable then print encoder values while driving */
 		if (Robot.ENABLE_DRIVE_LOGS)
 		{
 			System.out.println("Encoder right distance : " + Robot.driveTrain.getRightDistance() + ", left : "
