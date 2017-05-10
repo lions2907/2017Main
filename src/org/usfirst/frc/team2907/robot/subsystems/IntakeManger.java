@@ -15,18 +15,19 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class IntakeManger extends Subsystem
 {
-	public static final double POWER_MAX_INTAKE = .75; // TO FAST ON INTAKE DOESN"T GATHER FUEL
+	/* speed limit on intake, to fast doesn't gather fuel */
+	public static final double POWER_MAX_INTAKE = .75;
 	// TALONS CONTROLLING FRONT FUEL INTAKE 
 	private CANTalon talon1 = new CANTalon(RobotMap.TALON_INTAKE_1);
 	private CANTalon talon2 = new CANTalon(RobotMap.TALON_INTAKE_2);
-	// TALON CONTROLLING GEAR MECHANISM
-//	private CANTalon gearTalon = new CANTalon(RobotMap.TALON_GEAR_INTAKE);
-	// ULTRASONIC FOR DIGITAL READING OF GEAR (TEMP?)
-	private Ultrasonic ultrasonic = new Ultrasonic(RobotMap.ULTRASONIC_G_READ, RobotMap.ULTRASONIC_G_WRITE);
+	/* solenoids controlling gear mechanism */
 	private Solenoid leftSolenoid = new Solenoid(RobotMap.SOLENOID_INTAKE_1);
 	private Solenoid rightSolenoid = new Solenoid(RobotMap.SOLENOID_INTAKE_2);
 	private boolean isOut;
+	/* limit switch on NavX board port expansion */
 	private DigitalInput limitSwitch = new DigitalInput(10);
+	/* ultrasonic not used anymore, replaced by limit switch */
+	private Ultrasonic ultrasonic = new Ultrasonic(RobotMap.ULTRASONIC_G_READ, RobotMap.ULTRASONIC_G_WRITE);
 	
 	public IntakeManger()
 	{
@@ -45,31 +46,19 @@ public class IntakeManger extends Subsystem
 			leftSolenoid.set(true);
 		else 
 			rightSolenoid.set(true);
-//		if (highGear) {
-//			leftSolenoid.set(!highGear);
-//			rightSolenoid.set(highGear);
-//			isHighGear = true;
-//		} else {
-//			leftSolenoid.set(!highGear);
-//			rightSolenoid.set(highGear);
-//			isHighGear = false;
-//		}
-		Scheduler.getInstance().add(new DelayedCallback(0.25) {
+
+		Scheduler.getInstance().add(new DelayedCallback(0.25) 
+		{
 			public void onCallback() {
 				leftSolenoid.set(false);
 				rightSolenoid.set(false);
-//				shifter.set(DoubleSolenoid.Value.kOff);
 			}
 		});
 	}
-	
-//	public void moveGear(double speed)
-//	{
-//		gearTalon.set(speed);
-//	}
 
 	public void move(double speed)
 	{
+		/* add speed limit to intake */
 		talon1.set((speed < 1) ? Math.max(speed, -POWER_MAX_INTAKE) : Math.min(speed, POWER_MAX_INTAKE));
 		talon2.set((speed < 1) ? Math.max(speed, -POWER_MAX_INTAKE) : Math.min(speed, POWER_MAX_INTAKE));
 	}
