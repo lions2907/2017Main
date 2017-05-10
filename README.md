@@ -1,6 +1,5 @@
 # 2017Main 
-Main code for 2907 GWEN 2017 Robot. Built with command based layout. 
-Final Code for 2017 Steamworks game. Updated Post-Einstien and Houston Worlds.
+Final code for 2907 GWEN (Main Robot) during the 2017 Steamworks game. Built with command based layout. Updated Post-Einstien and Houston Worlds.
 
 Features
 
