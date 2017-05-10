@@ -14,17 +14,14 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class AlignTowerCommand extends Command
 {
-//	public static int[] OFFSETS = { 0/* feet */, 0/* feet */, 0 /* feet */};
-	/*
-	 * -------------
-	 * ..---- tower x 163.0 tower y 193.0
-	 */
-	// constants for easy changes
+	/* alignment coordinates */
 	public static final int HORIZONTAL_OFFSET = 200;
 	public static int VERTICAL_OFFSET = 90;
+	/* allowed horizontal error */
 	public static final int HORIZONTAL_ERROR = 10;
+	/* allowed vertical error */
 	public static final int VERTICAL_ERROR = 10;
-
+	/* alignment flags */
 	private boolean alignedHorizontal;
 	private boolean alignedVertical;
 
@@ -48,59 +45,49 @@ public class AlignTowerCommand extends Command
 		{
 			alignedHorizontal = false;
 		}
-		
-//		VERTICAL_OFFSET = findClosestPostition((int)Robot.cameraManager.getTowerYOffset());
 	}
 
 	protected void execute()
 	{
+		/* read cameras*/
 		Robot.cameraManager.readCameras();
-
+		/* simple if statements move robot to specified coordinates */
+		/* pixy is fast enough that pre-calculation isn't really needed */
 		if (!alignedHorizontal)
 		{
+			/* get horizontal offset */
 			double horizontalOffset = Robot.cameraManager.getTowerXOffset();
+			/* check if its within the allowed error */
 			if (Math.abs(horizontalOffset - HORIZONTAL_OFFSET) < HORIZONTAL_ERROR)
 			{
+				/* if so stop and set flag to true */
 				Robot.driveTrain.arcadeDrive(0, 0);
 				alignedHorizontal = true;
 			} else
 			{
-				Robot.driveTrain.arcadeDrive(0, (horizontalOffset
-						- HORIZONTAL_OFFSET > 0) ? -power : power);
+				/* not aligned, turn towards target */
+				Robot.driveTrain.arcadeDrive(0, (horizontalOffset - HORIZONTAL_OFFSET > 0) ? -power : power);
 			}
-		} else if (alignedHorizontal && !alignedVertical)
+		} else if (alignedHorizontal && !alignedVertical) /* if aligned horizontal, align vertical */
 		{
+			/* get vertical offset */
 			double verticalOffset = Robot.cameraManager.getTowerYOffset();
+			/* check if its within allowed error */
 			if (Math.abs(verticalOffset - VERTICAL_OFFSET) < VERTICAL_ERROR)
 			{
 				alignedVertical = true;
 				Robot.driveTrain.arcadeDrive(0, 0);
 			} else
 			{
-				Robot.driveTrain
-						.arcadeDrive(
-								(verticalOffset - VERTICAL_OFFSET > 0) ? -power
-										: power, 0);
+				/* drive forwards or backwards towards tower */
+				Robot.driveTrain.arcadeDrive((verticalOffset - VERTICAL_OFFSET > 0) ? -power : power, 0);
 			}
 		}
 	}
 
-//	private int findClosestPostition(int position)
-//	{
-//		int smallest = position - OFFSETS[0];
-//		for (int dis : OFFSETS)
-//		{
-//			if (position - dis < smallest)
-//			{
-//				smallest = position - dis;
-//			}
-//		}
-//		return smallest;
-//	}
-
 	protected boolean isFinished()
 	{
-		if (alignedHorizontal && alignedVertical)
+		if (alignedHorizontal && alignedVertical) /* were aligned with tower! */
 		{
 			System.out.println("We did it!");
 			Robot.cameraManager.aligned = true;
@@ -110,24 +97,11 @@ public class AlignTowerCommand extends Command
 
 	protected void end()
 	{
-		if (Math.abs(Robot.driveTrain.getAngle()) > 70)
-		{
-			Robot.cameraManager.aligned = false;
-		}
+		Robot.driveTrain.arcadeDrive(0, 0);
 	}
 
 	protected void interrupted()
 	{
 		end();
-	}
-
-	class PIDOutputTurn implements edu.wpi.first.wpilibj.PIDOutput
-	{
-
-		public void pidWrite(double output)
-		{
-			Robot.driveTrain.arcadeDrive(0, -output);
-		}
-
 	}
 }
