@@ -26,10 +26,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class DriveTrain extends Subsystem {
+public class DriveTrain extends Subsystem 
+{
+	/* maximum amperage allowed on drive talons */
 	public static final int MAX_AMPS = 80;
+	/* GreyHill encoders pulse 100 times per revolution */
 	public static final double ENCODER_PULSES_PR = 100.0;
-	public static final double DISTANCE_PER_FEET = 4.0*Math.PI; // Distance in inches, 4 inch wheels. 
+	// Distance in inches, 4 inch wheels. 
+	public static final double DISTANCE_PER_FEET = 4.0 * Math.PI; 
 	/* CANTALONS */
 	private CANTalon left1 = new CANTalon(RobotMap.TALON_LEFT_1);
 	private CANTalon left2 = new CANTalon(RobotMap.TALON_LEFT_2);
@@ -50,86 +54,67 @@ public class DriveTrain extends Subsystem {
 
 	public DriveTrain()
 	{
-		// setup encoder
-		driveEncoderLeft.setDistancePerPulse((1.0 / ENCODER_PULSES_PR)); // 100 pulses per revolution and 2:1 gear ratio
-		driveEncoderRight.setDistancePerPulse((1.0 / ENCODER_PULSES_PR)); // 100 pulses per revolution and 2:1 gear ratio
+		/* setup encoder */
+		driveEncoderLeft.setDistancePerPulse((1.0 / ENCODER_PULSES_PR)); // 100 pulses per revolution
+		driveEncoderRight.setDistancePerPulse((1.0 / ENCODER_PULSES_PR)); // 100 pulses per revolution
 		// setup talons
+		/* enable current limit */
 		left1.setCurrentLimit(MAX_AMPS);
 		left1.EnableCurrentLimit(true);
-
+		/* set to follow main left talon */
 		left2.changeControlMode(TalonControlMode.Follower);
 		left2.set(RobotMap.TALON_LEFT_1);
-		
+		/* set to follow main left talon */
 		left3.changeControlMode(TalonControlMode.Follower);
 		left3.set(RobotMap.TALON_LEFT_1);
-		
+		/* motors are opposite other side */
 		right1.setInverted(true);
+		/* enable current limit */
 		right1.setCurrentLimit(MAX_AMPS);
 		right1.EnableCurrentLimit(true);
-		
+		/* set to follow main right talon */
 		right2.changeControlMode(TalonControlMode.Follower);
 		right2.set(RobotMap.TALON_RIGHT_1);
-		
+		/* set to follow main right talon*/
 		right3.changeControlMode(TalonControlMode.Follower);
 		right3.set(RobotMap.TALON_RIGHT_1);
-//		right2.setInverted(true);
-//		right3.setInverted(true);
+
 		try {
-			// init sensor board
+			/* init navigation board */
 			sensorBoard = new AHRS(SPI.Port.kMXP);
 			getSensorBoard().reset();
 			navigationAvaliable = true;
 		} catch (Exception e) {
-			System.out.println("Error instantating sensorBoard : "
-					+ e.getMessage());
+			System.out.println("Error instantating sensorBoard : " + e.getMessage());
 		}
 	}
 	
-	public void shift(boolean highGear) {
+	public void shift(boolean highGear) 
+	{
 		isHighGear = highGear;
+		/* shift to opposite gear */
 		if (highGear)
 			leftSolenoid.set(true);
 		else 
 			rightSolenoid.set(true);
-//		if (highGear) {
-//			leftSolenoid.set(!highGear);
-//			rightSolenoid.set(highGear);
-//			isHighGear = true;
-//		} else {
-//			leftSolenoid.set(!highGear);
-//			rightSolenoid.set(highGear);
-//			isHighGear = false;
-//		}
-		Scheduler.getInstance().add(new DelayedCallback(0.25) {
+		/* turn solenoid off after 1/4 of second */
+		Scheduler.getInstance().add(new DelayedCallback(0.25)
+		{
 			public void onCallback() {
 				leftSolenoid.set(false);
 				rightSolenoid.set(false);
-//				shifter.set(DoubleSolenoid.Value.kOff);
 			}
 		});
 	}
-
-//	public void arcadeTurbo(double move, double rotate)
-//	{
-//		double leftSpeed = move + rotate;
-//		double rightSpeed = move - rotate;
-//		left1.set(leftSpeed);
-//		left2.set(leftSpeed);
-//		left3.set(leftSpeed);
-//		right1.set(rightSpeed);
-//		right2.set(rightSpeed);
-//		right3.set(rightSpeed);
-//	}
 	
-	public void arcadeDrive(double move, double rotate) {
+	/* standard arcade drive */
+	public void arcadeDrive(double move, double rotate) 
+	{
 		double leftSpeed = move + rotate;
 		double rightSpeed = move - rotate;
+		/* other talons are followers */
 		left1.set(leftSpeed);
-//		left2.set(leftSpeed);
-//		left3.set(leftSpeed);
 		right1.set(rightSpeed);
-//		right2.set(rightSpeed);
-//		right3.set(rightSpeed);
 	}
 
 	public void initDefaultCommand() {
@@ -183,8 +168,4 @@ public class DriveTrain extends Subsystem {
 	{
 		return sensorBoard.getAngle();
 	}
-	
-//	public boolean hasGear()
-//	{
-//	}
 }
