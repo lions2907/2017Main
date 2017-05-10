@@ -8,9 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class AlignPixyCommand extends Command
 {
+	/* default offset */
 	private double OFFSET = 210;
+	/* default allowed error */
+	private double ALLOWED_ERROR = 10;
+	/* default power */
 	private double POWER = .4;
-	private Flag flag;
 	
 	public AlignPixyCommand()
 	{
@@ -19,24 +22,21 @@ public class AlignPixyCommand extends Command
 		requires(Robot.driveTrain);
 	}
 	
-	public AlignPixyCommand(Flag flag)
-	{
-		this();
-		flag.angle = Robot.driveTrain.getAngle();
-		this.flag = flag;
-	}
-	
 	protected void initialize()
 	{
+		/* get variables from dashboard */
 		POWER = Preferences.getInstance().getDouble("GearCameraPower", .4);
 		OFFSET = Preferences.getInstance().getDouble("GearPixelOffset", 210);
 	}
 
-	// Called repeatedly when this Command is scheduled to run
 	protected void execute()
 	{
+		/* read cameras */
 		Robot.cameraManager.readCameras();
+		// get gear lift camera offset 
 		double offset = Robot.cameraManager.getGearOffset();
+		// simple if statement to turn robot towards target
+		// , pixy reads fast enough (50-60fps) that pre-calculation isn't really needed
 		if (offset < OFFSET)
 		{
 			Robot.driveTrain.arcadeDrive(0, POWER);
@@ -45,25 +45,25 @@ public class AlignPixyCommand extends Command
 			Robot.driveTrain.arcadeDrive(0, -POWER);
 		}
 		System.out.println("offset : " + offset);
-		
-		if (flag != null && ((Robot.driveTrain.getAngle() - flag.angle) > flag.failAngle))
-		{
-			flag.failed = true;
-		}
+	}
+	
+	public void end()
+	{
+		Robot.driveTrain.arcadeDrive(0, 0);
+	}
+	
+	public void interruped()
+	{
+		end();
 	}
 
 	@Override
 	protected boolean isFinished()
-	{
-		if (flag != null && flag.failed)
-		{
-			return true;
-		}
-		
+	{	
 		double offset = Robot.cameraManager.getGearOffset();
 		System.out.println("offset : " + offset);
-		// TODO Auto-generated method stub
-		return Math.abs(offset - OFFSET) < 10;
+		/* end command when on target */
+		return Math.abs(offset - OFFSET) < ALLOWED_ERROR;
 	}
 
 }
